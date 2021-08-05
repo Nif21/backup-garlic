@@ -7,9 +7,9 @@
         <div class={`${setBackground}`}>
             <div class="container mx-auto pb-40">
             <div class="flex flex-wrap pt-40">
-                <div class="w-10/12 md:w-6/12 lg:w-6/12 text-justify break-all">
-                <div class="text-5xl m-5 font-semibold">{title}</div>
-                <div class="m-5">{content}</div>
+                <div class="w-10/12 md:w-8/12 lg:w-8/12 text-justify break-all">
+                <div class="text-5xl m-5 font-semibold text-white">{title}</div>
+                <div class="m-5 text-white">{content}</div>
                 </div>
                 <img src={`${setImage}`} class="w-2/12 my-10 mx-10" />
             </div>

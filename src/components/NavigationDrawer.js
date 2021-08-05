@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Header from '../components/Header'
+import Header from './Header'
 
 export default function NavigationDrawer({handleClick}){
     return (
@@ -12,7 +12,11 @@ export default function NavigationDrawer({handleClick}){
             </label>
           </li>
           <li>
-            <div class="my-5 hover:text-gray-500 cursor-pointer">Home</div>
+            <div class="my-5 hover:text-gray-500 cursor-pointer">
+            <Link href="/">
+                <a>Home</a>
+              </Link>
+            </div>
           </li>
           <li>
             <div class="my-5 hover:text-gray-500 cursor-pointer">
