@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import ContentRight from "../components/ContentRight";
 import ContentLeft from "../components/ContentLeft";
@@ -6,6 +5,7 @@ import HomeHeader from "../components/HomeHeader";
 import NavigationDrawer from "../components/NavigationDrawer";
 import Carousel from "../components/Carousel";
 import Footer from "../components/Footer";
+import Head from "next/head";
 
 export default function Home() {
   const [active, setActive] = useState(false);
@@ -16,6 +16,10 @@ export default function Home() {
 
   return (
     <div class=" shadow bg-base-200 drawer">
+      <Head>
+        <title>INA Garlic</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
       <div class="drawer-side flex-none hidden lg:block">
         <NavigationDrawer handleClick={handleClick} />

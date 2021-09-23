@@ -1,0 +1,13 @@
+.mapDiv {
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+  z-index:1;
+}
+.nav {
+  float:right;
+  position:fixed;
+  top:0;
+  margin: 30px;
+  z-index:100;
+}

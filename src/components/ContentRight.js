@@ -11,9 +11,9 @@
                 <div class="text-5xl m-5 font-semibold text-white">{title}</div>
                 <div class="m-5 text-white">{content}</div>
                 </div>
-                <img src={`${setImage}`} class="w-2/12 my-10 mx-10" />
+                <img src={`${setImage}`} class="my-10 mx-10" />
             </div>
-            <div class="m-5 cursor-pointer py-5 w-40 bg-coco-normal text-center text-white rounded-xl hover:bg-black ">
+            <div class="m-5 cursor-pointer py-5 w-40 bg-coco-normal text-center text-white rounded-xl hover:bg-white hover:text-black">
                 {button}
             </div>
             </div>
