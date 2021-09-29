@@ -1,8 +1,10 @@
-  
+
 import React, { useRef, useEffect } from "react";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import ArcGISMap from "@arcgis/core/Map";
 import DictionaryRenderer from "@arcgis/core/renderers/DictionaryRenderer";
+import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer"
+import Graphic from "@arcgis/core/Graphic"
 import MapView from "@arcgis/core/views/MapView";
 import Zoom from "@arcgis/core/widgets/Zoom";
 import LayerList from "@arcgis/core/widgets/LayerList";
@@ -25,8 +27,8 @@ function EsriMap() {
       const view = new MapView({
         map: map,
         container: mapDiv.current,
-        ui:{
-          components: ["attribution"] 
+        ui: {
+          components: ["attribution"]
         },
         extent: {
           spatialReference: {
@@ -38,103 +40,76 @@ function EsriMap() {
           ymin: 4435053,
         },
       });
-   
-      const popupTemplate = {
-        // autocasts as new PopupTemplate()
-        title: "station: {Station_Name}",
-        content: [
-          {
-            // It is also possible to set the fieldInfos outside of the content
-            // directly in the popupTemplate. If no fieldInfos is specifically set
-            // in the content, it defaults to whatever may be set within the popupTemplate.
-            type: "fields",
-            fieldInfos: [
-              {
-                fieldName: "Fuel_Type_Code",
-                label: "Fuel type",
-              },
-              {
-                fieldName: "EV_Network",
-                label: "EV network",
-              },
-              {
-                fieldName: "EV_Connector_Types",
-                label: "EV connection types",
-              },
-              {
-                fieldName: "Station_Name",
-                label: "Station Name",
-              },
-            ],
-          },
-        ],
+
+      const graphicsLayer = new GraphicsLayer();
+      map.add(graphicsLayer);
+
+      const point = { //Create a point
+        type: "point",
+        longitude: -118.80657463861,
+        latitude: 34.0005930608889
+      };
+      const simpleMarkerSymbol = {
+        type: "simple-marker",
+        color: [226, 119, 40],  // Orange
+        outline: {
+          color: [255, 255, 255], // White
+          width: 1
+        }
       };
 
-      const scale = 36112;
-      const layer1 = new FeatureLayer({
-        url:
-          "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Alternative_Fuel_Station_March2018/FeatureServer",
-        outFields: ["*"],
-        popupTemplate,
-        renderer: new DictionaryRenderer({
-          url:
-            "https://jsapi.maps.arcgis.com/sharing/rest/content/items/30cfbf36efd64ccf92136201d9e852af",
-          fieldMap: {
-            fuel_type: "Fuel_Type_Code",
-          },
-          config: {
-            show_label: "false",
-          },
-          visualVariables: [
-            {
-              type: "size",
-              valueExpression: "$view.scale",
-              stops: [
-                { value: scale / 2, size: 20 },
-                { value: scale * 2, size: 15 },
-                { value: scale * 4, size: 10 },
-                { value: scale * 8, size: 5 },
-                { value: scale * 16, size: 2 },
-                { value: scale * 32, size: 1 },
-              ],
-            },
-          ],
-        }),
-        minScale: 0,
-        maxScale: 10000,
+      const pointGraphic = new Graphic({
+        geometry: point,
+        symbol: simpleMarkerSymbol
       });
+      graphicsLayer.add(pointGraphic);
 
-      const layer2 = new FeatureLayer({
-        url:
-          "https://services1.arcgis.com/4yjifSiIG17X0gW4/arcgis/rest/services/Alternative_Fuel_Station_March2018/FeatureServer",
-        outFields: ["*"],
-        popupTemplate,
-        renderer: new DictionaryRenderer({
-          url:
-            "https://jsapi.maps.arcgis.com/sharing/rest/content/items/30cfbf36efd64ccf92136201d9e852af",
-          fieldMap: {
-            fuel_type: "Fuel_Type_Code",
-            connector_types: "EV_Connector_Types",
-            network: "EV_Network",
-            name: "Station_Name",
-          },
-          config: {
-            show_label: "true",
-          },
-        }),
-        minScale: 10000,
-        maxScale: 0,
-      });
+      // Create a line geometry
+      const polyline = {
+        type: "polyline",
+        paths: [
+          [-118.821527826096, 34.0139576938577], //Longitude, latitude
+          [-118.814893761649, 34.0080602407843], //Longitude, latitude
+          [-118.808878330345, 34.0016642996246]  //Longitude, latitude
+        ]
+      };
+      const simpleLineSymbol = {
+        type: "simple-line",
+        color: [226, 119, 40], // Orange
+        width: 2
+      };
 
-      var zoom = new Zoom({   view: view,  layout: "vertical"});view.ui.add(zoom, "bottom-right")
-      let layerList = new LayerList({
-        view: view
+      const polylineGraphic = new Graphic({
+        geometry: polyline,
+        symbol: simpleLineSymbol
       });
-      // Adds widget below other elements in the top left corner of the view
-      view.ui.add(layerList, {
-        position: "bottom-left"
+      graphicsLayer.add(polylineGraphic);
+      // Create a polygon geometry
+      const polygon = {
+        type: "polygon",
+        rings: [
+          [-118.818984489994, 34.0137559967283], //Longitude, latitude
+          [-118.806796597377, 34.0215816298725], //Longitude, latitude
+          [-118.791432890735, 34.0163883241613], //Longitude, latitude
+          [-118.79596686535, 34.008564864635],   //Longitude, latitude
+          [-118.808558110679, 34.0035027131376]  //Longitude, latitude
+        ]
+      };
+
+      const simpleFillSymbol = {
+        type: "simple-fill",
+        color: [227, 139, 79, 0.8],  // Orange, opacity 80%
+        outline: {
+          color: [255, 255, 255],
+          width: 1
+        }
+      };
+      const polygonGraphic = new Graphic({
+        geometry: polygon,
+        symbol: simpleFillSymbol,
+
       });
-      map.addMany([layer1, layer2]);
+      graphicsLayer.add(polygonGraphic);
     }
   }, []);
 
