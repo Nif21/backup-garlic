@@ -20,6 +20,8 @@ function EsriMap() {
         basemap: "gray-vector",
       });
 
+    
+
       new MapView({
         map: map,
         container: mapDiv.current,
@@ -27,34 +29,17 @@ function EsriMap() {
           components: ["attribution"]
         },
       });
+ 
 
-      const graphicsLayer = new GraphicsLayer();
+      const graphicsLayer = new GraphicsLayer(
+      );
       map.add(graphicsLayer);
-
-      const point = { //Create a point
-        type: "point",
-        longitude: 110.93698189040987,
-        latitude: -7.521354251461899
-      };
-      const simpleMarkerSymbol = {
-        type: "simple-marker",
-        color: [226, 119, 40],  // Orange
-        outline: {
-          color: [255, 255, 255], // White
-          width: 1
-        }
-      };
-
-      const pointGraphic = new Graphic({
-        geometry: point,
-        symbol: simpleMarkerSymbol
-      });
-      graphicsLayer.add(pointGraphic);
       
       (async () => {
         console.log("A");
-        const data = await fetch("http://localhost:4000/v1/show")
+        const data = await fetch("http://1565-125-165-84-143.ngrok.io/v1/show")
         const dataJSON = await data.json();
+ 
         const simpleFillSymbol = {
           type: "simple-fill",
           color: [227, 139, 79, 0.8],  // Orange, opacity 80%
@@ -74,10 +59,28 @@ function EsriMap() {
             "family": "Pinaceae",
             "count": 126
           }
+          const popupTrailheads = {
+            "title": "No SPT : " + v.spt.toString() + " (Proporsi " + v.proporsi + " )",
+            "content":  "<h1><b>Kelas Faktor Landscape:</b> " + v.kelasfaktorlandscape + "</h1>" + 
+                        "<br><b>Bahan Induk:</b> " + v.bahaninduk + 
+                        "<br><b>Kedalam Mineral Tanah : </b>"+ v.kedalamanmineraltanah + 
+                        "<br><b>Drainase: </b> " + v.drainase +
+                        "<br><b>Tekstur Tanah:</b> " + v.teksturtanah + 
+                        "<br><b>Kemasaman Tanah: </b> " + v.kemasamantanah +
+                        "<br><b>Kapasitas Tukar Kation: </b> " + v.kapasitastukarkation +
+                        "<br><b>Kejenuhan Basa: </b> " + v.kejenuhanbasa +
+                        "<br><b>Land Form: </b> " + v.landform +
+                        "<br><b>Bahan Induk: </b> " + v.bahaninduk +
+                        "<br><b>Relief: </b> " + v.relief +
+                        "<br><b>Luas: </b> " + v.luas +
+                        "<br><b>Persentase Luas: </b> " + v.persentaseluas
+          }
           graphicsLayer.add(new Graphic({
             geometry: polygon,
             symbol: simpleFillSymbol,
-            attributes: attributes
+            attributes: attributes,
+            outFields: ["klasifikasitanah","CITY_JUR","X_STREET","PARKING","ELEV_FT"],
+            popupTemplate: popupTrailheads
           }));
         })
       })()
