@@ -2,10 +2,10 @@
 import React, { useRef, useEffect } from "react";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import ArcGISMap from "@arcgis/core/Map";
-import DictionaryRenderer from "@arcgis/core/renderers/DictionaryRenderer";
-import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer"
-import Graphic from "@arcgis/core/Graphic"
 import MapView from "@arcgis/core/views/MapView";
+import Legend from "@arcgis/core/widgets/Legend";
+import Graphic from "@arcgis/core/Graphic"
+
 import styles from "../styles/EsriMap.module.css";
 
 function EsriMap() {
@@ -20,9 +20,7 @@ function EsriMap() {
         basemap: "gray-vector",
       });
 
-    
-
-      new MapView({
+      const view =new MapView({
         map: map,
         container: mapDiv.current,
         ui: {
@@ -31,13 +29,43 @@ function EsriMap() {
       });
  
 
-      const graphicsLayer = new GraphicsLayer(
-      );
-      map.add(graphicsLayer);
+      const AllLayer = new FeatureLayer({
+        copyright: "BELIIN MEKDI DONG",
+        title: "All Layers",
+        fields: [
+          {
+            name: "ObjectID",
+            alias: "ObjectID",
+            type: "oid"
+          },
+          {
+            name: "spt",
+            alias: "spt",
+            type: "string"
+          },
+          {
+            name: "proporsi",
+            alias: "proporsi",
+            type: "string"
+          }
+        ],
+        objectIdField: "ObjectID",
+        geometryType: "polygon",
+        source: [],
+        popupTemplate: {
+          title: "{spt}",
+          proporsi: "{proporsi}"
+        }
+      });
+      map.add(AllLayer);
+
+      const legend = new Legend({
+        view: view
+      });
+      view.ui.add(legend, "bottom-left");
       
       (async () => {
-        console.log("A");
-        const data = await fetch("http://1565-125-165-84-143.ngrok.io/v1/show")
+        const data = await fetch("http://localhost:8000/v1/show")
         const dataJSON = await data.json();
  
         const simpleFillSymbol = {
@@ -48,17 +76,12 @@ function EsriMap() {
             width: 1
           }
         };
-        let polygon, attributes ;
-        dataJSON.map((v)=>{
+        let polygon ;
+        const graphics = dataJSON.map((v)=>{
           polygon = {
             type: "polygon",
             rings: v.geom.coordinates[0][0]
           };
-          attributes = {
-            "name": "Spruce",
-            "family": "Pinaceae",
-            "count": 126
-          }
           const popupTrailheads = {
             "title": "No SPT : " + v.spt.toString() + " (Proporsi " + v.proporsi + " )",
             "content":  "<h1><b>Kelas Faktor Landscape:</b> " + v.kelasfaktorlandscape + "</h1>" + 
@@ -75,14 +98,15 @@ function EsriMap() {
                         "<br><b>Luas: </b> " + v.luas +
                         "<br><b>Persentase Luas: </b> " + v.persentaseluas
           }
-          graphicsLayer.add(new Graphic({
+          return new Graphic({
             geometry: polygon,
             symbol: simpleFillSymbol,
-            attributes: attributes,
+            attributes: v,
             outFields: ["klasifikasitanah","CITY_JUR","X_STREET","PARKING","ELEV_FT"],
             popupTemplate: popupTrailheads
-          }));
+          });
         })
+        AllLayer.applyEdits({addFeatures: graphics})
       })()
     }
   }, []);
