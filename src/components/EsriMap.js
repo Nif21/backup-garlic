@@ -11,7 +11,7 @@ import BasemapToggle from "@arcgis/core/widgets/BasemapToggle";
 import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 import Expand from "@arcgis/core/widgets/Expand";
 import Print from "@arcgis/core/widgets/Print";
-
+import Extent from "@arcgis/core/geometry/Extent";
 function EsriMap() {
   const mapDiv = useRef(null);
   
@@ -30,6 +30,14 @@ function EsriMap() {
         ui: {
           components: ["attribution"]
         },
+        extent: {
+          // autocasts as new Extent()
+          xmin: -11607029.37,
+          ymin: 1804056.24,
+          xmax: -13953814.85,
+          ymax: 691360.10,
+          spatialReference: 102100
+        }
       });
       var zoom = new Zoom({
         view: view
@@ -73,7 +81,7 @@ function EsriMap() {
       view.ui.add(zoom,"bottom-right");
 
       // (async () => {
-      //   const data = await fetch("http://fbb7-180-245-81-100.ngrok.io/v1/show")
+      //   const data = await fetch("http://e8c4-110-138-81-150.ngrok.io/v1/show")
       //   const dataJSON = await data.json();
  
       //   let polygon ;
