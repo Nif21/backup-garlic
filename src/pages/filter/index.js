@@ -5,17 +5,16 @@ import HomeHeader from "../../components/HomeHeader";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import styles from "../../styles/EsriMap.module.css";
 import { useRouter } from 'next/router'
+import FilterEsriMap from "../../components/FilterEsriMap"
 
 // The ArcGIS JSAPI does not currently work with SSR, so we need to disable it for the map component
-const EsriMapWithNoSSR = dynamic(() => import("../../components/EsriMap"), {
+const EsriMapWithNoSSR = dynamic(() => import("../../components/FilterEsriMap"), {
   ssr: false,
 });
 
 
-function Map() {
+function Filter() {
   const router = useRouter()
-  console.log(router.query.name)
-
   const [active, setActive] = useState(false);
   const handleClick = () => {
     setActive(!active);
@@ -40,7 +39,7 @@ function Map() {
             </div>
           </div>
 
-          <EsriMapWithNoSSR />
+          <FilterEsriMap title={router.query.name} />
         </div>
       </div>
     </div>
@@ -48,4 +47,4 @@ function Map() {
   );
 }
 
-export default Map;
+export default Filter;

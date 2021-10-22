@@ -15,22 +15,58 @@ export default function NavigationDrawer({ handleClick, expand , title }) {
   const router = useRouter();
   const handleKedalaman = () => {
       router.push({
-        pathname: '/maps',
-        query: {name: "Kedalaman Mineral Tanah"}
+        pathname: '/filter',
+        query: { name: "Kedalaman Mineral Tanah"}
       })
     }
   const handleKapasitas = () => {
     router.push({
-      pathname: '/maps',
+      pathname: '/filter',
       query: {name: "Kapasitas Tukar Kation"}
     })
 }
-const handleKejenuhan = () => {
-  router.push({
-    pathname: '/maps',
-    query: {name: "Kejenuhan Basa"}
-  })
-}
+  const handleKejenuhan = () => {
+    router.push({
+      pathname: '/filter',
+      query: {name: "Kejenuhan Basa"}
+    })
+  }
+  const handleLandform = () => {
+    router.push({
+      pathname: '/filter',
+      query: {name: "Landform"}
+    })
+  }
+  const handleBahandInduk = () => {
+    router.push({
+      pathname: '/filter',
+      query: {name: "Bahan Induk"}
+    })
+  }
+
+  const handleRelief = () => {
+    router.push({
+      pathname: '/filter',
+      query: {name: "Relief"}
+    })
+  }
+
+  const handleLuas = () => {
+    router.push({
+      pathname: '/filter',
+      query: {name: "Luas"}
+    })
+  }
+
+  const handlePersentaseLuas = () => {
+    router.push({
+      pathname: '/filter',
+      query: {name: "Persentase Luas"}
+    })
+  }
+
+
+
   return (
     <>
       <label for="my-drawer" class="drawer-overlay" />
@@ -70,34 +106,24 @@ const handleKejenuhan = () => {
         {(title == "Kapasitas Tukar Kation") ? <b class="underline"> Kapasitas Tukar Kation </b>  : <a> Kapasitas Tukar Kation </a> }     
         </div>  
          <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 " onClick={handleKejenuhan}>
-            <a>Kejenuhan Basa</a>            
+         {(title == "Kejenuhan Basa") ? <b class="underline"> Kejenuhan Basa </b>  : <a>Kejenuhan Basa </a> }     
         </div>   
-        <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 ">
-          <Link href="/maps">
-            <a>Landform</a>
-          </Link>
+        <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 " onClick={handleLandform}>
+         {(title == "Landform") ? <b class="underline"> Landform </b>  : <a>Landform </a> }     
         </div>   
-        <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 ">
-          <Link href="/maps">
-            <a>Bahan Induk</a>
-          </Link>
+        <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 " onClick={handleBahandInduk}>
+         {(title == "Bahan Induk") ? <b class="underline"> Bahan Induk </b>  : <a>Bahan Induk </a> }     
         </div>   
-        <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 ">
-          <Link href="/maps">
-            <a>Relief</a>
-          </Link>
+        <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 " onClick={handleRelief}>
+         {(title == "Relief") ? <b class="underline"> Relief</b>  : <a>Relief</a> }     
+        </div>   
+        <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 " onClick={handleLuas}>
+         {(title == "Luas") ? <b class="underline"> Luas </b>  : <a>Luas </a> }     
+        </div>   
+        <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 " onClick={handlePersentaseLuas}>
+         {(title == "Persentase Luas") ? <b class="underline"> Persentase Luas </b>  : <a>Persentase Luas </a> }     
         </div>
-        <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 ">
-          <Link href="/maps">
-            <a>Luas</a>
-          </Link>
-        </div>
-        <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 ">
-          <Link href="/maps">
-            <a>Persentase Luas</a>
-          </Link>
-        </div>      
-               </div>
+      </div>
         <div class="my-3 hover:text-gray-500 cursor-pointer px-4 ">
           <Link href="/input">
             <a>Input Pengguna</a>

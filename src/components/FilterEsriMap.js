@@ -12,9 +12,8 @@ import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 import Expand from "@arcgis/core/widgets/Expand";
 import Print from "@arcgis/core/widgets/Print";
 import Extent from "@arcgis/core/geometry/Extent";
-function EsriMap() {
+function FilterEsriMap({title}) {
   const mapDiv = useRef(null);
-  
   useEffect(() => {
     if (mapDiv.current) {
       /**
@@ -138,121 +137,121 @@ function EsriMap() {
           });
         })
 
-        const normalLayer = new FeatureLayer({
-          fields: [
-            {
-              name: "ObjectID",
-              alias: "ObjectID",
-              type: "oid"
-            },
-            {
-              name: "spt",
-              alias: "spt",
-              type: "string"
-            },
-            {
-              name: "proporsi",
-              alias: "proporsi",
-              type: "string"
-            },
-            {
-              name: "kelasfaktorlandscape",
-              alias: "kelasfaktorlandscape",
-              type: "string"
-            },
-            {
-              name: "kedalamanmineraltanah",
-              alias: "kedalamanmineraltanah",
-              type: "string"
-            },
-            {
-              name: "drainase",
-              alias: "drainase",
-              type: "string"
-            },
-            {
-              name: "teksturtanah",
-              alias: "teksturtanah",
-              type: "string"
-            },
-            {
-              name: "kemasamantanah",
-              alias: "kemasamantanah",
-              type: "string"
-            },
-            {
-              name: "kapasitastukarkation",
-              alias: "kapasitastukarkation",
-              type: "string"
-            },
-            {
-              name: "kejenuhanbasa",
-              alias: "kejenuhanbasa",
-              type: "string"
-            },
-            {
-              name: "landform",
-              alias: "landform",
-              type: "string"
-            },
-            {
-              name: "bahaninduk",
-              alias: "bahaninduk",
-              type: "string"
-            },
-            {
-              name: "relief",
-              alias: "relief",
-              type: "string"
-            },
-            {
-              name: "luas",
-              alias: "luas",
-              type: "string"
-            },
-            {
-              name: "persentaseluas",
-              alias: "persentaseluas",
-              type: "string"
-            },
-          ],
-          objectIdField: "ObjectID",
-          geometryType: "polygon",
-          source: graphicsNormal,
-          renderer: {
-            type: "simple",
-            "symbol": {
-              "color": "#FF4500",
-              "type": "simple-fill",
-              "style": "solid",
-              "outline": {
-                color: [255, 255, 255],
-                width: 1
+        // const normalLayer = new FeatureLayer({
+        //   fields: [
+        //     {
+        //       name: "ObjectID",
+        //       alias: "ObjectID",
+        //       type: "oid"
+        //     },
+        //     {
+        //       name: "spt",
+        //       alias: "spt",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "proporsi",
+        //       alias: "proporsi",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "kelasfaktorlandscape",
+        //       alias: "kelasfaktorlandscape",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "kedalamanmineraltanah",
+        //       alias: "kedalamanmineraltanah",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "drainase",
+        //       alias: "drainase",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "teksturtanah",
+        //       alias: "teksturtanah",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "kemasamantanah",
+        //       alias: "kemasamantanah",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "kapasitastukarkation",
+        //       alias: "kapasitastukarkation",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "kejenuhanbasa",
+        //       alias: "kejenuhanbasa",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "landform",
+        //       alias: "landform",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "bahaninduk",
+        //       alias: "bahaninduk",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "relief",
+        //       alias: "relief",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "luas",
+        //       alias: "luas",
+        //       type: "string"
+        //     },
+        //     {
+        //       name: "persentaseluas",
+        //       alias: "persentaseluas",
+        //       type: "string"
+        //     },
+        //   ],
+        //   objectIdField: "ObjectID",
+        //   geometryType: "polygon",
+        //   source: graphicsNormal,
+        //   renderer: {
+        //     type: "simple",
+        //     "symbol": {
+        //       "color": "#FF4500",
+        //       "type": "simple-fill",
+        //       "style": "solid",
+        //       "outline": {
+        //         color: [255, 255, 255],
+        //         width: 1
 
-              }
-            },
-            "label": "Netral"
-          },
-          popupTemplate: {
-            "title": "No SPT : {spt} (Proporsi {proporsi} )",
-            "content":  "<h1><b>Kelas Faktor Landscape:</b> {kelasfaktorlandscape}</h1>" + 
-                        "<br><b>Kedalam Mineral Tanah : </b> {kedalamanmineraltanah}" + 
-                        "<br><b>Drainase: </b> {drainase}" +
-                        "<br><b>Tekstur Tanah:</b> {teksturtanah" + 
-                        "<br><b>Kemasaman Tanah: </b> {kemasamantanah}" +
-                        "<br><b>Kapasitas Tukar Kation: </b> {kapasitastukarkation}" +
-                        "<br><b>Kejenuhan Basa: </b> {kejenuhanbasa}" +
-                        "<br><b>Land Form: </b> {landform}" +
-                        "<br><b>Bahan Induk: </b> {bahaninduk}" +
-                        "<br><b>Relief: </b> {relief}"  +
-                        "<br><b>Luas: </b> {luas}" +
-                        "<br><b>Persentase Luas: </b> {persentaseluas}"
-          }
-        });
+        //       }
+        //     },
+        //     "label": "Normal"
+        //   },
+        //   popupTemplate: {
+        //     "title": "No SPT : {spt} (Proporsi {proporsi} )",
+        //     "content":  "<h1><b>Kelas Faktor Landscape:</b> {kelasfaktorlandscape}</h1>" + 
+        //                 "<br><b>Kedalam Mineral Tanah : </b> {kedalamanmineraltanah}" + 
+        //                 "<br><b>Drainase: </b> {drainase}" +
+        //                 "<br><b>Tekstur Tanah:</b> {teksturtanah" + 
+        //                 "<br><b>Kemasaman Tanah: </b> {kemasamantanah}" +
+        //                 "<br><b>Kapasitas Tukar Kation: </b> {kapasitastukarkation}" +
+        //                 "<br><b>Kejenuhan Basa: </b> {kejenuhanbasa}" +
+        //                 "<br><b>Land Form: </b> {landform}" +
+        //                 "<br><b>Bahan Induk: </b> {bahaninduk}" +
+        //                 "<br><b>Relief: </b> {relief}"  +
+        //                 "<br><b>Luas: </b> {luas}" +
+        //                 "<br><b>Persentase Luas: </b> {persentaseluas}"
+        //   }
+        // });
       
 
         const s1Layer = new FeatureLayer({
-          title: "Layer Kesesuain Lahan",
+          title: title,
           fields: [
             {
               name: "ObjectID",
@@ -334,7 +333,7 @@ function EsriMap() {
           },
         });
         
-        map.add(normalLayer);
+       // map.add(normalLayer);
         map.add(s3Layer);
         map.add(s2Layer);
         map.add(s1Layer);
@@ -345,4 +344,5 @@ function EsriMap() {
   return <div className={styles.mapDiv} ref={mapDiv}></div>;
 }
 
-export default EsriMap;
+
+export default FilterEsriMap;
