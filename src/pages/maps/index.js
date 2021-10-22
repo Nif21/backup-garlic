@@ -28,7 +28,7 @@ function Home() {
       </Head>
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
       <div class="drawer-side flex-none hidden lg:block">
-        <NavigationDrawer handleClick={handleClick} expand={true} />
+        <NavigationDrawer handleClick={handleClick} expand={true} title={router.query.name}/>
       </div>
       <div class="flex flex-col drawer-content  h-screen w-screen">
         <div class="flex-grow ">
