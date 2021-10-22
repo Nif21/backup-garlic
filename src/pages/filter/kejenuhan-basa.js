@@ -5,7 +5,6 @@ import HomeHeader from "../../components/HomeHeader";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import styles from "../../styles/EsriMap.module.css";
 import { useRouter } from 'next/router'
-import FilterEsriMap from "../../components/FilterEsriMap"
 
 // The ArcGIS JSAPI does not currently work with SSR, so we need to disable it for the map component
 const EsriMapWithNoSSR = dynamic(() => import("../../components/FilterEsriMap"), {
@@ -27,19 +26,19 @@ function Filter() {
       </Head>
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
       <div class="drawer-side flex-none hidden lg:block">
-        <NavigationDrawer handleClick={handleClick} expand={true} title={router.query.name}/>
+        <NavigationDrawer handleClick={handleClick} expand={true} title="Kejenuhan Basa"/>
       </div>
       <div class="flex flex-col drawer-content  h-screen w-screen">
         <div class="flex-grow ">
           <div>
             <div className={styles.nav}>
               <label for="my-drawer" >
-                <img src="circle.png" class={` w-32 h-32 cursor-pointer mx-auto`} onClick={handleClick} />
+                <img src="../circle.png" class={` w-32 h-32 cursor-pointer mx-auto`} onClick={handleClick} />
               </label>
             </div>
           </div>
 
-          <FilterEsriMap title={router.query.name} />
+          <EsriMapWithNoSSR title="Kejenuhan Basa"/>
         </div>
       </div>
     </div>

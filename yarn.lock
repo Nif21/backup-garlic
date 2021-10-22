@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@a11y/focus-trap/-/focus-trap-1.0.5.tgz#0748189c37ca21255c702aa5de3ee00ed4821d22"
   integrity sha512-3JOd6g+BALysWS8LNf0qdB8ltR651H/RCLAvUmfS0LIHwHO579XfjZUIZbURYiAZrcbp1CBAq4QZ2YwKNQZ1hw==
 
-"@arcgis/core@^4.21.1":
-  version "4.21.1"
-  resolved "https://registry.yarnpkg.com/@arcgis/core/-/core-4.21.1.tgz#bd4bf6aeac2de83b596ceb307c7f53f509904cac"
-  integrity sha512-LsnhOCVBKjnZV5VwWskjMWSHRjXXm23JMpbac8v9YgLWz1bsF2fuz+Lz6egrbb6sLYJSbRx7HQs7rrfaFXCt+A==
+"@arcgis/core@^4.21.2":
+  version "4.21.2"
+  resolved "https://registry.yarnpkg.com/@arcgis/core/-/core-4.21.2.tgz#0fbfe17f981ff4247ac7770f8e662e716260b8bb"
+  integrity sha512-L3Rc84wOFsMcljrydVKc1jkgYQSO+ru4Kgr7tCsK+YLVGWNeggLRh2XeGNIuXOEklaMxdWIBZ+Kw9424K+JQyw==
   dependencies:
     "@esri/arcgis-html-sanitizer" "~2.7.0"
     "@esri/calcite-colors" "~6.0.1"

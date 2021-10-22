@@ -81,7 +81,7 @@ function EsriMap() {
       view.ui.add(zoom,"bottom-right");
 
       (async () => {
-        const data = await fetch("https://7bd2-180-244-185-132.ngrok.io/v1/show")
+        const data = await fetch("https://72e3-180-244-185-132.ngrok.io/v1/show")
         const dataJSON = await data.json();
  
         let polygon ;

@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@arcgis/core": "^4.21.1",
+    "@arcgis/core": "^4.21.2",
     "@esri/arcgis-rest-portal": "^3.2.1",
     "@esri/arcgis-rest-request": "^3.2.1",
     "@esri/react-arcgis": "^5.1.0",
