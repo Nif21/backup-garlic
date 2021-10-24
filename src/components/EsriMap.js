@@ -238,7 +238,7 @@ function EsriMap() {
             "content":  "<h1><b>Kelas Faktor Landscape:</b> {kelasfaktorlandscape}</h1>" + 
                         "<br><b>Kedalam Mineral Tanah : </b> {kedalamanmineraltanah}" + 
                         "<br><b>Drainase: </b> {drainase}" +
-                        "<br><b>Tekstur Tanah:</b> {teksturtanah" + 
+                        "<br><b>Tekstur Tanah:</b> {teksturtanah}" + 
                         "<br><b>Kemasaman Tanah: </b> {kemasamantanah}" +
                         "<br><b>Kapasitas Tukar Kation: </b> {kapasitastukarkation}" +
                         "<br><b>Kejenuhan Basa: </b> {kejenuhanbasa}" +
