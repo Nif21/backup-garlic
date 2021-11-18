@@ -81,7 +81,7 @@ function EsriMap() {
       view.ui.add(zoom,"bottom-right");
 
       (async () => {
-        const data = await fetch("https://72e3-180-244-185-132.ngrok.io/v1/show")
+        const data = await fetch("http://6e7b-110-138-91-250.ngrok.io/v1/show")
         const dataJSON = await data.json();
  
         let polygon ;
@@ -222,7 +222,7 @@ function EsriMap() {
           renderer: {
             type: "simple",
             "symbol": {
-              "color": "#FF4500",
+              "color": "#F70400",
               "type": "simple-fill",
               "style": "solid",
               "outline": {
@@ -231,7 +231,7 @@ function EsriMap() {
 
               }
             },
-            "label": "Netral"
+            "label": "N"
           },
           popupTemplate: {
             "title": "No SPT : {spt} (Proporsi {proporsi} )",
@@ -266,7 +266,7 @@ function EsriMap() {
           renderer: {
             type: "simple",
             "symbol": {
-              "color": "#F0E68C",
+              "color": "#00FF7F",
               "type": "simple-fill",
               "style": "solid",
               "outline": {
@@ -294,7 +294,7 @@ function EsriMap() {
           renderer: {
             type: "simple",
             "symbol": {
-              "color": "#00FF7F",
+              "color": "#FFE600",
               "type": "simple-fill",
               "style": "solid",
               "outline": {
@@ -321,7 +321,7 @@ function EsriMap() {
           renderer: {
             type: "simple",
             "symbol": {
-              "color": "#800000",
+              "color": "#FF4400",
               "type": "simple-fill",
               "style": "solid",
               "outline": {

@@ -13,7 +13,7 @@
                 </div>
                 <img src={`${setImage}`} class="my-10 mx-10" />
             </div>
-            <div class="m-5 cursor-pointer py-5 w-40 bg-coco-normal text-center text-white rounded-xl hover:bg-white hover:text-black">
+            <div class="m-5 cursor-pointer py-5 w-40 bg-primary-coco text-center text-white rounded-xl hover:bg-primary-darkcoco hover:text-white">
                 {button}
             </div>
             </div>

@@ -1,6 +1,6 @@
 export default function Footer(){
     return(
-        <div class="bg-white">
+        <div class="bg-white shadow-xl">
           <div class="container mx-auto ">
             <div class="flex flex-wrap m-4">
               <img src="/ipb.png" class="w-16 h-16 m-4"/>

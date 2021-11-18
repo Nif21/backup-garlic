@@ -21,9 +21,8 @@ export default function Carousels(){
         }
       };
     return ( 
-        <div class="relative w-full opacity-50 ">
+        <div class="w-full opacity-50 ">
             <Carousel responsive={responsive} 
-            class="relative"  
             ontainerClass="container-with-dots" 
             autoPlay 
             infinite  

@@ -74,8 +74,8 @@ export default function Home() {
             </div>
 
             {/* Profil Pengembang */}
-            <div class="bg-green-100 py-4 px-4">
-              <div class="mx-16 mt-16 mb-8 text-2xl font-bold ">
+            <div class="bg-primary-dark py-4 px-4">
+              <div class="mx-16 mt-16 mb-8 text-2xl font-bold text-white">
                 Profil Pengembang
               </div>
               <div>

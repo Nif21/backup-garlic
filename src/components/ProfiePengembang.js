@@ -2,7 +2,7 @@ export default function Pengembang() {
   return (
     <>
       <div class="container mx-auto pb-40">
-        <div class="mt-16 py-16 px-8 w-96 bg-green-600 rounded-xl ">
+        <div class="mt-16 py-16 px-8 w-96 bg-primary-coco rounded-xl ">
           <div class="w-sm">
             <img src="circle.png" class="w-64 h-64  mx-auto" />
             <div class="mt-16 text-black text-center">

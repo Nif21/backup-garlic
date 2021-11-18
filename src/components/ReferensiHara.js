@@ -12,7 +12,7 @@ export default function NavigationDrawerChild({ handleClick, expand , title}) {
 
   return (
     <>
-      <div class="my-3 mx-3 hover:text-gray-500 cursor-pointer px-4 " onClick={expanded}>
+      <div class="my-3 mx-3 hover:text-black cursor-pointer px-4 " onClick={expanded}>
           <div class="flex flex-row"> 
           <div>Referensi Hara</div>
           <div class="flex-grow"></div>
@@ -22,17 +22,17 @@ export default function NavigationDrawerChild({ handleClick, expand , title}) {
           </div>
         </div>
         <div class={` ${isExpand ? 'block':'hidden'}  px-4 `}  >
-        <div class="my-3  mx-3 hover:text-gray-500 cursor-pointer px-4 ">
+        <div class="my-3  mx-3 hover:text-black cursor-pointer px-4 ">
           <Link href={`/filter/kejenuhan-basa`}>
             {(title == "Kejenuhan Basa") ? <b class="underline"> Kejenuhan Basa </b>  : <a>Kejenuhan Basa </a> }     
           </Link>
         </div> 
-        <div class="my-3  mx-3 hover:text-gray-500 cursor-pointer px-4 ">
+        <div class="my-3  mx-3 hover:text-black cursor-pointer px-4 ">
           <Link href={`/filter/kapasitas-tukar-kation`}>
             {(title == "Kapasitas Tukar Kation") ? <b class="underline"> Kapasitas Tukar Kation </b>  : <a>Kapasitas Tukar Kation </a> }     
           </Link>
         </div>   
-        <div class="my-3  mx-3 hover:text-gray-500 cursor-pointer px-4 ">
+        <div class="my-3  mx-3 hover:text-black cursor-pointer px-4 ">
           <Link href={`/filter/kemasaman-tanah`}>
             {(title == "Kemasaman Tanah") ? <b class="underline"> Kemasaman Tanah </b>  : <a>Kemasaman Tanah </a> }     
           </Link>

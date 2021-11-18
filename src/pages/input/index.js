@@ -183,7 +183,7 @@ function index() {
         </div>
         <div class="flex flex-col drawer-content  h-screen w-screen">
           <HomeHeader active={active} handleClick={handleClick} />
-          <div class="mt-5 md:mt-0 md:col-span-2 flex-grow ">
+          <div class="mt-5 md:mt-0 md:col-span-2 flex-grow bg-white ">
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Masukkan Variabel Kesesuaian Lahan Anda
             </h2>
@@ -347,7 +347,10 @@ function index() {
                   <p>{checkKemasaman(kemasaman)} </p>
                 </div>
               </div>
-             
+              <button type="submit" class="w-full mt-8 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco ">
+              Save
+            </button>
+          
             </div>
           </div>
 

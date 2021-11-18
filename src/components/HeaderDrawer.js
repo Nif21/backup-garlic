@@ -1,7 +1,7 @@
 export default function Header(){
     return (
         <div class={`flex cursor-pointer`}>
-        <img src="../logo.png" class="w-16 h-16 relative"/>
+        <img src="logo2.png" class="w-20 h-20 relative"/>
         <div>
           <div class="text-2xl mx-5 mt-2  text-white">
             INA GARLIC

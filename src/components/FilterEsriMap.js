@@ -82,7 +82,7 @@ function FilterEsriMap({title}) {
       view.ui.add(zoom,"bottom-right");
 
       (async () => {
-        const data = await fetch("https://72e3-180-244-185-132.ngrok.io/v1/show?select=spt&select=geom&select=kelasfaktorlandscape&select=" + title.replace(/ /g,''))
+        const data = await fetch("http://6e7b-110-138-91-250.ngrok.io/v1/show?select=spt&select=geom&select=kelasfaktorlandscape&select=" + title.replace(/ /g,''))
         const dataJSON = await data.json();
         let polygon ;
         const graphicsNormal = dataJSON.map((v)=>{
@@ -221,7 +221,7 @@ function FilterEsriMap({title}) {
           renderer: {
             type: "simple",
             "symbol": {
-              "color": "#FF4500",
+              "color": "#F70400",
               "type": "simple-fill",
               "style": "solid",
               "outline": {
@@ -230,7 +230,7 @@ function FilterEsriMap({title}) {
 
               }
             },
-            "label": "Normal"
+            "label": "N"
           },
           popupTemplate: {
             "title": "No SPT : {spt} ",
@@ -254,7 +254,7 @@ function FilterEsriMap({title}) {
           renderer: {
             type: "simple",
             "symbol": {
-              "color": "#F0E68C",
+              "color": "#00FF7F",
               "type": "simple-fill",
               "style": "solid",
               "outline": {
@@ -282,7 +282,7 @@ function FilterEsriMap({title}) {
           renderer: {
             type: "simple",
             "symbol": {
-              "color": "#00FF7F",
+              "color": "#FFE600",
               "type": "simple-fill",
               "style": "solid",
               "outline": {
@@ -309,7 +309,7 @@ function FilterEsriMap({title}) {
           renderer: {
             type: "simple",
             "symbol": {
-              "color": "#800000",
+              "color": "#FF4400",
               "type": "simple-fill",
               "style": "solid",
               "outline": {
