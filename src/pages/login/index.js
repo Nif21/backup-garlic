@@ -13,10 +13,10 @@ export default function Login() {
 
   return (
     <>
-      <div class="min-h-screen flex items-center justify-center bg-black py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8">
+      <div class="min-h-screen flex items-center justify-center bg-primary-dark py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8 ">
           <div>
-            <img class="mx-auto h-12 w-auto" src="/circle.png" alt="Workflow" />
+            <img class="mx-auto h-12 w-auto" src="/logo2.png" alt="Workflow" />
             <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
               Gunakan Akun IPB
             </h2>
@@ -58,7 +58,7 @@ export default function Login() {
               <Link href="/" >
                 <button
                   type="submit"
-                  class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-coco-normal hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-coco-normal"
+                  class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-coco-normal"
                 >
                   Sign in
                 </button>
