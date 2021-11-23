@@ -4,7 +4,7 @@ import { useState } from "react";
 const FaktorDikoreksi = () => {
   const [kedalaman, setKedalaman] = useState("");
   function checkKedalaman(kedalaman) {
-    var result = "";
+    let result = "";
     switch (kedalaman) {
       case "Sangat Dalam":
         result = "S1";
