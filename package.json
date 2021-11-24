@@ -25,7 +25,8 @@
     "react-responsive-carousel": "^3.2.21",
     "react-select": "^5.2.1",
     "react-spinners": "^0.11.0",
-    "reactstrap": "^8.9.0"
+    "reactstrap": "^8.9.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@arcgis/webpack-plugin": "^4.20.0",

@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik, Formik } from "formik";
 import CustomSelect from "./CustomSelect";
+import * as Yup from 'yup';
 
 const drainaseOptions = [
   { value: "Baik", label: "Baik" },
@@ -331,7 +332,25 @@ function FormikInput() {
       evelasi: "",
       relief: "",
     },
+    // validationSchema: Yup.object().shape({
+    //   drainase: Yup.string().required('Kelas kosong'),
+    //   teksturTanah: Yup.string().required('Kelas kosong'),
+    //   ktk: Yup.string().required('Kelas kosong'),
+    //   kemasaman: Yup.string().required('Kelas kosong'),
+    //   kedalaman: Yup.string().required('Kelas kosong'),
+    //   kejenuhan: Yup.string().required('Kelas kosong'),
+    //   curahHujan: Yup.string().required('Kelas kosong'),
+    //   lamaSinar: Yup.string().required('Kelas kosong'),
+    //   evelasi: Yup.string().required('Kelas kosong'),
+    //   relief: Yup.string().required('Kelas kosong'),
+    // }),
     onSubmit: (values) => {
+      let empty = false;
+      for(const v in values) {
+        if(values[v] == '') empty = true;
+      }
+      
+
       let result = {
         faktorYangDikendalikan: values.faktorYangDikendalikan,
         drainase: drainasePopulate(values.drainase),
@@ -352,11 +371,18 @@ function FormikInput() {
         relief: reliefPopulate(values.relief),
       };
 
-      setTimeout(() => {
-        alert(JSON.stringify(result, null, 2));
-      }, 1000);
+      console.log(empty)
+      if(!empty){
+        setTimeout(() => {
+          alert(JSON.stringify(result, null, 2));
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          alert("Kelas Tidak Boleh Kosong");
+        }, 1000);
+      }
+      
     },
-    validator: () => {},
   });
 
   function checkFaktorDikendalikan(drainase, media, retensi) {

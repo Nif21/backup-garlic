@@ -3,9 +3,6 @@ import { useState } from "react";
 import HomeHeader from "../../components/HomeHeader";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import Footer from "../../components/Footer";
-import FaktorDikendalikan from "../../components/input/FaktorDikendalikan";
-import FaktorDikoreksi from "../../components/input/FaktorDikoreksi";
-import FaktorTidakDapat from "../../components/input/FaktorTidakDapat";
 import FormikInput from "../../components/input/FormikInput";
 
 function index() {
