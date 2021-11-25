@@ -5,7 +5,7 @@ import HomeHeader from "../../components/HomeHeader";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import Footer from "../../components/Footer";
 import { Formik } from "formik";
-
+import FormikUploadFile from "../../components/inputFile/FormikUploadFile";
 function index() {
   const [active, setActive] = useState(false);
 
@@ -25,8 +25,12 @@ function index() {
         </div>
         <div class="flex flex-col drawer-content  h-screen w-screen">
           <HomeHeader active={active} handleClick={handleClick} />
-          <div class="mt-5 md:mt-0 md:col-span-2 flex-grow ">
-            <form action="#" method="POST">
+          <div class="mt-5 md:mt-0 md:col-span-2 flex-grow bg-white ">
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              Upload File SPT anda disini
+            </h2>
+            <FormikUploadFile />
+            {/* <form action="#" method="POST">
               <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                   <p class="mt-2 text-xl text-gray-500">
@@ -100,7 +104,7 @@ function index() {
                   </button>
                 </div>
               </div>
-            </form>
+            </form> */}
           </div>
 
           <Footer />
