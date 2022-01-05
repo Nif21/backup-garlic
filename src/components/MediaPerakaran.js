@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function NavigationDrawerChild({ handleClick, expand , title}) {
   
   const [isExpand, setExpand] = useState(expand ? expand : false)
-  console.log(isExpand)
   const expanded = () => {
     setExpand(!isExpand);
   };

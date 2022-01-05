@@ -4,7 +4,7 @@ import HeaderFilter from "./HeaderFilter";
 import { useState } from "react";
 import { HiChevronDown,HiChevronUp } from "react-icons/hi";
 import MediaPerakaran from "./MediaPerakaran";
-import ReferensiHara from "./ReferensiHara";
+import RetensiHara from "./RetensiHara";
 
 export default function NavigationDrawer({ handleClick, expand , title }) {
   
@@ -52,7 +52,7 @@ export default function NavigationDrawer({ handleClick, expand , title }) {
           </Link>
         </div> 
         <MediaPerakaran expand={isExpand} title={title}/>
-        <ReferensiHara expand={isExpand} title={title}/>
+        <RetensiHara expand={isExpand} title={title}/>
         {/* <div class="my-3  mx-3 hover:text-gray-500 cursor-pointer px-4 ">
           <Link href={`/filter/kedalaman-mineral-tanah`}>
             {(title == "Kedalaman Mineral Tanah") ? <b class="underline"> Kedalaman Mineral Tanah </b>  : <a>Kedalaman Mineral Tanah </a> }     

@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function NavigationDrawerChild({ handleClick, expand , title}) {
   
   const [isExpand, setExpand] = useState(expand ? expand : false)
-  console.log(isExpand)
   const expanded = () => {
     setExpand(!isExpand);
   };
@@ -14,7 +13,7 @@ export default function NavigationDrawerChild({ handleClick, expand , title}) {
     <>
       <div class="my-3 mx-3 hover:text-black cursor-pointer px-4 " onClick={expanded}>
           <div class="flex flex-row"> 
-          <div>Referensi Hara</div>
+          <div>Retensi Hara</div>
           <div class="flex-grow"></div>
           <div>
             {isExpand ? <HiChevronUp/> : <HiChevronDown/>}

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import HomeHeader from "../../components/HomeHeader";
+import HomeHeader from "../../components/HeaderNotSticky";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import Footer from "../../components/Footer";
 import FormikInput from "../../components/input/FormikInput";
@@ -33,22 +33,7 @@ function index() {
           <div class="mt-5 md:mt-0 md:col-span-2 flex-grow bg-white ">
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Masukkan Variabel Kesesuaian Lahan Anda
-            </h2>
-            {/* <div class="px-4 py-5  sm:p-6">
-              <div class="grid grid-cols-6 gap-6 mx-auto">
-                <FaktorDikendalikan />
-                <FaktorDikoreksi />
-                <FaktorTidakDapat />
-            
-              </div>
-              <button
-                type="submit"
-                class="w-full mt-8 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco "
-                onClick={handleOpen}
-              >
-                Save
-              </button>
-            </div> */}
+            </h2>    
             <FormikInput/>
           </div>
       

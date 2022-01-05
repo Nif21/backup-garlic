@@ -37,7 +37,6 @@ function Filter() {
               </label>
             </div>
           </div>
-
           <EsriMapWithNoSSR title="Tekstur Tanah"/>
         </div>
       </div>

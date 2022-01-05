@@ -82,7 +82,7 @@ function FilterEsriMap({title}) {
       view.ui.add(zoom,"bottom-right");
 
       (async () => {
-        const data = await fetch("http://6e7b-110-138-91-250.ngrok.io/v1/show?select=spt&select=geom&select=kelasfaktorlandscape&select=" + title.replace(/ /g,''))
+        const data = await fetch("http://4a9e-61-94-101-17.ngrok.io/v1/show?select=spt&select=geom&select=kelasfaktorlandscape&select=" + title.replace(/ /g,''))
         const dataJSON = await data.json();
         let polygon ;
         const graphicsNormal = dataJSON.map((v)=>{

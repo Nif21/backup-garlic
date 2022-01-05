@@ -19,7 +19,7 @@ export default function Home() {
   };
   return (
     <>
-      <div class=" shadow bg-base-200 drawer">
+      <div class="shadow bg-base-200 drawer">
         <Head>
           <title>INA Garlic</title>
           <link rel="icon" href="/favicon.ico" />

@@ -1,317 +1,347 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik, Formik } from "formik";
 import CustomSelect from "./CustomSelect";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
-const drainaseOptions = [
-  { value: "Baik", label: "Baik" },
-  { value: "Agak Terhambat", label: "Agak Terhambat" },
-  { value: "Agak Cepat", label: "Agak Cepat" },
-  { value: "Sedang", label: "Sedang" },
-  { value: "Terhambat", label: "Terhambat" },
-  { value: "Sangat Terhambat", label: "Sangat Terhambat" },
-  { value: "Cepat", label: "Cepat" },
-];
-
-function drainasePopulate(drainase) {
-  let result = "";
-  switch (drainase) {
-    case "Baik":
-      result = "S1";
-      break;
-    case "Agak Terhambat":
-      result = "S1";
-      break;
-    case "Agak Cepat":
-      result = "S2";
-      break;
-    case "Sedang":
-      result = "S2";
-      break;
-    case "Terhambat":
-      result = "S3";
-      break;
-    case "Sangat Terhambat":
-      result = "N";
-      break;
-    case "Cepat":
-      result = "N";
-      break;
-  }
-  return result;
+async function fetchData() {
+  const response = await fetch(
+    "http://4a9e-61-94-101-17.ngrok.io/v1/syaratTumbuh"
+  );
+  const data = await response.json();
+  return data;
 }
 
-const teksturTanahOptions = [
-  { value: "Halus", label: "Halus" },
-  { value: "Agak Halus", label: "Agak Halus" },
-  { value: "Sedang", label: "Sedang" },
-  { value: "Agak Kasar", label: "Agak Kasar" },
-  { value: "Kasar", label: "Kasar" },
-];
-
-function teksturTanahPopulate(tekstur) {
-  let result = "";
-  switch (tekstur) {
-    case "Halus":
-      result = "S1";
-      break;
-    case "Agak Halus":
-      result = "S1";
-      break;
-    case "Sedang":
-      result = "S1";
-      break;
-    case "Agak Kasar":
-      result = "S2";
-      break;
-    case "Kasar":
-      result = "S3";
-      break;
+const FormikInput = () => {
+  useEffect(() => {
+    fetchData().then((response) => {
+      let data = [];
+      data = response.map(
+        ({ Variabel, IntervalAtas, IntervalBawah, Kelas }) => ({
+          value: Variabel,
+          intervalAtas: IntervalAtas,
+          intervalBawah: IntervalBawah,
+          label: Variabel,
+          kelas: kelasMapping(Kelas)
+        })
+      );
+      setDrainaseOptions(data)
+    });
+  });
+  const [drainaseOptions, setDrainaseOptions] = useState([]);
+  
+  function kelasMapping(kelas){
+    let result = "";
+    switch(kelas){
+      case 1:
+        result = "S1"
+      case 2:
+        result = "S2"        
+      case 3:
+        result = "S3"  
+      default:
+        result = "N"
+    }
+    return result;
   }
-  return result;
-}
 
-const ktkOptions = [
-  { value: "Tinggi", label: "Tinggi" },
-  { value: "Sedang", label: "Sedang" },
-  { value: "Rendah", label: "Rendah" },
-  { value: "Sangat Rendah", label: "Sangat Rendah" },
-];
-
-function ktkPopulate(ktk) {
-  let result = "";
-  switch (ktk) {
-    case "Tinggi":
-      result = "S1";
-      break;
-    case "Sedang":
-      result = "S1";
-      break;
-    case "Rendah":
-      result = "S2";
-      break;
-    case "Sangat Rendah":
-      result = "S3";
-      break;
+  function drainasePopulate(drainase) {
+    let result = "";
+    switch (drainase) {
+      case "Baik":
+        result = "S1";
+        break;
+      case "Agak Terhambat":
+        result = "S1";
+        break;
+      case "Agak Cepat":
+        result = "S2";
+        break;
+      case "Sedang":
+        result = "S2";
+        break;
+      case "Terhambat":
+        result = "S3";
+        break;
+      case "Sangat Terhambat":
+        result = "N";
+        break;
+      case "Cepat":
+        result = "N";
+        break;
+    }
+    return result;
   }
-  return result;
-}
 
-const kemasamanOptions = [
-  { value: "Agak Masam", label: "Agak Masam" },
-  { value: "Masam", label: "Masam" },
-  { value: "Netral", label: "Netral" },
-  { value: "Sangat Masam", label: "Sangat Masam" },
-];
+  const teksturTanahOptions = [
+    { value: "Halus", label: "Halus" },
+    { value: "Agak Halus", label: "Agak Halus" },
+    { value: "Sedang", label: "Sedang" },
+    { value: "Agak Kasar", label: "Agak Kasar" },
+    { value: "Kasar", label: "Kasar" },
+  ];
 
-function kemasamanPopulate(kemasaman) {
-  let result = "";
-  switch (kemasaman) {
-    case "Agak Masam":
-      result = "S1";
-      break;
-    case "Masam":
-      result = "S2";
-      break;
-    case "Sangat Masam":
-      result = "S3";
-      break;
-    case "Netral":
-      result = "S2";
-      break;
+  function teksturTanahPopulate(tekstur) {
+    let result = "";
+    switch (tekstur) {
+      case "Halus":
+        result = "S1";
+        break;
+      case "Agak Halus":
+        result = "S1";
+        break;
+      case "Sedang":
+        result = "S1";
+        break;
+      case "Agak Kasar":
+        result = "S2";
+        break;
+      case "Kasar":
+        result = "S3";
+        break;
+    }
+    return result;
   }
-  return result;
-}
 
-const kedalamanOptions = [
-  { value: "Sangat Dalam", label: "Sangat Dalam" },
-  { value: "Dalam", label: "Dalam" },
-  { value: "Sedang", label: "Sedang" },
-  { value: "Dangkal", label: "Dangkal" },
-  { value: "Sangat Dangkal", label: "Sangat Dangkal" },
-  { value: "Batuan", label: "Batuan" },
-];
+  const ktkOptions = [
+    { value: "Tinggi", label: "Tinggi" },
+    { value: "Sedang", label: "Sedang" },
+    { value: "Rendah", label: "Rendah" },
+    { value: "Sangat Rendah", label: "Sangat Rendah" },
+  ];
 
-function kedalamanPopulate(kedalaman) {
-  let result = "";
-  switch (kedalaman) {
-    case "Sangat Dalam":
-      result = "S1";
-      break;
-    case "Dalam":
-      result = "S1";
-      break;
-    case "Sedang":
-      result = "S1";
-      break;
-    case "Dangkal":
-      result = "S2";
-      break;
-    case "Sangat Dangkal":
-      result = "S3";
-      break;
-    case "Batuan":
-      result = "N";
-      break;
+  function ktkPopulate(ktk) {
+    let result = "";
+    switch (ktk) {
+      case "Tinggi":
+        result = "S1";
+        break;
+      case "Sedang":
+        result = "S1";
+        break;
+      case "Rendah":
+        result = "S2";
+        break;
+      case "Sangat Rendah":
+        result = "S3";
+        break;
+    }
+    return result;
   }
-  return result;
-}
 
-const kejenuhanOptions = [
-  { value: "Sangat Tinggi", label: "Sangat Tinggi" },
-  { value: "Tinggi", label: "Tinggi" },
-  { value: "Sedang", label: "Sedang" },
-  { value: "Rendah", label: "Rendah" },
-  { value: "Sangat Rendah", label: "Sangat Rendah" },
-];
+  const kemasamanOptions = [
+    { value: "Agak Masam", label: "Agak Masam" },
+    { value: "Masam", label: "Masam" },
+    { value: "Netral", label: "Netral" },
+    { value: "Sangat Masam", label: "Sangat Masam" },
+  ];
 
-function kejenuhanPopulate(kejenuhan) {
-  let result = "";
-  switch (kejenuhan) {
-    case "Sangat Tinggi":
-      result = "S1";
-      break;
-    case "Tinggi":
-      result = "S1";
-      break;
-    case "Sedang":
-      result = "S2";
-      break;
-    case "Rendah":
-      result = "S3";
-      break;
-    case "Sangat Rendah":
-      result = "S3";
-      break;
+  function kemasamanPopulate(kemasaman) {
+    let result = "";
+    switch (kemasaman) {
+      case "Agak Masam":
+        result = "S1";
+        break;
+      case "Masam":
+        result = "S2";
+        break;
+      case "Sangat Masam":
+        result = "S3";
+        break;
+      case "Netral":
+        result = "S2";
+        break;
+    }
+    return result;
   }
-  return result;
-}
 
-const curahHujanOptions = [
-  { value: "Tinggi", label: "Tinggi" },
-  { value: "Agak Tinggi", label: "Agak Tinggi" },
-  { value: "Agak Rendah", label: "Agak Rendah" },
-  { value: "Rendah", label: "Rendah" },
-];
+  const kedalamanOptions = [
+    { value: "Sangat Dalam", label: "Sangat Dalam" },
+    { value: "Dalam", label: "Dalam" },
+    { value: "Sedang", label: "Sedang" },
+    { value: "Dangkal", label: "Dangkal" },
+    { value: "Sangat Dangkal", label: "Sangat Dangkal" },
+    { value: "Batuan", label: "Batuan" },
+  ];
 
-function curahHujanPopulate(curahHujan) {
-  let result = "";
-  switch (curahHujan) {
-    case "Tinggi":
-      result = "S1";
-      break;
-    case "Agak Tinggi":
-      result = "S2";
-      break;
-    case "Agak Rendah":
-      result = "S3";
-      break;
-    case "Rendah":
-      result = "N";
-      break;
+  function kedalamanPopulate(kedalaman) {
+    let result = "";
+    switch (kedalaman) {
+      case "Sangat Dalam":
+        result = "S1";
+        break;
+      case "Dalam":
+        result = "S1";
+        break;
+      case "Sedang":
+        result = "S1";
+        break;
+      case "Dangkal":
+        result = "S2";
+        break;
+      case "Sangat Dangkal":
+        result = "S3";
+        break;
+      case "Batuan":
+        result = "N";
+        break;
+    }
+    return result;
   }
-  return result;
-}
 
-const lamaSinarOptions = [
-  { value: "Sangat Tinggi", label: "Sangat Tinggi" },
-  { value: "Tinggi", label: "Tinggi" },
-  { value: "Sedang", label: "Sedang" },
-  { value: "Agak Rendah", label: "Agak Rendah" },
-  { value: "Rendah", label: "Rendah" },
-];
+  const kejenuhanOptions = [
+    { value: "Sangat Tinggi", label: "Sangat Tinggi" },
+    { value: "Tinggi", label: "Tinggi" },
+    { value: "Sedang", label: "Sedang" },
+    { value: "Rendah", label: "Rendah" },
+    { value: "Sangat Rendah", label: "Sangat Rendah" },
+  ];
 
-function lamaSinarPopulate(lamaSinar) {
-  let result = "";
-  switch (lamaSinar) {
-    case "Sangat Tinggi":
-      result = "S1";
-      break;
-    case "Tinggi":
-      result = "S1";
-      break;
-    case "Sedang":
-      result = "S2";
-      break;
-    case "Agak Rendah":
-      result = "S3";
-      break;
-    case "Rendah":
-      result = "N";
-      break;
+  function kejenuhanPopulate(kejenuhan) {
+    let result = "";
+    switch (kejenuhan) {
+      case "Sangat Tinggi":
+        result = "S1";
+        break;
+      case "Tinggi":
+        result = "S1";
+        break;
+      case "Sedang":
+        result = "S2";
+        break;
+      case "Rendah":
+        result = "S3";
+        break;
+      case "Sangat Rendah":
+        result = "S3";
+        break;
+    }
+    return result;
   }
-  return result;
-}
 
-const elevasiOptions = [
-  { value: "Sangat Tinggi", label: "Sangat Tinggi" },
-  { value: "Tinggi", label: "Tinggi" },
-  { value: "Agak Tinggi", label: "Agak Tinggi" },
-  { value: "Agak Rendah", label: "Agak Rendah" },
-  { value: "Rendah", label: "Rendah" },
-];
+  const curahHujanOptions = [
+    { value: "Tinggi", label: "Tinggi" },
+    { value: "Agak Tinggi", label: "Agak Tinggi" },
+    { value: "Agak Rendah", label: "Agak Rendah" },
+    { value: "Rendah", label: "Rendah" },
+  ];
 
-function elevasiPopulate(elevasi) {
-  let result = "";
-  switch (elevasi) {
-    case "Sangat Tinggi":
-      result = "S1";
-      break;
-    case "Tinggi":
-      result = "S1";
-      break;
-    case "Agak Tinggi":
-      result = "S2";
-      break;
-    case "Agak Rendah":
-      result = "S3";
-      break;
-    case "Rendah":
-      result = "N";
-      break;
+  function curahHujanPopulate(curahHujan) {
+    let result = "";
+    switch (curahHujan) {
+      case "Tinggi":
+        result = "S1";
+        break;
+      case "Agak Tinggi":
+        result = "S2";
+        break;
+      case "Agak Rendah":
+        result = "S3";
+        break;
+      case "Rendah":
+        result = "N";
+        break;
+    }
+    return result;
   }
-  return result;
-}
 
-const reliefOptions = [
-  { value: "Datar", label: "Datar" },
-  { value: "Agak Datar", label: "Agak Datar" },
-  { value: "Agak Landai", label: "Agak Landai" },
-  { value: "Landai", label: "Landai" },
-  { value: "Agak Curam", label: "Agak Curam" },
-  { value: "Curam ", label: "Curam" },
-  { value: "Sangat Curam", label: "Sangat Curam" },
-];
+  const lamaSinarOptions = [
+    { value: "Sangat Tinggi", label: "Sangat Tinggi" },
+    { value: "Tinggi", label: "Tinggi" },
+    { value: "Sedang", label: "Sedang" },
+    { value: "Agak Rendah", label: "Agak Rendah" },
+    { value: "Rendah", label: "Rendah" },
+  ];
 
-function reliefPopulate(relief) {
-  let result = "";
-  switch (relief) {
-    case "Datar":
-      result = "S1";
-      break;
-    case "Agak Datar":
-      result = "S1";
-      break;
-    case "Agak Landai":
-      result = "S1";
-      break;
-    case "Landai":
-      result = "S1";
-      break;
-    case "Agak Curam":
-      result = "S2";
-      break;
-    case "Curam":
-      result = "S3";
-      break;
-    case "Sangat Curam":
-      result = "N";
-      break;
+  function lamaSinarPopulate(lamaSinar) {
+    let result = "";
+    switch (lamaSinar) {
+      case "Sangat Tinggi":
+        result = "S1";
+        break;
+      case "Tinggi":
+        result = "S1";
+        break;
+      case "Sedang":
+        result = "S2";
+        break;
+      case "Agak Rendah":
+        result = "S3";
+        break;
+      case "Rendah":
+        result = "N";
+        break;
+    }
+    return result;
   }
-  return result;
-}
 
-function FormikInput() {
+  const elevasiOptions = [
+    { value: "Sangat Tinggi", label: "Sangat Tinggi" },
+    { value: "Tinggi", label: "Tinggi" },
+    { value: "Agak Tinggi", label: "Agak Tinggi" },
+    { value: "Agak Rendah", label: "Agak Rendah" },
+    { value: "Rendah", label: "Rendah" },
+  ];
+
+  function elevasiPopulate(elevasi) {
+    let result = "";
+    switch (elevasi) {
+      case "Sangat Tinggi":
+        result = "S1";
+        break;
+      case "Tinggi":
+        result = "S1";
+        break;
+      case "Agak Tinggi":
+        result = "S2";
+        break;
+      case "Agak Rendah":
+        result = "S3";
+        break;
+      case "Rendah":
+        result = "N";
+        break;
+    }
+    return result;
+  }
+
+  const reliefOptions = [
+    { value: "Datar", label: "Datar" },
+    { value: "Agak Datar", label: "Agak Datar" },
+    { value: "Agak Landai", label: "Agak Landai" },
+    { value: "Landai", label: "Landai" },
+    { value: "Agak Curam", label: "Agak Curam" },
+    { value: "Curam ", label: "Curam" },
+    { value: "Sangat Curam", label: "Sangat Curam" },
+  ];
+
+  function reliefPopulate(relief) {
+    let result = "";
+    switch (relief) {
+      case "Datar":
+        result = "S1";
+        break;
+      case "Agak Datar":
+        result = "S1";
+        break;
+      case "Agak Landai":
+        result = "S1";
+        break;
+      case "Landai":
+        result = "S1";
+        break;
+      case "Agak Curam":
+        result = "S2";
+        break;
+      case "Curam":
+        result = "S3";
+        break;
+      case "Sangat Curam":
+        result = "N";
+        break;
+    }
+    return result;
+  }
+
   const formik = useFormik({
     initialValues: {
       faktorYangDikendalikan: "",
@@ -332,24 +362,12 @@ function FormikInput() {
       evelasi: "",
       relief: "",
     },
-    // validationSchema: Yup.object().shape({
-    //   drainase: Yup.string().required('Kelas kosong'),
-    //   teksturTanah: Yup.string().required('Kelas kosong'),
-    //   ktk: Yup.string().required('Kelas kosong'),
-    //   kemasaman: Yup.string().required('Kelas kosong'),
-    //   kedalaman: Yup.string().required('Kelas kosong'),
-    //   kejenuhan: Yup.string().required('Kelas kosong'),
-    //   curahHujan: Yup.string().required('Kelas kosong'),
-    //   lamaSinar: Yup.string().required('Kelas kosong'),
-    //   evelasi: Yup.string().required('Kelas kosong'),
-    //   relief: Yup.string().required('Kelas kosong'),
-    // }),
+
     onSubmit: (values) => {
       let empty = false;
-      for(const v in values) {
-        if(values[v] == '') empty = true;
+      for (const v in values) {
+        if (values[v] == "") empty = true;
       }
-      
 
       let result = {
         faktorYangDikendalikan: values.faktorYangDikendalikan,
@@ -371,8 +389,7 @@ function FormikInput() {
         relief: reliefPopulate(values.relief),
       };
 
-      console.log(empty)
-      if(!empty){
+      if (!empty) {
         setTimeout(() => {
           alert(JSON.stringify(result, null, 2));
         }, 1000);
@@ -381,7 +398,6 @@ function FormikInput() {
           alert("Kelas Tidak Boleh Kosong");
         }, 1000);
       }
-      
     },
   });
 
@@ -731,6 +747,6 @@ function FormikInput() {
       </form>
     </div>
   );
-}
+};
 
 export default FormikInput;
