@@ -6,6 +6,7 @@ import NavigationDrawer from "../../components/NavigationDrawer";
 import styles from "../../styles/EsriMap.module.css";
 import { useRouter } from "next/router";
 import Image from "next/image";
+
 // The ArcGIS JSAPI does not currently work with SSR, so we need to disable it for the map component
 const EsriMapWithNoSSR = dynamic(() => import("../../components/EsriMap"), {
   ssr: false,
@@ -36,7 +37,7 @@ function Map() {
       <div className="flex flex-col drawer-content  h-screen w-screen">
         <div className="flex-grow ">
           <div>
-            <div classNameName={styles.nav}>
+            <div className={styles.nav}>
               <label htmlFor="my-drawer">
                 <img
                   src="logo2.png"

@@ -613,7 +613,7 @@ function EsriMap() {
     }
   }, []);
 
-  return <div classNameName={styles.mapDiv} ref={mapDiv}></div>;
+  return <div className={styles.mapDiv} ref={mapDiv}></div>;
 }
 
 export default EsriMap;

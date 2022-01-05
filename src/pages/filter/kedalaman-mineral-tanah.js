@@ -37,7 +37,7 @@ function Filter() {
       <div className="flex flex-col drawer-content  h-screen w-screen">
         <div className="flex-grow ">
           <div>
-            <div classNameName={styles.nav}>
+            <div className={styles.nav}>
               <label htmlFor="my-drawer">
                 <img
                   src="circle.png"
