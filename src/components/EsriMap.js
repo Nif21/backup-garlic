@@ -81,9 +81,7 @@ function EsriMap() {
       view.ui.add(zoom, "bottom-right");
 
       (async () => {
-        const data = await fetch("https://garlic-backend.herokuapp.com/v1", {
-          mode: "no-cors",
-        });
+        const data = await fetch("https://garlic-backend.herokuapp.com/v1");
         const dataJSON = await data.json();
         for (let d in dataJSON) {
           let dt = dataJSON[d].data;
