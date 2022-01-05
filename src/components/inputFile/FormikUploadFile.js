@@ -17,7 +17,7 @@ const FormikUploadFile = () => {
 
   return (
     <>
-      <div class="m-16">
+      <div className="m-16">
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmitFile}
@@ -36,8 +36,8 @@ function UploadFile({ values, setFieldValue }) {
   return (
     <div>
       <Form>
-        <div class="m-2 font-bold">File Shp</div>
-        <div class="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
+        <div className="m-2 font-bold">File Shp</div>
+        <div className="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
           <input
             type="file"
             style={{ display: "none" }}
@@ -48,21 +48,21 @@ function UploadFile({ values, setFieldValue }) {
           />
 
           <button
-            class="mr-4 bg-primary-coco p-2 rounded-l-lg"
+            className="mr-4 bg-primary-coco p-2 rounded-l-lg"
             type="button"
             onClick={() => fileInput1.current.click()}
           >
             Choose file
           </button>
 
-          <small class="text-base my-auto">
+          <small className="text-base my-auto">
             {values.shp ? values.shp.name || "Error" : "No file chosen"}
           </small>
-          <div class="flex-grow"></div>
+          <div className="flex-grow"></div>
         </div>
 
-        <div class="m-2 font-bold">File Shx</div>
-        <div class="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
+        <div className="m-2 font-bold">File Shx</div>
+        <div className="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
           <input
             type="file"
             style={{ display: "none" }}
@@ -73,21 +73,21 @@ function UploadFile({ values, setFieldValue }) {
           />
 
           <button
-            class="mr-4 bg-primary-coco p-2 rounded-l-lg"
+            className="mr-4 bg-primary-coco p-2 rounded-l-lg"
             type="button"
             onClick={() => fileInput2.current.click()}
           >
             Choose file
           </button>
 
-          <small class="text-base my-auto">
+          <small className="text-base my-auto">
             {values.shx ? values.shx.name || "Error" : "No file chosen"}
           </small>
-          <div class="flex-grow"></div>
+          <div className="flex-grow"></div>
         </div>
 
-        <div class="m-2 font-bold">File Dpf</div>
-        <div class="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
+        <div className="m-2 font-bold">File Dpf</div>
+        <div className="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
           <input
             type="file"
             style={{ display: "none" }}
@@ -98,21 +98,21 @@ function UploadFile({ values, setFieldValue }) {
           />
 
           <button
-            class="mr-4 bg-primary-coco p-2 rounded-l-lg"
+            className="mr-4 bg-primary-coco p-2 rounded-l-lg"
             type="button"
             onClick={() => fileInput3.current.click()}
           >
             Choose file
           </button>
 
-          <small class="text-base my-auto">
+          <small className="text-base my-auto">
             {values.dpf ? values.dpf.name || "Error" : "No file chosen"}
           </small>
-          <div class="flex-grow"></div>
+          <div className="flex-grow"></div>
         </div>
 
-        <div class="m-2 font-bold">File Xlsx</div>
-        <div class="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
+        <div className="m-2 font-bold">File Xlsx</div>
+        <div className="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
           <input
             type="file"
             style={{ display: "none" }}
@@ -123,22 +123,22 @@ function UploadFile({ values, setFieldValue }) {
           />
 
           <button
-            class="mr-4 bg-primary-coco p-2 rounded-l-lg"
+            className="mr-4 bg-primary-coco p-2 rounded-l-lg"
             type="button"
             onClick={() => fileInput4.current.click()}
           >
             Choose file
           </button>
 
-          <small class="text-base my-auto">
+          <small className="text-base my-auto">
             {values.xlsx ? values.xlsx.name || "Error" : "No file chosen"}
           </small>
-          <div class="flex-grow"></div>
+          <div className="flex-grow"></div>
         </div>
 
         <button
           type="submit"
-          class="w-full mt-8 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco "
+          className="w-full mt-8 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco "
         >
           Submit
         </button>

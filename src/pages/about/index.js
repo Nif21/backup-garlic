@@ -19,25 +19,25 @@ export default function Home() {
   };
   return (
     <>
-      <div class="shadow bg-base-200 drawer">
+      <div className="shadow bg-base-200 drawer">
         <Head>
           <title>INA Garlic</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-side flex-none hidden lg:block">
+        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-side flex-none hidden lg:block">
           <NavigationDrawer handleClick={handleClick} />
         </div>
-        <div class="flex flex-col drawer-content  h-screen w-screen">
+        <div className="flex flex-col drawer-content  h-screen w-screen">
           <HomeHeader active={active} handleClick={handleClick} />
-          <div class="flex-grow ">
+          <div className="flex-grow ">
             {/* About Garlic */}
-            <div class="p-4 mb-16">
-              <div class="mx-16 mt-16 mb-8 text-2xl font-bold ">
+            <div className="p-4 mb-16">
+              <div className="mx-16 mt-16 mb-8 text-2xl font-bold ">
                 Apa itu INA Garlic
               </div>
-              <div class="flex flex-wrap">
-                <div class="mx-16 w-8/12 sm:7/12 md:7/12 text-lg text-justify">
+              <div className="flex flex-wrap">
+                <div className="mx-16 w-8/12 sm:7/12 md:7/12 text-lg text-justify">
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
                   standard dummy text ever since the 1500s, when an unknown
@@ -49,15 +49,15 @@ export default function Home() {
                   passages, and more recently with desktop publishing software
                   like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
-                <img src="circle.png" class="w-32 h-32 mx-auto" />
+                <img src="circle.png" className="w-32 h-32 mx-auto" />
               </div>
             </div>
-            <div class="p-4 mb-16">
-              <div class="mx-16 mt-16 mb-8 text-2xl font-bold ">
+            <div className="p-4 mb-16">
+              <div className="mx-16 mt-16 mb-8 text-2xl font-bold ">
                 Apa itu INA Garlic
               </div>
-              <div class="flex flex-wrap">
-                <div class="mx-16 w-8/12 sm:7/12 md:7/12 text-lg text-justify">
+              <div className="flex flex-wrap">
+                <div className="mx-16 w-8/12 sm:7/12 md:7/12 text-lg text-justify">
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
                   standard dummy text ever since the 1500s, when an unknown
@@ -69,23 +69,23 @@ export default function Home() {
                   passages, and more recently with desktop publishing software
                   like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
-                <img src="circle.png" class="w-32 h-32 mx-auto" />
+                <img src="circle.png" className="w-32 h-32 mx-auto" />
               </div>
             </div>
 
             {/* Profil Pengembang */}
-            <div class="bg-primary-dark py-4 px-4">
-              <div class="mx-16 mt-16 mb-8 text-2xl font-bold text-white">
+            <div className="bg-primary-dark py-4 px-4">
+              <div className="mx-16 mt-16 mb-8 text-2xl font-bold text-white">
                 Profil Pengembang
               </div>
               <div>
-                <div class="pb-16">
-                  <div class="md:flex md:justify-center md:space-x-32 md:px-14">
+                <div className="pb-16">
+                  <div className="md:flex md:justify-center md:space-x-32 md:px-14">
                     <Pengembang />
                     <Pengembang />
                     <Pengembang />
                   </div>
-                  <div class="md:flex md:justify-center md:space-x-32 md:px-14">
+                  <div className="md:flex md:justify-center md:space-x-32 md:px-14">
                     <Pengembang />
                     <Pengembang />
                     <Pengembang />

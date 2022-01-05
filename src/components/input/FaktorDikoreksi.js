@@ -51,27 +51,30 @@ const FaktorDikoreksi = () => {
     return result;
   }
 
-  function checkFaktorDikoreksi(kedalaman,kejenuhan) {    
+  function checkFaktorDikoreksi(kedalaman, kejenuhan) {
     var result = "";
-    if(kedalaman != '' && kejenuhan != '') {
-        if (kedalaman == "N" || kejenuhan == "N") result = "N";
-        else if (kedalaman == "S3"|| kejenuhan == "S3") result = "S3";
-        else if (kedalaman == "S2"|| kejenuhan == "S2") result = "S2";
-        else result = "S1";
-    }   
+    if (kedalaman != "" && kejenuhan != "") {
+      if (kedalaman == "N" || kejenuhan == "N") result = "N";
+      else if (kedalaman == "S3" || kejenuhan == "S3") result = "S3";
+      else if (kedalaman == "S2" || kejenuhan == "S2") result = "S2";
+      else result = "S1";
+    }
     return result;
   }
 
   return (
     <>
-      <div class="col-span-full flex space-x-4 text-lg	">
+      <div className="col-span-full flex space-x-4 text-lg	">
         <b>Faktor yang dapat dikoreksi</b>
         <b>
-          {checkFaktorDikoreksi(checkKedalaman(kedalaman),checkKejenuhan(kejenuhan))}
+          {checkFaktorDikoreksi(
+            checkKedalaman(kedalaman),
+            checkKejenuhan(kejenuhan)
+          )}
         </b>
       </div>
-      <div class="col-span-6 sm:col-span-3">
-        <label class="block text-sm font-medium text-gray-700">
+      <div className="col-span-6 sm:col-span-3">
+        <label className="block text-sm font-medium text-gray-700">
           Kedalaman Mineral Tanah
         </label>
         <select
@@ -79,7 +82,7 @@ const FaktorDikoreksi = () => {
           onChange={(e) => {
             setKedalaman(e.target.value);
           }}
-          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
           <option>Sangat Dalam</option>
           <option>Dalam</option>
@@ -93,8 +96,8 @@ const FaktorDikoreksi = () => {
         <p> Kelas Kesesuaian Lahan </p>
         <p>{checkKedalaman(kedalaman)} </p>
       </div>
-      <div class="col-span-6 sm:col-span-3">
-        <label class="block text-sm font-medium text-gray-700">
+      <div className="col-span-6 sm:col-span-3">
+        <label className="block text-sm font-medium text-gray-700">
           Kejenuhan Basa
         </label>
         <select
@@ -102,7 +105,7 @@ const FaktorDikoreksi = () => {
           onChange={(e) => {
             setKejenuhan(e.target.value);
           }}
-          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
           <option>Sangat Tinggi</option>
           <option>Tinggi</option>

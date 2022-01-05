@@ -102,9 +102,7 @@ function EsriMap() {
       view.ui.add(zoom, "bottom-right");
 
       (async () => {
-        const data = await fetch(
-          "http://4a9e-61-94-101-17.ngrok.io/v1/show"
-        );
+        const data = await fetch("http://4a9e-61-94-101-17.ngrok.io/v1/show");
         const dataJSON = await data.json();
         // for (let d in dataJSON) {
         //   let dt = dataJSON[d].data;
@@ -358,9 +356,6 @@ function EsriMap() {
         //   map.add(s2Layer);
         //   map.add(s1Layer);
         // }
-
-
-
 
         // let polygon ;
         //   const graphicsNormal = dataJSON.map((v)=>{
@@ -618,7 +613,7 @@ function EsriMap() {
     }
   }, []);
 
-  return <div className={styles.mapDiv} ref={mapDiv}></div>;
+  return <div classNameName={styles.mapDiv} ref={mapDiv}></div>;
 }
 
 export default EsriMap;

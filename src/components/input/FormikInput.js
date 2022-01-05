@@ -21,25 +21,25 @@ const FormikInput = () => {
           intervalAtas: IntervalAtas,
           intervalBawah: IntervalBawah,
           label: Variabel,
-          kelas: kelasMapping(Kelas)
+          kelas: kelasMapping(Kelas),
         })
       );
-      setDrainaseOptions(data)
+      setDrainaseOptions(data);
     });
   });
   const [drainaseOptions, setDrainaseOptions] = useState([]);
-  
-  function kelasMapping(kelas){
+
+  function kelasMapping(kelas) {
     let result = "";
-    switch(kelas){
+    switch (kelas) {
       case 1:
-        result = "S1"
+        result = "S1";
       case 2:
-        result = "S2"        
+        result = "S2";
       case 3:
-        result = "S3"  
+        result = "S3";
       default:
-        result = "N"
+        result = "N";
     }
     return result;
   }
@@ -489,11 +489,11 @@ const FormikInput = () => {
   }
 
   return (
-    <div class="px-4 py-5  sm:p-6">
+    <div className="px-4 py-5  sm:p-6">
       <form onSubmit={formik.handleSubmit}>
         {/* Faktor Yang dapat dikendalikan */}
         <>
-          <div class="col-span-full flex space-x-4 text-lg">
+          <div className="col-span-full flex space-x-4 text-lg">
             <b>Faktor yang dapat dikendalikan</b>
             <b>
               {checkFaktorDikendalikan(
@@ -503,10 +503,10 @@ const FormikInput = () => {
               )}
             </b>
           </div>
-          <div class="col-span-6 sm:col-span-3 mb-8">
+          <div className="col-span-6 sm:col-span-3 mb-8">
             <label
               htmlFor="drainase"
-              class="block text-base font-medium text-gray-700 space-x-4"
+              className="block text-base font-medium text-gray-700 space-x-4"
             >
               <b>Drainase</b>
               <b>{drainasePopulate(formik.values.drainase)}</b>
@@ -520,10 +520,10 @@ const FormikInput = () => {
               options={drainaseOptions}
             />
           </div>
-          <div class="col-span-6 sm:col-span-3 my-2">
+          <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="drainase"
-              class="block text-base font-medium text-gray-700 space-x-4 my-2"
+              className="block text-base font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Media Perakaran</b>
               <b>
@@ -531,10 +531,10 @@ const FormikInput = () => {
               </b>
             </label>
           </div>
-          <div class="col-span-6 sm:col-span-3 my-2">
+          <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="teksturTanah"
-              class="block text-sm font-medium text-gray-700 space-x-4 my-2"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Tekstur Tanah</b>
               <b>{teksturTanahPopulate(formik.values.teksturTanah)}</b>
@@ -547,10 +547,10 @@ const FormikInput = () => {
               options={teksturTanahOptions}
             />
           </div>
-          <div class="col-span-6 sm:col-span-3 mt-8">
+          <div className="col-span-6 sm:col-span-3 mt-8">
             <label
               htmlFor="retensi"
-              class="block text-base font-medium text-gray-700 space-x-4 my-2"
+              className="block text-base font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Retensi Hara</b>
               <b>
@@ -561,10 +561,10 @@ const FormikInput = () => {
               </b>
             </label>
           </div>
-          <div class="col-span-6 sm:col-span-3 my-2">
+          <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="ktk"
-              class="block text-sm font-medium text-gray-700 space-x-4 my-2"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Kapasitas Tukar Kation</b>
               <b>{ktkPopulate(formik.values.ktk)}</b>
@@ -575,10 +575,10 @@ const FormikInput = () => {
               options={ktkOptions}
             />
           </div>
-          <div class="col-span-6 sm:col-span-3 my-2">
+          <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="teksturTanah"
-              class="block text-sm font-medium text-gray-700 space-x-4 my-2"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Kemasaman Tanah</b>
               <b>{kemasamanPopulate(formik.values.kemasaman)}</b>
@@ -594,7 +594,7 @@ const FormikInput = () => {
         </>
         {/* Faktor Yang dapat dikoreksi */}
         <>
-          <div class="col-span-full flex space-x-4 text-lg mt-8">
+          <div className="col-span-full flex space-x-4 text-lg mt-8">
             <b>Faktor yang dapat dikoreksi</b>
             <b>
               {checkFaktorDikoreksi(
@@ -603,10 +603,10 @@ const FormikInput = () => {
               )}
             </b>
           </div>
-          <div class="col-span-6 sm:col-span-3 my-2">
+          <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="kedalaman"
-              class="block text-sm font-medium text-gray-700 space-x-4 my-2"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Kedalaman Mineral Tanah</b>
               <b>{kedalamanPopulate(formik.values.kedalaman)}</b>
@@ -619,10 +619,10 @@ const FormikInput = () => {
               options={kedalamanOptions}
             />
           </div>
-          <div class="col-span-6 sm:col-span-3 my-2">
+          <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="kejenuhan"
-              class="block text-sm font-medium text-gray-700 space-x-4 my-2"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Kejenuhan Basa</b>
               <b>{kejenuhanPopulate(formik.values.kejenuhan)}</b>
@@ -637,8 +637,8 @@ const FormikInput = () => {
           </div>
         </>
         {/* Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi */}
-        <div class="mb-16">
-          <div class="col-span-full flex space-x-4 text-lg mt-8">
+        <div className="mb-16">
+          <div className="col-span-full flex space-x-4 text-lg mt-8">
             <b>
               Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi
             </b>
@@ -649,10 +649,10 @@ const FormikInput = () => {
               )}
             </b>
           </div>
-          <div class="col-span-6 sm:col-span-3 ">
+          <div className="col-span-6 sm:col-span-3 ">
             <label
               htmlFor="cuaca"
-              class="block text-base font-medium text-gray-700 space-x-4 my-2"
+              className="block text-base font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Cuaca</b>
               <b>
@@ -663,10 +663,10 @@ const FormikInput = () => {
               </b>
             </label>
           </div>
-          <div class="col-span-6 sm:col-span-3 my-2">
+          <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="curahHujan"
-              class="block text-sm font-medium text-gray-700 space-x-4 my-2"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Curah Hujan</b>
               <b>{curahHujanPopulate(formik.values.curahHujan)}</b>
@@ -679,10 +679,10 @@ const FormikInput = () => {
               options={curahHujanOptions}
             />
           </div>
-          <div class="col-span-6 sm:col-span-3 my-2">
+          <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="lamaSinar"
-              class="block text-sm font-medium text-gray-700 space-x-4 my-2"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Lama Penyinaran</b>
               <b>{lamaSinarPopulate(formik.values.lamaSinar)}</b>
@@ -695,10 +695,10 @@ const FormikInput = () => {
               options={lamaSinarOptions}
             />
           </div>
-          <div class="col-span-6 sm:col-span-3 mt-8">
+          <div className="col-span-6 sm:col-span-3 mt-8">
             <label
               htmlFor="faktorRelief"
-              class="block text-base font-medium text-gray-700 space-x-4 my-2"
+              className="block text-base font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Faktor Relief</b>
               <b>
@@ -709,10 +709,10 @@ const FormikInput = () => {
               </b>
             </label>
           </div>
-          <div class="col-span-6 sm:col-span-3 my-2">
+          <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="evelasi"
-              class="block text-sm font-medium text-gray-700 space-x-4 my-2"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Elevasi</b>
               <b>{elevasiPopulate(formik.values.evelasi)}</b>
@@ -723,10 +723,10 @@ const FormikInput = () => {
               options={elevasiOptions}
             />
           </div>
-          <div class="col-span-6 sm:col-span-3 my-2">
+          <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="relief"
-              class="block text-sm font-medium text-gray-700 space-x-4 my-2"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Relief</b>
               <b>{reliefPopulate(formik.values.relief)}</b>
@@ -740,7 +740,7 @@ const FormikInput = () => {
         </div>
         <button
           type="submit"
-          class="w-full mt-8 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco "
+          className="w-full mt-8 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco "
         >
           Submit
         </button>

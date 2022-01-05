@@ -140,26 +140,30 @@ const FaktorTidakDapat = () => {
     return result;
   }
 
-  function checkFaktorTidakDapat(cuaca,relief) {
+  function checkFaktorTidakDapat(cuaca, relief) {
     let result = "";
-    if(cuaca != '' && relief != '') {
-        if (cuaca == "N" || relief == "N" ) result = "N";
-        else if (cuaca == "S3"|| relief == "S3") result = "S3";
-        else if (cuaca == "S2"|| relief == "S2") result = "S2";
-        else result = "S1";
-    }   
+    if (cuaca != "" && relief != "") {
+      if (cuaca == "N" || relief == "N") result = "N";
+      else if (cuaca == "S3" || relief == "S3") result = "S3";
+      else if (cuaca == "S2" || relief == "S2") result = "S2";
+      else result = "S1";
+    }
     return result;
   }
 
-
   return (
     <>
-      <div class="col-span-full flex space-x-4 text-lg	">
+      <div className="col-span-full flex space-x-4 text-lg	">
         <b>Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi</b>
-        <b>{checkFaktorTidakDapat(checkCuaca(checkCurahHujan(curahHujan), checkLamaSinar(lamaSinar)),checkAllRelief(checkElevasi(elevasi), checkRelief(relief)))}</b>
+        <b>
+          {checkFaktorTidakDapat(
+            checkCuaca(checkCurahHujan(curahHujan), checkLamaSinar(lamaSinar)),
+            checkAllRelief(checkElevasi(elevasi), checkRelief(relief))
+          )}
+        </b>
       </div>
-      <div class="col-span-6 sm:col-span-3">
-        <p class="block text-sm font-medium text-gray-700 space-x-4">
+      <div className="col-span-6 sm:col-span-3">
+        <p className="block text-sm font-medium text-gray-700 space-x-4">
           <b> Cuaca</b>
           <b>
             {checkCuaca(checkCurahHujan(curahHujan), checkLamaSinar(lamaSinar))}
@@ -167,8 +171,8 @@ const FaktorTidakDapat = () => {
         </p>
       </div>
       <div></div>
-      <div class="col-span-6 sm:col-span-3">
-        <label class="block text-sm font-medium text-gray-700">
+      <div className="col-span-6 sm:col-span-3">
+        <label className="block text-sm font-medium text-gray-700">
           Curah Hujan
         </label>
         <select
@@ -176,7 +180,7 @@ const FaktorTidakDapat = () => {
           onChange={(e) => {
             setCurahHujan(e.target.value);
           }}
-          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
           <option>Rendah</option>
           <option>Agak Rendah</option>
@@ -188,8 +192,8 @@ const FaktorTidakDapat = () => {
         <p> Kelas Kesesuaian Lahan </p>
         <p>{checkCurahHujan(curahHujan)} </p>
       </div>
-      <div class="col-span-6 sm:col-span-3">
-        <label class="block text-sm font-medium text-gray-700">
+      <div className="col-span-6 sm:col-span-3">
+        <label className="block text-sm font-medium text-gray-700">
           Lama Penyinaran
         </label>
         <select
@@ -197,7 +201,7 @@ const FaktorTidakDapat = () => {
           onChange={(e) => {
             setLamaSinar(e.target.value);
           }}
-          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
           <option>Rendah</option>
           <option>Agak Rendah</option>
@@ -210,17 +214,15 @@ const FaktorTidakDapat = () => {
         <p> Kelas Kesesuaian Lahan </p>
         <p>{checkLamaSinar(lamaSinar)} </p>
       </div>
-      <div class="col-span-6 sm:col-span-3">
-        <p class="block text-sm font-medium text-gray-700 space-x-4">
+      <div className="col-span-6 sm:col-span-3">
+        <p className="block text-sm font-medium text-gray-700 space-x-4">
           <b> Relief</b>
-          <b>
-            {checkAllRelief(checkElevasi(elevasi), checkRelief(relief))}
-          </b>
+          <b>{checkAllRelief(checkElevasi(elevasi), checkRelief(relief))}</b>
         </p>
       </div>
       <div></div>
-      <div class="col-span-6 sm:col-span-3">
-        <label class="block text-sm font-medium text-gray-700">
+      <div className="col-span-6 sm:col-span-3">
+        <label className="block text-sm font-medium text-gray-700">
           Elevasi
         </label>
         <select
@@ -228,9 +230,9 @@ const FaktorTidakDapat = () => {
           onChange={(e) => {
             setElevasi(e.target.value);
           }}
-          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
-         <option>Rendah</option>
+          <option>Rendah</option>
           <option>Agak Rendah</option>
           <option>Agak Tinggi</option>
           <option>Tinggi</option>
@@ -241,8 +243,8 @@ const FaktorTidakDapat = () => {
         <p> Kelas Kesesuaian Lahan </p>
         <p>{checkElevasi(elevasi)} </p>
       </div>
-      <div class="col-span-6 sm:col-span-3">
-        <label class="block text-sm font-medium text-gray-700">
+      <div className="col-span-6 sm:col-span-3">
+        <label className="block text-sm font-medium text-gray-700">
           Relief
         </label>
         <select
@@ -250,7 +252,7 @@ const FaktorTidakDapat = () => {
           onChange={(e) => {
             setRelief(e.target.value);
           }}
-          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
           <option>Datar</option>
           <option>Agak Datar</option>
