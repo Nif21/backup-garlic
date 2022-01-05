@@ -6,7 +6,7 @@ import NavigationDrawer from "../../components/NavigationDrawer";
 import Footer from "../../components/Footer";
 import { Formik } from "formik";
 import FormikUploadFile from "../../components/inputFile/FormikUploadFile";
-function index() {
+function Index() {
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
@@ -42,4 +42,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

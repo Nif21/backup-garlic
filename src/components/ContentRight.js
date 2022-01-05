@@ -1,3 +1,4 @@
+import Image from "next/Image";
 export default function ContentRight({
   title,
   content,
@@ -19,7 +20,7 @@ export default function ContentRight({
               </div>
               <div className="m-5 text-white">{content}</div>
             </div>
-            <img src={`${setImage}`} className="my-10 mx-10" />
+            <Image src={`${setImage}`} className="my-10 mx-10" alt="" />
           </div>
           <div className="m-5 cursor-pointer py-5 w-40 bg-primary-coco text-center text-white rounded-xl hover:bg-primary-darkcoco hover:text-white">
             {button}

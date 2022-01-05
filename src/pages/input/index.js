@@ -5,7 +5,7 @@ import NavigationDrawer from "../../components/NavigationDrawer";
 import Footer from "../../components/Footer";
 import FormikInput from "../../components/input/FormikInput";
 
-function index() {
+function Index() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(true);
 
@@ -90,4 +90,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

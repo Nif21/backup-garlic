@@ -5,7 +5,7 @@ import HomeHeader from "../../components/HomeHeader";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import styles from "../../styles/EsriMap.module.css";
 import { useRouter } from "next/router";
-
+import Image from "next/Image";
 // The ArcGIS JSAPI does not currently work with SSR, so we need to disable it for the map component
 const EsriMapWithNoSSR = dynamic(
   () => import("../../components/FilterEsriMap"),
@@ -38,11 +38,12 @@ function Filter() {
         <div className="flex-grow ">
           <div>
             <div classNameName={styles.nav}>
-              <label for="my-drawer">
-                <img
-                  src="../circle.png"
+              <label htmlFor="my-drawer">
+                <Image
+                  src="circle.png"
                   className={` w-32 h-32 cursor-pointer mx-auto`}
                   onClick={handleClick}
+                  alt=""
                 />
               </label>
             </div>

@@ -39,7 +39,7 @@ export default function Home() {
               <div className="flex flex-wrap">
                 <div className="mx-16 w-8/12 sm:7/12 md:7/12 text-lg text-justify">
                   Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
+                  typesetting industry. Lorem Ipsum has been the industry`s
                   standard dummy text ever since the 1500s, when an unknown
                   printer took a galley of type and scrambled it to make a type
                   specimen book. It has survived not only five centuries, but
@@ -49,7 +49,7 @@ export default function Home() {
                   passages, and more recently with desktop publishing software
                   like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
-                <img src="circle.png" className="w-32 h-32 mx-auto" />
+                <Image src="circle.png" className="w-32 h-32 mx-auto" />
               </div>
             </div>
             <div className="p-4 mb-16">
@@ -59,7 +59,7 @@ export default function Home() {
               <div className="flex flex-wrap">
                 <div className="mx-16 w-8/12 sm:7/12 md:7/12 text-lg text-justify">
                   Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
+                  typesetting industry. Lorem Ipsum has been the industry`s
                   standard dummy text ever since the 1500s, when an unknown
                   printer took a galley of type and scrambled it to make a type
                   specimen book. It has survived not only five centuries, but
@@ -69,7 +69,7 @@ export default function Home() {
                   passages, and more recently with desktop publishing software
                   like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
-                <img src="circle.png" className="w-32 h-32 mx-auto" />
+                <Image src="circle.png" className="w-32 h-32 mx-auto" />
               </div>
             </div>
 

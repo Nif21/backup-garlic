@@ -1,5 +1,6 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Image from "next/Image";
 
 export default function Carousels() {
   const responsive = {
@@ -33,16 +34,16 @@ export default function Carousels() {
         swipeable
       >
         <div className="">
-          <img src="/test_caro_1.jpg" className="w-screen" />
+          <Image src="/test_caro_1.jpg" className="w-screen" alt="" />
         </div>
         <div className="">
-          <img src="/test_caro_2.jpg" className="w-screen" />
+          <Image src="/test_caro_2.jpg" className="w-screen" alt="" />
         </div>
         <div className="">
-          <img src="/test_caro_3.jpg" className="w-screen" />
+          <Image src="/test_caro_3.jpg" className="w-screen" alt="" />
         </div>
         <div className="">
-          <img src="/test_caro_4.jpg" className="w-screen" />
+          <Image src="/test_caro_4.jpg" className="w-screen" alt="" />
         </div>
       </Carousel>
     </div>
