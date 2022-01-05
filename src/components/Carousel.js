@@ -1,6 +1,6 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Image from "next/Image";
+import Image from "next/image";
 
 export default function Carousels() {
   const responsive = {

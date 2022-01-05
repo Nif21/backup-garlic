@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-import Image from "next/Image";
+import Image from "next/image";
 export default function Login() {
   const [isLogin, setLogin] = useState(false);
 

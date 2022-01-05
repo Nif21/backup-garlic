@@ -1,4 +1,4 @@
-import Image from "next/Image";
+import Image from "next/image";
 export default function Header({ handleClick }) {
   return (
     <div className={`flex `}>

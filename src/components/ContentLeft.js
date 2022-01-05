@@ -1,11 +1,11 @@
-import Image from "next/Image";
+import Image from "next/image";
 
 export default function ContentLeft({ title, content, button }) {
   return (
     <>
       <div className="container mx-auto pb-40">
         <div className="flex flex-wrap pt-40">
-          <Image src="/circle.png" className="my-10 mx-10" alt=""/>
+          <Image src="/circle.png" className="my-10 mx-10" alt="" />
           <div className="w-10/12 md:w-6/12 lg:w-6/12 text-justify break-all">
             <div className="text-5xl m-5 font-semibold">{title}</div>
             <div className="m-5">{content}</div>
