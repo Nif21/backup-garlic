@@ -1,7 +1,12 @@
 import React from "react";
 import Select from "react-select";
 
-export default ({ onChange, options, value, classNameName }) => {
+export default function CustomSelect({
+  onChange,
+  options,
+  value,
+  classNameName,
+}) {
   const defaultValue = (options, value) => {
     return options ? options.find((option) => option.value === value) : "";
   };
@@ -17,4 +22,4 @@ export default ({ onChange, options, value, classNameName }) => {
       />
     </div>
   );
-};
+}
