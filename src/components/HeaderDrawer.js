@@ -6,7 +6,7 @@ export default function Header() {
       <div>
         <div className="text-2xl mx-5 mt-2  text-white">INA GARLIC</div>
         <div className="mx-5  text-white text-xs">
-          Agroecological Assessment of Land Suitability for Garlic
+          Agroecological Assessment of Land Suitability htmlFor Garlic
         </div>
       </div>
     </div>

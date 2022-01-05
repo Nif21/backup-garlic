@@ -14,9 +14,9 @@ export default function NavigationDrawer({ handleClick, expand, title }) {
 
   return (
     <>
-      <label for="my-drawer" className="drawer-overlay" />
+      <label htmlFor="my-drawer" className="drawer-overlay" />
       <div className="flex flex-col overflow-y-auto w-80 bg-primary-normal text-white">
-        <label for="my-drawer" onClick={handleClick} className="p-4">
+        <label htmlFor="my-drawer" onClick={handleClick} className="p-4">
           {title != null ? <HeaderFilter /> : <Header />}
         </label>
         <div className="my-3 hover:text-black cursor-pointer px-4">
