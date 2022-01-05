@@ -2,7 +2,7 @@ import Image from "next/image";
 export default function Header({ handleClick }) {
   return (
     <div className={`flex `}>
-      <Image
+      <img
         src="logo.png"
         className="w-16 h-16 relative cursor-pointer"
         onClick={handleClick}

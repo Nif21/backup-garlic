@@ -39,7 +39,7 @@ function Filter() {
           <div>
             <div classNameName={styles.nav}>
               <label htmlFor="my-drawer">
-                <Image
+                <img
                   src="circle.png"
                   className={` w-32 h-32 cursor-pointer mx-auto`}
                   onClick={handleClick}

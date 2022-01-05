@@ -49,7 +49,7 @@ export default function Home() {
                   passages, and more recently with desktop publishing software
                   like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
-                <Image src="circle.png" className="w-32 h-32 mx-auto" />
+                <img src="circle.png" className="w-32 h-32 mx-auto" />
               </div>
             </div>
             <div className="p-4 mb-16">
@@ -69,7 +69,7 @@ export default function Home() {
                   passages, and more recently with desktop publishing software
                   like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
-                <Image src="circle.png" className="w-32 h-32 mx-auto" />
+                <img src="circle.png" className="w-32 h-32 mx-auto" />
               </div>
             </div>
 

@@ -38,7 +38,7 @@ function Map() {
           <div>
             <div classNameName={styles.nav}>
               <label htmlFor="my-drawer">
-                <Image
+                <img
                   src="logo2.png"
                   className={` w-32 h-32 cursor-pointer mx-auto`}
                   onClick={handleClick}

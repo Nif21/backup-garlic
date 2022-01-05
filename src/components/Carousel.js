@@ -34,16 +34,16 @@ export default function Carousels() {
         swipeable
       >
         <div className="">
-          <Image src="/test_caro_1.jpg" className="w-screen" alt="" />
+          <img src="/test_caro_1.jpg" className="w-screen" alt="" />
         </div>
         <div className="">
-          <Image src="/test_caro_2.jpg" className="w-screen" alt="" />
+          <img src="/test_caro_2.jpg" className="w-screen" alt="" />
         </div>
         <div className="">
-          <Image src="/test_caro_3.jpg" className="w-screen" alt="" />
+          <img src="/test_caro_3.jpg" className="w-screen" alt="" />
         </div>
         <div className="">
-          <Image src="/test_caro_4.jpg" className="w-screen" alt="" />
+          <img src="/test_caro_4.jpg" className="w-screen" alt="" />
         </div>
       </Carousel>
     </div>
