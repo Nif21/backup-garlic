@@ -326,7 +326,7 @@ function FilterEsriMap({ title }) {
     }
   }, []);
 
-  return <div className={styles.mapDiv} ref={mapDiv}></div>;
+  return <div classNameName={styles.mapDiv} ref={mapDiv}></div>;
 }
 
 function content(title) {
