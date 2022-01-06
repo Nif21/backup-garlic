@@ -19,6 +19,7 @@ module.exports = {
           lesswhite: "#F0EEE7",
           coco: "#F4A442",
           darkcoco: "#E39A40",
+          krem: "#F7F3E7",
         },
       },
     },

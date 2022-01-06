@@ -10,7 +10,7 @@ export default function ContentLeft({ title, content, button }) {
             className="my-10 mx-10  h-72 w-72"
             alt=""
           />
-          <div className="w-10/12 md:w-6/12 lg:w-8/12 text-justify break-all">
+          <div className="w-10/12 md:w-6/12 lg:w-8/12 text-justify ">
             <div className="text-5xl m-5 font-semibold">{title}</div>
             <div className="m-5">{content}</div>
           </div>

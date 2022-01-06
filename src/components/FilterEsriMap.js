@@ -12,8 +12,6 @@ import Expand from "@arcgis/core/widgets/Expand";
 import Print from "@arcgis/core/widgets/Print";
 import Extent from "@arcgis/core/geometry/Extent";
 function FilterEsriMap({ title }) {
-  let contentData = content(title);
-
   const mapDiv = useRef(null);
   useEffect(() => {
     if (mapDiv.current) {
@@ -82,276 +80,254 @@ function FilterEsriMap({ title }) {
       view.ui.add(zoom, "bottom-right");
 
       (async () => {
+        let judulKelas = spesifikasiKelas(title.replace(/ /g, ""));
         const data = await fetch(
           "https://garlic-backend.herokuapp.com/v1?select=spt&select=geom&select=" +
-            title.replace(/ /g, "")
+            judulKelas
         );
         const dataJSON = await data.json();
-        let polygon;
-        const graphicsNormal = dataJSON.map((v) => {
-          polygon = {
-            type: "polygon",
-            rings: v.geom.coordinates[0][0],
-          };
-          return new Graphic({
-            geometry: polygon,
-            attributes: v,
-          });
-        });
-
-        const graphicsS3 = dataJSON.map((v) => {
-          if (v.kelasfaktorlandscape == "S3") {
+        for (let d in dataJSON) {
+          let dt = dataJSON[d].data;
+          let polygon;
+          const graphicsNormal = dt.map((v) => {
+            v.dataKelas = getKelas(v, judulKelas);
+            v.kelas = v.dataKelas.NamaKelas;
+            v.variabel = v.dataKelas.Variabel;
+            v.keterangan = v.dataKelas.Keterangan;
+            v.rekomendasi = v.dataKelas.Rekomendasi;
             polygon = {
               type: "polygon",
               rings: v.geom.coordinates[0][0],
             };
-          }
-
-          return new Graphic({
-            geometry: polygon,
-            attributes: v,
+            return new Graphic({
+              geometry: polygon,
+              attributes: v,
+            });
           });
-        });
 
-        const graphicsS2 = dataJSON.map((v) => {
-          if (v.kelasfaktorlandscape == "S2") {
-            polygon = {
-              type: "polygon",
-              rings: v.geom.coordinates[0][0],
-            };
-          }
-          return new Graphic({
-            geometry: polygon,
-            attributes: v,
+          const graphicsS3 = dt.map((v) => {
+            if (v.dataKelas.Kelas == 3 || v.dataKelas.Kelas == 3) {
+              polygon = {
+                type: "polygon",
+                rings: v.geom.coordinates[0][0],
+              };
+            }
+
+            return new Graphic({
+              geometry: polygon,
+              // attributes: v,
+            });
           });
-        });
 
-        const graphicsS1 = dataJSON.map((v) => {
-          if (v.kelasfaktorlandscape == "S1") {
-            polygon = {
-              type: "polygon",
-              rings: v.geom.coordinates[0][0],
-            };
-          }
-
-          return new Graphic({
-            geometry: polygon,
-            attributes: v,
+          const graphicsS2 = dt.map((v) => {
+            if (v.dataKelas.Kelas < 3 || v.dataKelas.Kelas < 3) {
+              polygon = {
+                type: "polygon",
+                rings: v.geom.coordinates[0][0],
+              };
+            }
+            return new Graphic({
+              geometry: polygon,
+              //attributes: v,
+            });
           });
-        });
-        const normalLayer = new FeatureLayer({
-          fields: [
-            {
-              name: "ObjectID",
-              alias: "ObjectID",
-              type: "oid",
-            },
-            {
-              name: "spt",
-              alias: "spt",
-              type: "string",
-            },
-            {
-              name: "proporsi",
-              alias: "proporsi",
-              type: "string",
-            },
-            {
-              name: "kelasfaktorlandscape",
-              alias: "kelasfaktorlandscape",
-              type: "string",
-            },
-            {
-              name: "kedalamanmineraltanah",
-              alias: "kedalamanmineraltanah",
-              type: "string",
-            },
-            {
-              name: "drainase",
-              alias: "drainase",
-              type: "string",
-            },
-            {
-              name: "teksturtanah",
-              alias: "teksturtanah",
-              type: "string",
-            },
-            {
-              name: "kemasamantanah",
-              alias: "kemasamantanah",
-              type: "string",
-            },
-            {
-              name: "kapasitastukarkation",
-              alias: "kapasitastukarkation",
-              type: "string",
-            },
-            {
-              name: "kejenuhanbasa",
-              alias: "kejenuhanbasa",
-              type: "string",
-            },
-            {
-              name: "landform",
-              alias: "landform",
-              type: "string",
-            },
-            {
-              name: "bahaninduk",
-              alias: "bahaninduk",
-              type: "string",
-            },
-            {
-              name: "relief",
-              alias: "relief",
-              type: "string",
-            },
-            {
-              name: "luas",
-              alias: "luas",
-              type: "string",
-            },
-            {
-              name: "persentaseluas",
-              alias: "persentaseluas",
-              type: "string",
-            },
-          ],
-          objectIdField: "ObjectID",
-          geometryType: "polygon",
-          source: graphicsNormal,
-          renderer: {
-            type: "simple",
-            symbol: {
-              color: "#F70400",
-              type: "simple-fill",
-              style: "solid",
-              outline: {
-                color: [255, 255, 255],
-                width: 1,
-              },
-            },
-            label: "N",
-          },
-          popupTemplate: {
-            title: "No SPT : {spt} ",
-            content: contentData,
-          },
-        });
 
-        const s1Layer = new FeatureLayer({
-          title: title,
-          fields: [
-            {
-              name: "ObjectID",
-              alias: "ObjectID",
-              type: "oid",
-            },
-          ],
-          objectIdField: "ObjectID",
-          geometryType: "polygon",
-          source: graphicsS1,
-          renderer: {
-            type: "simple",
-            symbol: {
-              color: "#00FF7F",
-              type: "simple-fill",
-              style: "solid",
-              outline: {
-                color: [255, 255, 255],
-                width: 1,
-              },
-            },
-            label: "S1",
-          },
-        });
+          const graphicsS1 = dt.map((v) => {
+            if (v.dataKelas.Kelas < 2 || v.dataKelas.Kelas < 2) {
+              polygon = {
+                type: "polygon",
+                rings: v.geom.coordinates[0][0],
+              };
+            }
 
-        const s2Layer = new FeatureLayer({
-          fields: [
-            {
-              name: "ObjectID",
-              alias: "ObjectID",
-              type: "oid",
-            },
-          ],
-          objectIdField: "ObjectID",
-          geometryType: "polygon",
-          source: graphicsS2,
-          renderer: {
-            type: "simple",
-            symbol: {
-              color: "#FFE600",
-              type: "simple-fill",
-              style: "solid",
-              outline: {
-                color: [255, 255, 255],
-                width: 1,
-              },
-            },
-            label: "S2",
-          },
-        });
+            return new Graphic({
+              geometry: polygon,
+              //attributes: v,
+            });
+          });
 
-        const s3Layer = new FeatureLayer({
-          fields: [
-            {
-              name: "ObjectID",
-              alias: "ObjectID",
-              type: "oid",
-            },
-          ],
-          objectIdField: "ObjectID",
-          geometryType: "polygon",
-          source: graphicsS3,
-          renderer: {
-            type: "simple",
-            symbol: {
-              color: "#FF4400",
-              type: "simple-fill",
-              style: "solid",
-              outline: {
-                color: [255, 255, 255],
-                width: 1,
+          const normalLayer = new FeatureLayer({
+            fields: [
+              {
+                name: "ObjectID",
+                alias: "ObjectID",
+                type: "oid",
               },
+              {
+                name: "spt",
+                alias: "spt",
+                type: "string",
+              },
+              {
+                name: "proporsi",
+                alias: "proporsi",
+                type: "string",
+              },
+              {
+                name: "kelas",
+                alias: "kelas",
+                type: "string",
+              },
+              {
+                name: "variabel",
+                alias: "variabel",
+                type: "string",
+              },
+              {
+                name: "keterangan",
+                alias: "keterangan",
+                type: "string",
+              },
+              {
+                name: "rekomendasi",
+                alias: "rekomendasi",
+                type: "string",
+              },
+            ],
+            objectIdField: "ObjectID",
+            geometryType: "polygon",
+            source: graphicsNormal,
+            renderer: {
+              type: "simple",
+              symbol: {
+                color: "#F70400",
+                type: "simple-fill",
+                style: "solid",
+                outline: {
+                  color: [255, 255, 255],
+                  width: 1,
+                },
+              },
+              label: "N",
             },
-            label: "S3",
-          },
-        });
+            popupTemplate: {
+              title: "No SPT : {spt} (Proporsi {proporsi} )",
+              content:
+                "<h1><b>Variabel:</b> {variabel}</h1>" +
+                "<br><b>Keterangan : </b> {keterangan}" +
+                "<br><b>Rekomendasi: </b> {rekomendasi}",
+            },
+          });
 
-        map.add(normalLayer);
-        map.add(s3Layer);
-        map.add(s2Layer);
-        map.add(s1Layer);
+          const s1Layer = new FeatureLayer({
+            title: "Layer Kesesuain Lahan",
+            fields: [
+              {
+                name: "ObjectID",
+                alias: "ObjectID",
+                type: "oid",
+              },
+            ],
+            objectIdField: "ObjectID",
+            geometryType: "polygon",
+            source: graphicsS1,
+            renderer: {
+              type: "simple",
+              symbol: {
+                color: "#00FF7F",
+                type: "simple-fill",
+                style: "solid",
+                outline: {
+                  color: [255, 255, 255],
+                  width: 1,
+                },
+              },
+              label: "S1",
+            },
+          });
+
+          const s2Layer = new FeatureLayer({
+            fields: [
+              {
+                name: "ObjectID",
+                alias: "ObjectID",
+                type: "oid",
+              },
+            ],
+            objectIdField: "ObjectID",
+            geometryType: "polygon",
+            source: graphicsS2,
+            renderer: {
+              type: "simple",
+              symbol: {
+                color: "#FFE600",
+                type: "simple-fill",
+                style: "solid",
+                outline: {
+                  color: [255, 255, 255],
+                  width: 1,
+                },
+              },
+              label: "S2",
+            },
+          });
+
+          const s3Layer = new FeatureLayer({
+            fields: [
+              {
+                name: "ObjectID",
+                alias: "ObjectID",
+                type: "oid",
+              },
+            ],
+            objectIdField: "ObjectID",
+            geometryType: "polygon",
+            source: graphicsS3,
+            renderer: {
+              type: "simple",
+              symbol: {
+                color: "#FF4400",
+                type: "simple-fill",
+                style: "solid",
+                outline: {
+                  color: [255, 255, 255],
+                  width: 1,
+                },
+              },
+              label: "S3",
+            },
+          });
+
+          map.add(normalLayer);
+          map.add(s3Layer);
+          map.add(s2Layer);
+          map.add(s1Layer);
+        }
       })();
     }
   }, []);
 
-  return <div classNameName={styles.mapDiv} ref={mapDiv}></div>;
+  return <div className={styles.mapDiv} ref={mapDiv}></div>;
 }
 
-function content(title) {
-  let contentData = "";
-  contentData +=
-    "<h1><b>Kelas Faktor Landscape:</b> {kelasfaktorlandscape}</h1>";
-  if (title == "Kedalaman Mineral Tanah")
-    contentData += "<b>Kedalaman Mineral Tanah : </b> {kedalamanmineraltanah}";
-  else if (title == "Drainase") contentData += "<b>Drainase: </b> {drainase}";
-  else if (title == "Tekstur Tanah")
-    contentData += "<b>Tekstur Tanah: </b> {teksturtanah}";
-  else if (title == "Kemasaman Tanah")
-    contentData += "<b>Kemasaman Tanah: </b> {kemasamantanah}";
-  else if (title == "Kapasitas Tukar Kation")
-    contentData += "<b>Kapasitas Tukar Kation: </b> {kapasitastukarkation}";
-  else if (title == "Kejenuhan Basa")
-    contentData += "<b>Kejenuhan Basa: </b> {kejenuhanbasa}";
-  else if (title == "Land Form") contentData += "<b>Land Form: </b> {landform}";
-  else if (title == "Bahan Induk")
-    contentData += "<b>Bahan Induk: </b> {bahaninduk}";
-  else if (title == "Relief") contentData += "<b>Relief: </b> {relief}";
-  else if (title == "Luas") contentData += "<b>Luas: </b> {luas}";
-  else if (title == "Persentase Luas")
-    contentData += "<b>Persentase Luas: </b> {persentaseluas}";
-  return contentData;
+function kelasFaktor(a, b) {
+  if (a == 3 || b == 3) return "Kelas S1 Sangat Sesuai";
+  else if (a < 3 && b < 3) return "Kelas S2, Cukup Sesuai";
+  else if (a < 2 && b < 2) return "Kelas S3, Sesuai Marginal";
+  return "Kelas N, Tidak Sesuai";
+}
+function spesifikasiKelas(kelas) {
+  if (kelas == "Drainase") return "KelasDrainase";
+  else if (kelas == "TeksturTanah") return "KelasTeksturTanah";
+  else if (kelas == "KedalamanMineralTanah")
+    return "KelasKedalamanMineralTanah";
+  else if (kelas == "KapasitasTukarKation") return "KelasKapasitasTukarKation";
+  else if (kelas == "KemasamanTanah") return "KelasKemasamanTanah";
+  else if (kelas == "KejenuhanBasa") return "KelasKejenuhanBasa";
+  else if (kelas == "Relief") return "KelasRelief";
+  return "";
+}
+function getKelas(v, kelas) {
+  if (kelas == "KelasDrainase") return v.KelasDrainase;
+  else if (kelas == "KelasTeksturTanah") return v.KelasTeksturTanah;
+  else if (kelas == "KelasKedalamanMineralTanah")
+    return v.KelasKedalamanMineralTanah;
+  else if (kelas == "KelasKapasitasTukarKation")
+    return v.KelasKapasitasTukarKation;
+  else if (kelas == "KelasKemasamanTanah") return v.KelasKemasamanTanah;
+  else if (kelas == "KelasKejenuhanBasa") return v.KelasKejenuhanBasa;
+  else if (kelas == "KelasRelief") return v.KelasRelief;
+  return null;
 }
 
 export default FilterEsriMap;

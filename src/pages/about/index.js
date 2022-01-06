@@ -32,12 +32,12 @@ export default function Home() {
           <HomeHeader active={active} handleClick={handleClick} />
           <div className="flex-grow ">
             {/* About Garlic */}
-            <div className="p-4 mb-16">
+            <div className="p-4 ">
               <div className="mx-16 mt-16 mb-8 text-2xl font-bold ">
                 Apa itu INA Agro-GARLIC
               </div>
               <div className="flex flex-wrap">
-                <div className="mx-16 w-8/12 sm:7/12 md:7/12 text-lg text-justify">
+                <div className="mx-16 w-12/12 sm:7/12 md:7/12 text-lg text-justify">
                   INA Agro-GARLIC (Agroecological Assessment of Land Suitability
                   for Garlic) adalah Sistem Informasi Geografis Kesesuaian
                   Agroekologi untuk Bawang Putih pada kawasan prioritas
@@ -72,15 +72,14 @@ export default function Home() {
                   karena mempunyai faktor pembatas yang sangat berat dan/atau
                   sulit diatasi.
                 </div>
-                <img src="circle.png" className="w-32 h-32 mx-auto" />
               </div>
             </div>
             <div className="p-4 mb-16">
-              <div className="mx-16 mt-16 mb-8 text-2xl font-bold ">
+              <div className="mx-16  mb-8 text-2xl font-bold ">
                 Syarat tumbuh bawang putih
               </div>
               <div className="flex flex-wrap">
-                <div className="mx-16 w-8/12 sm:7/12 md:7/12 text-lg text-justify">
+                <div className="mx-16 w-12/12 sm:7/12 md:7/12 text-lg text-justify">
                   Syarat tumbuh bawang putih yang dianalisis dikelompokan ke
                   dalam tiga kategori yaitu: <br />
                   1. Faktor yang dapat dikendalikan, yang terdiri dari <br />
@@ -98,26 +97,49 @@ export default function Home() {
                   b. Curah Hujan (mm), (total per bulan) <br />
                   c. Lama Penyinaran (jam per hari), (rata-rata bulanan)
                 </div>
-                <img src="circle.png" className="w-32 h-32 mx-auto" />
               </div>
             </div>
 
             {/* Profil Pengembang */}
             <div className="bg-primary-dark py-4 px-4">
               <div className="mx-16 mt-16 mb-8 text-2xl font-bold text-white">
-                Profil Pengembang
+                Tim Peneliti
               </div>
               <div>
                 <div className="pb-16">
-                  <div className="md:flex md:justify-center md:space-x-32 md:px-14">
-                    <Pengembang />
-                    <Pengembang />
-                    <Pengembang />
+                  <div className="flex justify-center space-x-32 px-14">
+                    <Pengembang
+                      name="Prof. Dr. Imas Sukaesih Sitanggang, S.Si, M.Kom"
+                      role="Peneliti"
+                      image="bu_imas.jpeg"
+                    />
+                    <Pengembang
+                      name="Prof. Dr. Ir. Sobir, M.Si"
+                      role="Peneliti"
+                      image="prof_sobir.jpeg"
+                    />
+                    <Pengembang
+                      name="Dr. Eng. Annisa, S.Kom., M.Kom"
+                      role="Peneliti"
+                      image="bu_annisa.png"
+                    />
                   </div>
-                  <div className="md:flex md:justify-center md:space-x-32 md:px-14">
-                    <Pengembang />
-                    <Pengembang />
-                    <Pengembang />
+                  <div className="flex justify-center space-x-32 px-14">
+                    <Pengembang
+                      name="Muhammad Asyhar Agmalaro, S.Si, M.Kom"
+                      role="Peneliti"
+                      image="pa_asyhar.png"
+                    />
+                    <Pengembang
+                      name="Muhammad Fauzan Ramadhan"
+                      role="Peneliti"
+                      image="ojan.png"
+                    />
+                    <Pengembang
+                      name="Reza Achmad Naufal"
+                      role="Peneliti"
+                      image="reja.png"
+                    />
                   </div>
                 </div>
               </div>

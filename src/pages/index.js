@@ -32,12 +32,12 @@ export default function Home() {
           <div className={`bg-primary-dark`}>
             <div className="container mx-auto pb-40">
               <div className="flex flex-wrap pt-40">
-                <div className="w-10/12 md:w-8/12 lg:w-8/12 text-justify break-all">
+                <div className="w-10/12 md:w-8/12 lg:w-8/12 text-justify ">
                   <div className="text-5xl m-5 font-semibold text-white">
                     {`About INA Agro-GARLIC`}
                   </div>
                   <div className="m-5 text-white">{`INA Agro-GARLIC (Agroecological Assessment of Land Suitability for Garlic) adalah Sistem Informasi Geografis Kesesuaian Agroekologi untuk Bawang Putih pada kawasan prioritas pengembangan lahan bawang putih di Indonesia.  
-            Struktur klasifikasi kesesuaian lahan mengikuti kerangka FAO (1976) yaitu `}</div>
+            Struktur klasifikasi kesesuaian lahan mengikuti kerangka FAO (1976)`}</div>
                   <div className="m-5 cursor-pointer py-5 w-40 bg-primary-coco text-center text-white rounded-xl hover:bg-primary-darkcoco hover:text-white">
                     <Link href="/about">{`more info`}</Link>
                   </div>

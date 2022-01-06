@@ -82,7 +82,7 @@ export default function NavigationDrawer({ handleClick, expand, title }) {
             {(title == "Kejenuhan Basa") ? <b className="underline"> Kejenuhan Basa </b>  : <a>Kejenuhan Basa </a> }     
           </Link>
         </div>  */}
-          <div className="my-3  mx-3 hover:text-black cursor-pointer px-4 ">
+          {/* <div className="my-3  mx-3 hover:text-black cursor-pointer px-4 ">
             <Link href={`/filter/landform`}>
               {title == "Landform" ? (
                 <b className="underline"> Landform </b>
@@ -99,7 +99,7 @@ export default function NavigationDrawer({ handleClick, expand, title }) {
                 <a>Bahan Induk </a>
               )}
             </Link>
-          </div>
+          </div> */}
 
           <div className="my-3  mx-3 hover:text-black cursor-pointer px-4 ">
             <Link href={`/filter/relief`}>
@@ -110,7 +110,7 @@ export default function NavigationDrawer({ handleClick, expand, title }) {
               )}
             </Link>
           </div>
-          <div className="my-3  mx-3 hover:text-black cursor-pointer px-4 ">
+          {/* <div className="my-3  mx-3 hover:text-black cursor-pointer px-4 ">
             <Link href={`/filter/luas`}>
               {title == "Luas" ? (
                 <b className="underline"> Luas </b>
@@ -127,7 +127,7 @@ export default function NavigationDrawer({ handleClick, expand, title }) {
                 <a>Persentase Luas </a>
               )}
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className="my-3 hover:text-black cursor-pointer px-4 ">
           <Link href="/input">
