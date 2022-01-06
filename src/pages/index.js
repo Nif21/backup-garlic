@@ -6,6 +6,7 @@ import NavigationDrawer from "../components/NavigationDrawer";
 import Carousel from "../components/Carousel";
 import Footer from "../components/Footer";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Home() {
   const [active, setActive] = useState(false);
@@ -17,7 +18,7 @@ export default function Home() {
   return (
     <div className=" shadow bg-white drawer">
       <Head>
-        <title>INA Garlic</title>
+        <title>INA Agro-GARLIC</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -28,23 +29,33 @@ export default function Home() {
         <HomeHeader active={active} handleClick={handleClick} />
         <div className="flex-grow bg-white">
           {/* <Carousel /> */}
-          <ContentRight
-            title="About Garlic"
-            content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.        "
-            button="more info"
-            background="bg-primary-dark"
-          ></ContentRight>
+          <div className={`bg-primary-dark`}>
+            <div className="container mx-auto pb-40">
+              <div className="flex flex-wrap pt-40">
+                <div className="w-10/12 md:w-8/12 lg:w-8/12 text-justify break-all">
+                  <div className="text-5xl m-5 font-semibold text-white">
+                    {`About INA Agro-GARLIC`}
+                  </div>
+                  <div className="m-5 text-white">{`INA Agro-GARLIC (Agroecological Assessment of Land Suitability for Garlic) adalah Sistem Informasi Geografis Kesesuaian Agroekologi untuk Bawang Putih pada kawasan prioritas pengembangan lahan bawang putih di Indonesia.  
+            Struktur klasifikasi kesesuaian lahan mengikuti kerangka FAO (1976) yaitu `}</div>
+                  <div className="m-5 cursor-pointer py-5 w-40 bg-primary-coco text-center text-white rounded-xl hover:bg-primary-darkcoco hover:text-white">
+                    <Link href="/about">{`more info`}</Link>
+                  </div>
+                </div>
+                <img
+                  src={`./circle_garlic.png`}
+                  className="my-10 mx-10 h-72 w-72"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
           <ContentLeft
-            title="About Garlic"
-            content="Bawang putih (Allium sativum) merupakan tanaman yang memiliki banyak manfaat. Salah satunya untuk mengobati berbagai penyakit terutama penyakit yang disebabkan oleh infeksi bakteri. Bawang putih dapat menghambat bakteri patogen diantaranya bakteri Gram positif dan bakteri Gram negatif. Bawang putih sangat efektif menghambat dan membunuh bakteri yang disebabkan oleh diallydisulphide (DADS) dan diallytrisulphide (DATS) yang dihasilkan oleh allisin"
+            title="About Bawang Putih"
+            content="Bawang putih (Allium sativum L.) merupakan komoditas hortikultura yang penting bagi masyarakat Indonesia mengingat ragam dan jumlah pemanfaatannya. Selain dapat dimanfaatkan sebagai bahan penyedap makanan hampir di setiap masakan, komoditas ini juga berperan sebagai obat bagi beberapa jenis penyakit. Umbi bawang putih dapat digunakan untuk membantu menurunkan tekanan darah tinggi, mengobati gangguan pernafasan, sakit kepala, wasir, susah buang air besar, memar atau luka sayat, cacingan, insomnia, kolesterol, influenza, gangguan saluran kencing, dan lain-lain. Keadaan ini membawa dampak terhadap tingginya nilai ekonomis bawang putih di mata masyarakat Indonesia. Sumber: Panduan Budidaya Bawang Putih, Kementerian Pertanian Badan Penelitian dan Pengembangan Pertanian Balai Pengkajian Teknologi Pertanian Jawa Timur, Tahun 2018."
             button="more info"
           ></ContentLeft>
-          <ContentRight
-            title="About Garlic"
-            content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.        "
-            button="more info"
-            background="bg-primary-dark"
-          ></ContentRight>
         </div>
         <Footer />
       </div>

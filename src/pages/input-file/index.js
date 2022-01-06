@@ -16,7 +16,7 @@ function Index() {
     <>
       <div className=" shadow bg-base-200 drawer">
         <Head>
-          <title>INA Garlic</title>
+          <title>INA Agro-GARLIC</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
