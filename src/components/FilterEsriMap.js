@@ -83,7 +83,7 @@ function FilterEsriMap({ title }) {
 
       (async () => {
         const data = await fetch(
-          "http://4a9e-61-94-101-17.ngrok.io/v1/show?select=spt&select=geom&select=kelasfaktorlandscape&select=" +
+          "https://garlic-backend.herokuapp.com/v1?select=spt&select=geom&select=" +
             title.replace(/ /g, "")
         );
         const dataJSON = await data.json();

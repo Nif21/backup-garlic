@@ -87,6 +87,11 @@ function EsriMap() {
           let dt = dataJSON[d].data;
           let polygon;
           const graphicsNormal = dt.map((v) => {
+            let kelas = kelasFaktor(
+              v.KelasFaktorYangDapatDikendalikan.Kelas,
+              v.KelasFaktorYangEfeknyaDapatDikoreksi.Kelas
+            );
+            v.kelas = kelas;
             polygon = {
               type: "polygon",
               rings: v.geom.coordinates[0][0],
@@ -165,8 +170,8 @@ function EsriMap() {
                 type: "string",
               },
               {
-                name: "kelasfaktorlandscape",
-                alias: "kelasfaktorlandscape",
+                name: "kelas",
+                alias: "kelas",
                 type: "string",
               },
               {
@@ -244,7 +249,7 @@ function EsriMap() {
             popupTemplate: {
               title: "No SPT : {spt} (Proporsi {proporsi} )",
               content:
-                "<h1><b>Kelas Faktor Landscape:</b> {kelasfaktorlandscape}</h1>" +
+                "<h1><b>Kelas Faktor Landscape:</b> {kelas}</h1>" +
                 "<br><b>Kedalam Mineral Tanah : </b> {kedalamanmineraltanah}" +
                 "<br><b>Drainase: </b> {drainase}" +
                 "<br><b>Tekstur Tanah:</b> {teksturtanah}" +
@@ -348,6 +353,13 @@ function EsriMap() {
   }, []);
 
   return <div className={styles.mapDiv} ref={mapDiv}></div>;
+}
+
+function kelasFaktor(a, b) {
+  if (a == 3 || b == 3) return "Kelas S1 Sangat Sesuai";
+  else if (a < 3 && b < 3) return "Kelas S2, Cukup Sesuai";
+  else if (a < 2 && b < 2) return "Kelas S3, Sesuai Marginal";
+  return "Kelas N, Tidak Sesuai";
 }
 
 export default EsriMap;

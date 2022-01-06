@@ -40,7 +40,7 @@ function Map() {
             <div className={styles.nav}>
               <label htmlFor="my-drawer">
                 <img
-                  src="logo2.png"
+                  src="logo_ipb.png"
                   className={` w-32 h-32 cursor-pointer mx-auto`}
                   onClick={handleClick}
                 />

@@ -3,7 +3,7 @@ export default function Header({ handleClick }) {
   return (
     <div className={`flex `}>
       <img
-        src="logo.png"
+        src="logo_ipb.png"
         className="w-16 h-16 relative cursor-pointer"
         onClick={handleClick}
         alt=""
