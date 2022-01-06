@@ -82,7 +82,7 @@ function FilterEsriMap({ title }) {
       (async () => {
         let judulKelas = spesifikasiKelas(title.replace(/ /g, ""));
         const data = await fetch(
-          "https://garlic-backend.herokuapp.com/v1?select=spt&select=geom&select=" +
+          "https://garlic-backend.herokuapp.com/v1?select=spt&select=proporsi&select=geom&select=" +
             judulKelas
         );
         const dataJSON = await data.json();
@@ -90,7 +90,7 @@ function FilterEsriMap({ title }) {
           let dt = dataJSON[d].data;
           let polygon;
           const graphicsNormal = dt.map((v) => {
-            v.dataKelas = getKelas(v, judulKelas);
+            v.dataKelas = v[judulKelas];
             v.kelas = v.dataKelas.NamaKelas;
             v.variabel = v.dataKelas.Variabel;
             v.keterangan = v.dataKelas.Keterangan;
@@ -203,7 +203,8 @@ function FilterEsriMap({ title }) {
             popupTemplate: {
               title: "No SPT : {spt} (Proporsi {proporsi} )",
               content:
-                "<h1><b>Variabel:</b> {variabel}</h1>" +
+                "<h1><b>Kelas:</b> {kelas}</h1>" +
+                "<br><b>Variabel : </b> {variabel}" +
                 "<br><b>Keterangan : </b> {keterangan}" +
                 "<br><b>Rekomendasi: </b> {rekomendasi}",
             },
@@ -300,12 +301,6 @@ function FilterEsriMap({ title }) {
   return <div className={styles.mapDiv} ref={mapDiv}></div>;
 }
 
-function kelasFaktor(a, b) {
-  if (a == 3 || b == 3) return "Kelas S1 Sangat Sesuai";
-  else if (a < 3 && b < 3) return "Kelas S2, Cukup Sesuai";
-  else if (a < 2 && b < 2) return "Kelas S3, Sesuai Marginal";
-  return "Kelas N, Tidak Sesuai";
-}
 function spesifikasiKelas(kelas) {
   if (kelas == "Drainase") return "KelasDrainase";
   else if (kelas == "TeksturTanah") return "KelasTeksturTanah";
@@ -316,18 +311,6 @@ function spesifikasiKelas(kelas) {
   else if (kelas == "KejenuhanBasa") return "KelasKejenuhanBasa";
   else if (kelas == "Relief") return "KelasRelief";
   return "";
-}
-function getKelas(v, kelas) {
-  if (kelas == "KelasDrainase") return v.KelasDrainase;
-  else if (kelas == "KelasTeksturTanah") return v.KelasTeksturTanah;
-  else if (kelas == "KelasKedalamanMineralTanah")
-    return v.KelasKedalamanMineralTanah;
-  else if (kelas == "KelasKapasitasTukarKation")
-    return v.KelasKapasitasTukarKation;
-  else if (kelas == "KelasKemasamanTanah") return v.KelasKemasamanTanah;
-  else if (kelas == "KelasKejenuhanBasa") return v.KelasKejenuhanBasa;
-  else if (kelas == "KelasRelief") return v.KelasRelief;
-  return null;
 }
 
 export default FilterEsriMap;
