@@ -83,6 +83,7 @@ function EsriMap() {
       (async () => {
         const data = await fetch("https://garlic-backend.herokuapp.com/v1");
         const dataJSON = await data.json();
+        console.log(dataJSON);
         for (let d in dataJSON) {
           let dt = dataJSON[d].data;
           let polygon;

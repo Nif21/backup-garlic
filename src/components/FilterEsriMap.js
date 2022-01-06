@@ -86,6 +86,7 @@ function FilterEsriMap({ title }) {
             judulKelas
         );
         const dataJSON = await data.json();
+        console.log(dataJSON);
         for (let d in dataJSON) {
           let dt = dataJSON[d].data;
           let polygon;
