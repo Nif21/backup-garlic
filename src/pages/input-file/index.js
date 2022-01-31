@@ -23,19 +23,17 @@ function Index() {
         <div className="drawer-side flex-none hidden lg:block">
           <NavigationDrawer handleClick={handleClick} />
         </div>
-        <div className="flex flex-col drawer-content  h-screen w-screen">
+        <div className="flex flex-col drawer-content  h-screen w-screen bg-primary-dark">
           <HomeHeader active={active} handleClick={handleClick} />
-          <div className="mt-5 md:mt-0 md:col-span-2 flex-grow bg-white ">
-            <div className="container mx-auto">
-              <div className="mx-64">
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                  Upload File SPT anda disini
-                </h2>
-                <FormikUploadFile />
-              </div>
+          <div className="container mx-auto my-16">
+            <div className=" md:mt-0 md:col-span-2 flex-grow bg-white  mx-40 p-8 rounded">
+              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 ">
+                Upload File SPT anda disini
+              </h2>
+              <FormikUploadFile />
             </div>
           </div>
-          <Footer />
+          <Footer background="bg-white" textColor="text-black" />
         </div>
       </div>
     </>

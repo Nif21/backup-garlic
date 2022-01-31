@@ -34,7 +34,7 @@ function UploadFile({ values, setFieldValue }) {
   const fileInput3 = React.createRef();
   const fileInput4 = React.createRef();
   return (
-    <div>
+    <div className="mb-8">
       <Form>
         <div className="m-2 font-bold">File Shp</div>
         <div className="m-2 bg-primary-white rounded-lg border-black border flex mb-8">

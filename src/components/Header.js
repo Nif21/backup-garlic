@@ -63,7 +63,7 @@ export default function Header({ handleClick }) {
               className="text-black text-lg hover:underline hover:text-primary-dark"
               aria-expanded="false"
             >
-              <Link href="/filter">
+              <Link href="/input">
                 <span>File Pengguna</span>
               </Link>
             </button>
@@ -72,7 +72,7 @@ export default function Header({ handleClick }) {
               className="text-black text-lg hover:underline hover:text-primary-dark"
               aria-expanded="false"
             >
-              <Link href="/filter">
+              <Link href="/input-file">
                 <span>File Input</span>
               </Link>
             </button>

@@ -26,7 +26,7 @@ export default function HeaderNotSticky({ active, handleClick }) {
           className={`bg-primary-white w-full hover:bg-primary-lesswhite hidden md:block lg:block  `}
           onClick={handleClick}
         >
-          <div className="container p-5">
+          <div className="p-5">
             <Header />
           </div>
         </div>

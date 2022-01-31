@@ -136,7 +136,7 @@ function FilterEsriMap({ title }) {
           </button>
         </div>
       </div>
-      <div className={styles.mapDiv} ref={mapDiv}></div>;
+      <div className={styles.mapDiv} ref={mapDiv}></div>
     </div>
   );
 }

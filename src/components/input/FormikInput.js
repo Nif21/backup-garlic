@@ -4,11 +4,11 @@ import CustomSelect from "./CustomSelect";
 import * as Yup from "yup";
 
 async function fetchData() {
-  const response = await fetch(
-    "http://4a9e-61-94-101-17.ngrok.io/v1/syaratTumbuh"
-  );
-  const data = await response.json();
-  return data;
+  // const response = await fetch(
+  //   "http://4a9e-61-94-101-17.ngrok.io/v1/syaratTumbuh"
+  // );
+  // const data = await response.json();
+  return {};
 }
 
 const FormikInput = () => {
