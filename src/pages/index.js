@@ -57,7 +57,7 @@ export default function Home() {
             button="more info"
           ></ContentLeft>
         </div>
-        <Footer />
+        <Footer background="bg-primary-dark" textColor="text-white" />
       </div>
     </div>
   );

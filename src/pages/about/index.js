@@ -93,9 +93,14 @@ export default function Home() {
                   b. Kedalaman Mineral Tanah (cm) <br /> <br />
                   3. Faktor yang tidak dapat dikendalikan dan dikoreksi yaitu
                   faktor cuaca, yang terdiri dari <br />
-                  a. Temperatur (c), rata-rata (per bulan) <br />
-                  b. Curah Hujan (mm), (total per bulan) <br />
-                  c. Lama Penyinaran (jam per hari), (rata-rata bulanan)
+                  a. Faktor cuaca <br />
+                  &emsp;&emsp;i. Temperatur (c), rata-rata (per bulan) <br />
+                  &emsp;&emsp;ii. Curah Hujan (mm), (total per bulan) <br />
+                  &emsp;&emsp;iii. Lama Penyinaran (jam per hari), (rata-rata
+                  bulanan) <br />
+                  b. Faktor relief <br />
+                  &emsp;&emsp; i. Elevasi (magl) <br />
+                  &emsp;&emsp;ii. Relief(%) <br></br>
                 </div>
               </div>
             </div>

@@ -21,16 +21,13 @@ export default function HomeHeader({ active, handleClick }) {
           </svg>
         </label>
       </div>
-      <label htmlFor="my-drawer">
-        <div
-          className={`bg-primary-white w-full hover:bg-primary-lesswhite hidden md:block lg:block  `}
-          onClick={handleClick}
-        >
-          <div className="container p-5">
-            <Header />
-          </div>
+      <div
+        className={`bg-primary-white w-full hover:bg-primary-lesswhite hidden md:block lg:block  `}
+      >
+        <div className=" p-5">
+          <Header />
         </div>
-      </label>
+      </div>
     </div>
   );
 }

@@ -16,6 +16,15 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
           href="https://js.arcgis.com/4.14/esri/css/main.css"
         />
+        <script
+          type="module"
+          src="https://js.arcgis.com/calcite-components/1.0.0-beta.69/calcite.esm.js"
+        ></script>
+        <script
+          nomodule=""
+          src="https://js.arcgis.com/calcite-components/1.0.0-beta.69/calcite.js"
+        ></script>
+
         <script src="https://js.arcgis.com/4.20/"></script>
       </Head>
       <Component {...pageProps} />

@@ -140,7 +140,7 @@ export default function NavigationDrawer({ handleClick, expand, title }) {
           </Link>
         </div>
         <div className="flex-grow"></div>
-        <div className="py-4  mx-4 mb-4 hover:text-gray-500 hover:bg-primary-darkcoco cursor-pointer bg-primary-coco rounded-xl">
+        <div className="w-auto	 py-4  mx-4 mb-4 hover:text-gray-500 hover:bg-primary-darkcoco cursor-pointer bg-primary-coco rounded-xl">
           <Link href="/login">
             <div className="text-center">Login</div>
           </Link>
