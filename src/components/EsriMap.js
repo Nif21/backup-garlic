@@ -105,6 +105,7 @@ function kelasFaktor(a, b) {
 const getNormalMap = async (map) => {
   const data = await fetch("https://garlic-backend.herokuapp.com/v1");
   const dataJSON = await data.json();
+  console.log("Loading");
   for (let d in dataJSON) {
     let dt = dataJSON[d].data;
     let polygon;
@@ -370,6 +371,7 @@ const getNormalMap = async (map) => {
     map.add(s2Layer);
     map.add(s1Layer);
   }
+  console.log("Finish");
 };
 
 export default EsriMap;

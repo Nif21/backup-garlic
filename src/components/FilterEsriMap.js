@@ -8,73 +8,92 @@ import Zoom from "@arcgis/core/widgets/Zoom";
 import styles from "../styles/EsriMap.module.css";
 import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 import Expand from "@arcgis/core/widgets/Expand";
+import { data } from "autoprefixer";
 function FilterEsriMap({ title }) {
   const mapDiv = useRef(null);
-  const [filter, setFilter] = useState("");
+  const [spt, setSpt] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    if (mapDiv.current) {
-      /**
-       * Initialize application
-       */
-      const map = new ArcGISMap({
-        basemap: "gray-vector",
-      });
-
-      const view = new MapView({
-        map: map,
-        container: mapDiv.current,
-        ui: {
-          components: ["attribution"],
-        },
-        extent: {
-          // autocasts as new Extent()
-          xmin: 11467704.3,
-          ymin: -1008101.35,
-          xmax: 14285478.91,
-          ymax: 608393.1,
-          spatialReference: 102100,
-        },
-      });
-      var zoom = new Zoom({
-        view: view,
-      });
-      const legend = new Legend({
-        view: view,
-        container: document.createElement("div"),
-      });
-      let basemapGallery = new BasemapGallery({
-        view: view,
-        container: document.createElement("div"),
-      });
-
-      // Add widget to the top right corner of the view
-
-      var bgExpandLegend = new Expand({
-        view: view,
-        content: legend.container,
-        expandIconClass: "esri-icon-layer-list",
-      });
-      var bgExpandBasemap = new Expand({
-        view: view,
-        content: basemapGallery.container,
-        expandIconClass: "esri-icon-basemap",
-      });
-
-      const seasonsElement = document.getElementById("seasons-filter");
-      document
-        .getElementById("query-parks")
-        .addEventListener("click", async () => {
-          map.removeAll();
-          getNormalMap(map, topCountSelect.selectedOption.value);
-        });
-      // Add widget to the top right corner of the view
-      view.ui.add(seasonsElement, "top-right");
-      view.ui.add(bgExpandLegend, "bottom-left");
-      view.ui.add(bgExpandBasemap, "bottom-left");
-      view.ui.add(zoom, "bottom-right");
-      getNormalMap(map, "");
-    }
+    requestSpt();
   }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (mapDiv.current) {
+        /**
+         * Initialize application
+         */
+        const map = new ArcGISMap({
+          basemap: "gray-vector",
+        });
+
+        const view = new MapView({
+          map: map,
+          container: mapDiv.current,
+          ui: {
+            components: ["attribution"],
+          },
+          extent: {
+            // autocasts as new Extent()
+            xmin: 11467704.3,
+            ymin: -1008101.35,
+            xmax: 14285478.91,
+            ymax: 608393.1,
+            spatialReference: 102100,
+          },
+        });
+        var zoom = new Zoom({
+          view: view,
+        });
+        const legend = new Legend({
+          view: view,
+          container: document.createElement("div"),
+        });
+        let basemapGallery = new BasemapGallery({
+          view: view,
+          container: document.createElement("div"),
+        });
+
+        // Add widget to the top right corner of the view
+
+        var bgExpandLegend = new Expand({
+          view: view,
+          content: legend.container,
+          expandIconClass: "esri-icon-layer-list",
+        });
+        var bgExpandBasemap = new Expand({
+          view: view,
+          content: basemapGallery.container,
+          expandIconClass: "esri-icon-basemap",
+        });
+        const seasonsElement = document.getElementById("seasons-filter");
+        document
+          .getElementById("query-parks")
+          .addEventListener("click", async () => {
+            map.removeAll();
+            getNormalMap(map, spt, topCountSelect.selectedOption.value);
+          });
+        // Add widget to the top right corner of the view
+        view.ui.add(seasonsElement, "top-right");
+        view.ui.add(bgExpandLegend, "bottom-left");
+        view.ui.add(bgExpandBasemap, "bottom-left");
+        view.ui.add(zoom, "bottom-right");
+        if (!isLoading) {
+          getNormalMap(map, spt, "");
+        }
+      }
+    }
+  });
+
+  async function requestSpt() {
+    setIsLoading(true);
+    data = await fetch("https://garlic-backend.herokuapp.com/v1");
+    const dataJSON = await data.json();
+    setSpt(dataJSON);
+    setIsLoading(false);
+  }
+
   return (
     <div>
       <div id="seasons-filter" className={styles.filter}>
@@ -137,6 +156,14 @@ function FilterEsriMap({ title }) {
         </div>
       </div>
       <div className={styles.mapDiv} ref={mapDiv}></div>
+
+      {isLoading ? (
+        <div className={styles.loader}>
+          <div className={styles.child}>Load Data</div>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
@@ -147,14 +174,10 @@ function kelasFaktor(a, b) {
   else if (a < 2 && b < 2) return "Kelas S3, Sesuai Marginal";
   return "Kelas N, Tidak Sesuai";
 }
-const getNormalMap = async (map, filter) => {
-  let data;
+const getNormalMap = (map, spt, filter) => {
   if (filter == "") {
-    alert("in no filter");
-    data = await fetch("https://garlic-backend.herokuapp.com/v1");
-    const dataJSON = await data.json();
-    for (let d in dataJSON) {
-      let dt = dataJSON[d].data;
+    for (let d in spt) {
+      let dt = spt[d].data;
       let polygon;
       const graphicsNormal = dt.map((v) => {
         let kelas = kelasFaktor(
@@ -417,14 +440,8 @@ const getNormalMap = async (map, filter) => {
       map.add(s1Layer);
     }
   } else {
-    data = await fetch(
-      "https://garlic-backend.herokuapp.com/v1?select=spt&select=proporsi&select=geom&select=" +
-        filter
-    );
-    alert("in filter");
-    const dataJSON = await data.json();
-    for (let d in dataJSON) {
-      let dt = dataJSON[d].data;
+    for (let d in spt) {
+      let dt = spt[d].data;
       let polygon;
       const graphicsNormal = dt.map((v) => {
         v.dataKelas = v[filter];
