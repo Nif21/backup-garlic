@@ -1,6 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
-import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import ArcGISMap from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
 import Legend from "@arcgis/core/widgets/Legend";
@@ -10,104 +9,124 @@ import styles from "../styles/EsriMap.module.css";
 import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 import Expand from "@arcgis/core/widgets/Expand";
 import Print from "@arcgis/core/widgets/Print";
-import { Alert } from "bootstrap";
+
 function EsriMap() {
   const mapDiv = useRef(null);
+  const [spt, setSpt] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (spt.length == 0) requestSpt();
+  }, []);
 
   useEffect(() => {
-    if (mapDiv.current) {
-      /**
-       * Initialize application
-       */
-      const map = new ArcGISMap({
-        basemap: "gray-vector",
-      });
+    if (!isLoading) {
+      if (mapDiv.current) {
+        /**
+         * Initialize application
+         */
+        const map = new ArcGISMap({
+          basemap: "gray-vector",
+        });
 
-      const view = new MapView({
-        map: map,
-        container: mapDiv.current,
-        ui: {
-          components: ["attribution"],
-        },
-        extent: {
-          // autocasts as new Extent()
-          xmin: 11467704.3,
-          ymin: -1008101.35,
-          xmax: 14285478.91,
-          ymax: 608393.1,
-          spatialReference: 102100,
-        },
-      });
+        const view = new MapView({
+          map: map,
+          container: mapDiv.current,
+          ui: {
+            components: ["attribution"],
+          },
+          extent: {
+            // autocasts as new Extent()
+            xmin: 11467704.3,
+            ymin: -1008101.35,
+            xmax: 14285478.91,
+            ymax: 608393.1,
+            spatialReference: 102100,
+          },
+        });
 
-      var zoom = new Zoom({
-        view: view,
-      });
-      const legend = new Legend({
-        view: view,
-        container: document.createElement("div"),
-      });
-      let basemapGallery = new BasemapGallery({
-        view: view,
-        container: document.createElement("div"),
-      });
+        var zoom = new Zoom({
+          view: view,
+        });
+        const legend = new Legend({
+          view: view,
+          container: document.createElement("div"),
+        });
+        let basemapGallery = new BasemapGallery({
+          view: view,
+          container: document.createElement("div"),
+        });
 
-      var print = new Print({
-        view: view,
-        // specify your own print service
-        printServiceUrl:
-          "https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
-        container: document.createElement("div"),
-      });
+        var print = new Print({
+          view: view,
+          // specify your own print service
+          printServiceUrl:
+            "https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+          container: document.createElement("div"),
+        });
 
-      // Add widget to the top right corner of the view
-      var bgExpandPrint = new Expand({
-        view: view,
-        content: print.container,
-        expandIconClass: "esri-icon-printer",
-      });
+        // Add widget to the top right corner of the view
+        var bgExpandPrint = new Expand({
+          view: view,
+          content: print.container,
+          expandIconClass: "esri-icon-printer",
+        });
 
-      legend.hideLayersNotInCurrentView = true;
-      var bgExpandLegend = new Expand({
-        view: view,
-        content: legend.container,
-        expandIconClass: "esri-icon-layer-list",
-      });
-      var bgExpandBasemap = new Expand({
-        view: view,
-        content: basemapGallery.container,
-        expandIconClass: "esri-icon-basemap",
-      });
-      // Add widget to the top right corner of the view
-      view.ui.add(bgExpandLegend, "top-right");
-      view.ui.add(bgExpandBasemap, "top-right");
-      view.ui.add(bgExpandPrint, "top-right");
-      // view.ui.add(document.getElementById("actions"), "bottom-left");
-      view.ui.add(zoom, "bottom-right");
-      const add = document.getElementById("actions");
-      getNormalMap(map);
+        legend.hideLayersNotInCurrentView = true;
+        var bgExpandLegend = new Expand({
+          view: view,
+          content: legend.container,
+          expandIconClass: "esri-icon-layer-list",
+        });
+        var bgExpandBasemap = new Expand({
+          view: view,
+          content: basemapGallery.container,
+          expandIconClass: "esri-icon-basemap",
+        });
+        // Add widget to the top right corner of the view
+        view.ui.add(bgExpandLegend, "top-right");
+        view.ui.add(bgExpandBasemap, "top-right");
+        view.ui.add(bgExpandPrint, "top-right");
+        // view.ui.add(document.getElementById("actions"), "bottom-left");
+        view.ui.add(zoom, "bottom-right");
+        const add = document.getElementById("actions");
+        getNormalMap(map, spt);
+      }
     }
-  }, []);
+  });
+
+  async function requestSpt() {
+    setIsLoading(true);
+    const data = await fetch("https://garlic-backend.herokuapp.com/v1");
+    const dataJSON = await data.json();
+    setSpt(dataJSON);
+    setIsLoading(false);
+  }
 
   return (
     <div>
       <div className={styles.mapDiv} ref={mapDiv}></div>
+      {isLoading ? (
+        <div className={styles.loader}>
+          <div className={styles.child}>Load Data</div>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
 
 function kelasFaktor(a, b) {
-  if (a == 3 || b == 3) return "Kelas S1 Sangat Sesuai";
+  if (a < 2 && b < 2) return "Kelas S1, Sangat Sesuai";
   else if (a < 3 && b < 3) return "Kelas S2, Cukup Sesuai";
-  else if (a < 2 && b < 2) return "Kelas S3, Sesuai Marginal";
+  else if (a == 3 || b == 3) return "Kelas S3, Sesuai Marginal";
   return "Kelas N, Tidak Sesuai";
 }
 
-const getNormalMap = async (map) => {
-  const data = await fetch("https://garlic-backend.herokuapp.com/v1");
-  const dataJSON = await data.json();
-  console.log("Loading");
-  for (let d in dataJSON) {
-    let dt = dataJSON[d].data;
+const getNormalMap = (map, spt) => {
+  console.log(spt);
+  for (let d in spt) {
+    let dt = spt[d].data;
     let polygon;
     const graphicsNormal = dt.map((v) => {
       let kelas = kelasFaktor(
@@ -144,7 +163,7 @@ const getNormalMap = async (map) => {
 
     const graphicsS2 = dt.map((v) => {
       if (
-        v.KelasFaktorYangDapatDikendalikan.Kelas < 3 ||
+        v.KelasFaktorYangDapatDikendalikan.Kelas < 3 &&
         v.KelasFaktorYangEfeknyaDapatDikoreksi.Kelas < 3
       ) {
         polygon = {
@@ -160,7 +179,7 @@ const getNormalMap = async (map) => {
 
     const graphicsS1 = dt.map((v) => {
       if (
-        v.KelasFaktorYangDapatDikendalikan.Kelas < 2 ||
+        v.KelasFaktorYangDapatDikendalikan.Kelas < 2 &&
         v.KelasFaktorYangEfeknyaDapatDikoreksi.Kelas < 2
       ) {
         polygon = {
@@ -371,7 +390,6 @@ const getNormalMap = async (map) => {
     map.add(s2Layer);
     map.add(s1Layer);
   }
-  console.log("Finish");
 };
 
 export default EsriMap;

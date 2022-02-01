@@ -8,14 +8,14 @@ import Zoom from "@arcgis/core/widgets/Zoom";
 import styles from "../styles/EsriMap.module.css";
 import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 import Expand from "@arcgis/core/widgets/Expand";
-import { data } from "autoprefixer";
-function FilterEsriMap({ title }) {
+
+function FilterEsriMap() {
   const mapDiv = useRef(null);
   const [spt, setSpt] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    requestSpt();
+    if (spt.length == 0) requestSpt();
   }, []);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ function FilterEsriMap({ title }) {
 
   async function requestSpt() {
     setIsLoading(true);
-    data = await fetch("https://garlic-backend.herokuapp.com/v1");
+    const data = await fetch("https://garlic-backend.herokuapp.com/v1");
     const dataJSON = await data.json();
     setSpt(dataJSON);
     setIsLoading(false);
@@ -169,9 +169,9 @@ function FilterEsriMap({ title }) {
 }
 
 function kelasFaktor(a, b) {
-  if (a == 3 || b == 3) return "Kelas S1 Sangat Sesuai";
+  if (a < 2 && b < 2) return "Kelas S1, Sangat Sesuai";
   else if (a < 3 && b < 3) return "Kelas S2, Cukup Sesuai";
-  else if (a < 2 && b < 2) return "Kelas S3, Sesuai Marginal";
+  else if (a == 3 || b == 3) return "Kelas S3, Sesuai Marginal";
   return "Kelas N, Tidak Sesuai";
 }
 const getNormalMap = (map, spt, filter) => {
@@ -214,7 +214,7 @@ const getNormalMap = (map, spt, filter) => {
 
       const graphicsS2 = dt.map((v) => {
         if (
-          v.KelasFaktorYangDapatDikendalikan.Kelas < 3 ||
+          v.KelasFaktorYangDapatDikendalikan.Kelas < 3 &&
           v.KelasFaktorYangEfeknyaDapatDikoreksi.Kelas < 3
         ) {
           polygon = {
@@ -230,7 +230,7 @@ const getNormalMap = (map, spt, filter) => {
 
       const graphicsS1 = dt.map((v) => {
         if (
-          v.KelasFaktorYangDapatDikendalikan.Kelas < 2 ||
+          v.KelasFaktorYangDapatDikendalikan.Kelas < 2 &&
           v.KelasFaktorYangEfeknyaDapatDikoreksi.Kelas < 2
         ) {
           polygon = {
