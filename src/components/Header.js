@@ -64,7 +64,7 @@ export default function Header({ handleClick }) {
               aria-expanded="false"
             >
               <Link href="/input">
-                <span>File Pengguna</span>
+                <span>Penilaian Kesesuaian Lahan</span>
               </Link>
             </button>
             <button

@@ -13,10 +13,20 @@ function FilterEsriMap() {
   const mapDiv = useRef(null);
   const [spt, setSpt] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [showFilter, setShowFilter] = useState(false);
   useEffect(() => {
     if (spt.length == 0) requestSpt();
   }, []);
+
+  useEffect(() => {
+    if (showFilter) {
+      document.getElementById("logo-filter").style.display = "none";
+      document.getElementById("filter-variabel").style.display = "block";
+    } else {
+      document.getElementById("logo-filter").style.display = "block";
+      document.getElementById("filter-variabel").style.display = "none";
+    }
+  }, [showFilter]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -67,15 +77,15 @@ function FilterEsriMap() {
           content: basemapGallery.container,
           expandIconClass: "esri-icon-basemap",
         });
-        const seasonsElement = document.getElementById("seasons-filter");
+        const filterElement = document.getElementById("filter-variabel-place");
         document
-          .getElementById("query-parks")
-          .addEventListener("click", async () => {
+          .getElementById("filter-radio-button")
+          .addEventListener("calciteRadioButtonGroupChange", (e) => {
             map.removeAll();
-            getNormalMap(map, spt, topCountSelect.selectedOption.value);
+            getNormalMap(map, spt, e.detail);
           });
         // Add widget to the top right corner of the view
-        view.ui.add(seasonsElement, "top-right");
+        view.ui.add(filterElement, "top-right");
         view.ui.add(bgExpandLegend, "bottom-left");
         view.ui.add(bgExpandBasemap, "bottom-left");
         view.ui.add(zoom, "bottom-right");
@@ -84,7 +94,7 @@ function FilterEsriMap() {
         }
       }
     }
-  });
+  }, [isLoading, spt]);
 
   async function requestSpt() {
     setIsLoading(true);
@@ -96,65 +106,77 @@ function FilterEsriMap() {
 
   return (
     <div>
-      <div id="seasons-filter" className={styles.filter}>
-        <label>
-          Pilih variabel untuk di filter.
-          <calcite-select id="topCountSelect" scale="s" width="auto">
-            <calcite-option label="Default" value=""></calcite-option>
-            <calcite-option
-              label="Drainase"
-              value="KelasDrainase"
-            ></calcite-option>
-            <calcite-option
-              label="Tekstur Tanah"
-              value="KelasTeksturTanah"
-            ></calcite-option>
-            <calcite-option
-              label="Kedalamanan Mineral Tanah"
-              value="KelasKedalamanMineralTanah"
-            ></calcite-option>
-            <calcite-option
-              label="Kapasitas Tukar Kation"
-              value="KelasKapasitasTukarKation"
-            ></calcite-option>
-            <calcite-option
-              label="Kemasaman Tanah"
-              value="KelasKemasamanTanah"
-            ></calcite-option>
-            <calcite-option
-              label="Kejenuhan Basa"
-              value="KelasKejenuhanBasa"
-            ></calcite-option>
-            <calcite-option
-              label="Temperatur"
-              value="KelasTemperatur"
-            ></calcite-option>
-            <calcite-option
-              label="Curah Hujan"
-              value="KelasCurahHujan"
-            ></calcite-option>
-            <calcite-option
-              label="Lama Penyinaran"
-              value="KelasLamaPenyinaran"
-            ></calcite-option>
-            <calcite-option
-              label="Elevasi"
-              value="KelasElevasi"
-            ></calcite-option>
-            <calcite-option label="Relief" value="KelasRelief"></calcite-option>
-            <calcite-option
-              label="Faktor Cuaca"
-              value="KelasFaktorCuaca"
-            ></calcite-option>
-          </calcite-select>
-        </label>
-        <br />
-        <div>
-          <button id="query-parks" className={styles.buttonSubmit}>
-            Submit
-          </button>
+      <div id="filter-variabel-place">
+        <div id="filter-variabel" className={styles.filter}>
+          <label>
+            Pilih variabel untuk di filter.
+            <calcite-radio-button-group
+              id="filter-radio-button"
+              name="basic-group"
+              layout="vertical"
+            >
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasDrainase"></calcite-radio-button>
+                Drainase
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasTeksturTanah"></calcite-radio-button>
+                Tekstur Tanah
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasKedalamanMineralTanah"></calcite-radio-button>
+                Kedalamanan Mineral Tanah
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasKapasitasTukarKation"></calcite-radio-button>
+                Kapasitas Tukar Kation
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasKemasamanTanah"></calcite-radio-button>
+                Kemasaman Tanah
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasKejenuhanBasa"></calcite-radio-button>
+                Kejenuhan Basa
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasTemperatur"></calcite-radio-button>
+                Temperatur
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasCurahHujan"></calcite-radio-button>
+                Curah Hujan
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasLamaPenyinaran"></calcite-radio-button>
+                Lama Penyinaran
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasElevasi"></calcite-radio-button>
+                Elevasi
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasRelief"></calcite-radio-button>
+                Relief
+              </calcite-label>
+              <calcite-label layout="inline">
+                <calcite-radio-button value="KelasFaktorCuaca"></calcite-radio-button>
+                Faktor Cuaca
+              </calcite-label>
+            </calcite-radio-button-group>
+          </label>
         </div>
+        <button
+          id="logo-filter"
+          className={styles.logo}
+          onClick={() => {
+            setShowFilter((showFilter) => !showFilter);
+          }}
+        >
+          X
+        </button>
       </div>
+
       <div className={styles.mapDiv} ref={mapDiv}></div>
 
       {isLoading ? (

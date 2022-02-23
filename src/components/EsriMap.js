@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import ArcGISMap from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
@@ -9,14 +9,27 @@ import styles from "../styles/EsriMap.module.css";
 import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 import Expand from "@arcgis/core/widgets/Expand";
 import Print from "@arcgis/core/widgets/Print";
+import { Alert } from "bootstrap";
 
 function EsriMap() {
   const mapDiv = useRef(null);
   const [spt, setSpt] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showListMap, setShowListMap] = useState(false);
+
   useEffect(() => {
     if (spt.length == 0) requestSpt();
   }, []);
+
+  useEffect(() => {
+    if (showListMap) {
+      document.getElementById("logo-list-data-daerah").style.display = "none";
+      document.getElementById("list-data-daerah").style.display = "block";
+    } else {
+      document.getElementById("logo-list-data-daerah").style.display = "block";
+      document.getElementById("list-data-daerah").style.display = "none";
+    }
+  }, [showListMap]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -82,17 +95,26 @@ function EsriMap() {
           content: basemapGallery.container,
           expandIconClass: "esri-icon-basemap",
         });
+
+        const dataDaerahPlace = document.getElementById("data-daerah-place");
+        if (spt.length > 0) {
+          document
+            .getElementById("data-daerah")
+            .addEventListener("click", async () => {
+              alert(spt[0].name);
+            });
+        }
+
+        view.ui.add(dataDaerahPlace, "top-left");
         // Add widget to the top right corner of the view
         view.ui.add(bgExpandLegend, "top-right");
         view.ui.add(bgExpandBasemap, "top-right");
         view.ui.add(bgExpandPrint, "top-right");
         // view.ui.add(document.getElementById("actions"), "bottom-left");
-        view.ui.add(zoom, "bottom-right");
-        const add = document.getElementById("actions");
         getNormalMap(map, spt);
       }
     }
-  });
+  }, [spt, isLoading]);
 
   async function requestSpt() {
     setIsLoading(true);
@@ -110,7 +132,45 @@ function EsriMap() {
           <div className={styles.child}>Load Data</div>
         </div>
       ) : (
-        <div></div>
+        <div id="data-daerah-place">
+          <div id="list-data-daerah" className={styles.listMapBackground}>
+            <div className={styles.listMapAlignRight}>
+              <div id="emptyDiv"></div>
+              <button
+                className={styles.margin10}
+                onClick={() => {
+                  setShowListMap((showListMap) => !showListMap);
+                }}
+              >
+                X
+              </button>
+            </div>
+            <div className={styles.listMap}>
+              {spt.length > 0 ? (
+                <div>
+                  <button id="data-daerah" className={styles.buttonSubmit}>
+                    {spt[0].name}
+                  </button>
+                </div>
+              ) : (
+                <div></div>
+              )}
+              <br />
+              <button id="query-parks" className={styles.buttonSubmit}>
+                Submit
+              </button>
+            </div>
+          </div>
+          <button
+            id="logo-list-data-daerah"
+            className={styles.logo}
+            onClick={() => {
+              setShowListMap((showListMap) => !showListMap);
+            }}
+          >
+            X
+          </button>
+        </div>
       )}
     </div>
   );
@@ -124,7 +184,6 @@ function kelasFaktor(a, b) {
 }
 
 const getNormalMap = (map, spt) => {
-  console.log(spt);
   for (let d in spt) {
     let dt = spt[d].data;
     let polygon;

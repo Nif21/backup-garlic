@@ -1,10 +1,8 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 import HomeHeader from "../../components/HomeHeader";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import Footer from "../../components/Footer";
-import { Formik } from "formik";
 import FormikUploadFile from "../../components/inputFile/FormikUploadFile";
 function Index() {
   const [active, setActive] = useState(false);
@@ -28,7 +26,7 @@ function Index() {
           <div className="container mx-auto my-16">
             <div className=" md:mt-0 md:col-span-2 flex-grow bg-white  mx-40 p-8 rounded">
               <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 ">
-                Upload File SPT anda disini
+                Upload File SPT
               </h2>
               <FormikUploadFile />
             </div>

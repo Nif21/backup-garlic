@@ -33,7 +33,7 @@ function Index() {
           <div className="container mx-auto my-16 ">
             <div className="md:mt-0 md:col-span-2 flex-grow bg-white mx-40 p-8 rounded">
               <h2 className=" text-center text-3xl font-extrabold text-gray-900">
-                Masukkan Variabel Kesesuaian Lahan Anda
+                Masukkan Data Syarat Tumbuh Bawang Putih
               </h2>
               <FormikInput />
             </div>

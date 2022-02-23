@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, useFormik } from "formik";
-import * as Yup from "yup";
-import { useDropzone } from "react-dropzone";
 
 const initialValues = {
+  province: "",
+  kabupaten: "",
   shp: "",
   shx: "",
   dbf: "",
@@ -29,13 +29,88 @@ const FormikUploadFile = () => {
 };
 
 function UploadFile({ values, setFieldValue }) {
+  const [province, setProvince] = useState([]);
+  const [selectedProvince, setSelectedProvince] = useState(null);
+  const [kabupaten, setKabupaten] = useState([]);
+  const [selectedKabupaten, setSelectedKabupaten] = useState(null);
   const fileInput1 = React.createRef();
   const fileInput2 = React.createRef();
   const fileInput3 = React.createRef();
   const fileInput4 = React.createRef();
+
+  useEffect(() => {
+    fetchProvince();
+  }, []);
+
+  useEffect(() => {
+    fetchKabupaten(selectedProvince);
+  }, [selectedProvince]);
+
+  const fetchProvince = async () => {
+    const data = await fetch(
+      "http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
+    );
+    const json = await data.json();
+    setProvince(json);
+  };
+
+  const fetchKabupaten = async (id) => {
+    const data = await fetch(
+      `http://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id}.json`
+    );
+    const json = await data.json();
+    setKabupaten(json);
+  };
+
+  const handelChangeProvince = (e) => {
+    setFieldValue("province", e.target.value);
+    setSelectedProvince(e.target.value);
+  };
+
+  const handelChangeKabupaten = (e) => {
+    setFieldValue("kabupaten", e.target.value);
+    setSelectedKabupaten(e.target.value);
+  };
+
   return (
     <div className="mb-8">
       <Form>
+        <div className="grid grid-cols-6 gap-6 my-8 mx-2">
+          <div className="mb-col-span-6 sm:col-span-3">
+            <label htmlFor="Provinsi" className="m-2 font-bold">
+              Provinsi
+            </label>
+            <select
+              id="country"
+              name="country"
+              onChange={handelChangeProvince}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
+            >
+              {province.map((p) => (
+                <option value={p.id} key={p.id}>
+                  {p.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-col-span-6 sm:col-span-3">
+            <label htmlFor="Kabupaten" className="m-2 font-bold">
+              Kabupaten
+            </label>
+            <select
+              id="country"
+              name="country"
+              onChange={handelChangeKabupaten}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
+            >
+              {kabupaten.map((k) => (
+                <option value={k.id} key={k.id}>
+                  {k.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
         <div className="m-2 font-bold">File Shp</div>
         <div className="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
           <input
@@ -136,12 +211,14 @@ function UploadFile({ values, setFieldValue }) {
           <div className="flex-grow"></div>
         </div>
 
-        <button
-          type="submit"
-          className="w-full mt-8 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco "
-        >
-          Submit
-        </button>
+        <div className="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
+          <button
+            type="submit"
+            className="w-1/2 mt-8 justify-center place-items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco "
+          >
+            Submit
+          </button>
+        </div>
       </Form>
     </div>
   );

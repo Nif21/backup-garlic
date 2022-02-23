@@ -1,13 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
-import ContentRight from "../../components/ContentRight";
-import ContentLeft from "../../components/ContentLeft";
-import Header from "../../components/Header";
 import HomeHeader from "../../components/HomeHeader";
 import NavigationDrawer from "../../components/NavigationDrawer";
-import Carousel from "../../components/Carousel";
-import Link from "next/link";
 import Footer from "../../components/Footer";
 import Pengembang from "../../components/ProfiePengembang";
 

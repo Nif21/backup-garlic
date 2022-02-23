@@ -738,12 +738,14 @@ const FormikInput = () => {
             />
           </div>
         </div>
-        <button
-          type="submit"
-          className="w-full mt-8 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco "
-        >
-          Submit
-        </button>
+        <div className="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
+          <button
+            type="submit"
+            className="w-1/2 mt-8 justify-center place-items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco "
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -37,6 +37,28 @@
   background-color: white;
 }
 
+.listMap {
+  padding: 25px 50px;
+}
+
+.listMapBackground {
+  background-color: white;
+}
+
+.margin10 {
+  margin: 10px;
+}
+
+.listMapAlignRight {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  padding: 5px 10px;
+  background-color: white;
+}
+
 .buttonSubmit {
   padding: 8px 16px;
   border-radius: 5px;

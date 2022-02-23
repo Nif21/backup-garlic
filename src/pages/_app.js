@@ -18,14 +18,15 @@ function MyApp({ Component, pageProps }) {
         />
         <script
           type="module"
-          src="https://js.arcgis.com/calcite-components/1.0.0-beta.69/calcite.esm.js"
+          src="https://js.arcgis.com/calcite-components/1.0.0-beta.76/calcite.esm.js"
         ></script>
-        <script
-          nomodule=""
-          src="https://js.arcgis.com/calcite-components/1.0.0-beta.69/calcite.js"
-        ></script>
-
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://js.arcgis.com/calcite-components/1.0.0-beta.76/calcite.css"
+        />
         <script src="https://js.arcgis.com/4.20/"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       </Head>
       <Component {...pageProps} />
     </>
