@@ -50,12 +50,27 @@
   margin: 10px 0 0 10px;
 }
 
+.margin10Right {
+  margin: 10px 10px 0 0;
+}
+
+.marginBottom10 {
+  margin-bottom: 10px 0 0 10px;
+}
+
 .listMapAlignRight {
   display: flex;
   justify-content: space-between;
 }
 
 .logo {
+  padding: 10px;
+  background-color: white;
+}
+
+.logoFilter {
+  height: 30px;
+  width: 30px;
   padding: 10px;
   background-color: white;
 }

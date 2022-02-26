@@ -16,6 +16,7 @@ function EsriMap() {
   const [isLoading, setIsLoading] = useState(false);
   const [showListMap, setShowListMap] = useState(false);
   const [selectedMap, setSelectedMap] = useState("");
+  
   useEffect(() => {
     if (spt.length == 0) requestSpt();
   }, []);
@@ -226,11 +227,10 @@ function kelasFaktor(a, b) {
 }
 
 const getNormalMap = (map, spt) => {
-  let dt = [];
+  const dt = [];
   for (let s in spt) {
     spt[s].data.map((d) => dt.push(d));
   }
-  console.log(dt);
   let polygon;
   const graphicsNormal = dt.map((v) => {
     let kelas = kelasFaktor(
