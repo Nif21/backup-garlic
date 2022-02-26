@@ -27,6 +27,8 @@ function MyApp({ Component, pageProps }) {
         />
         <script src="https://js.arcgis.com/4.20/"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="https://css.gg/display-grid.css" rel="stylesheet" />
+        <link href="https://css.gg/close.css" rel="stylesheet"></link>
       </Head>
       <Component {...pageProps} />
     </>
