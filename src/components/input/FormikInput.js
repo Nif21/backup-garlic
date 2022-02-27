@@ -3,390 +3,131 @@ import { useFormik, Formik } from "formik";
 import CustomSelect from "./CustomSelect";
 import * as Yup from "yup";
 
-async function fetchData() {
-  // const response = await fetch(
-  //   "http://4a9e-61-94-101-17.ngrok.io/v1/syaratTumbuh"
-  // );
-  // const data = await response.json();
-  return {};
-}
-
 const FormikInput = () => {
-  useEffect(() => {
-    fetchData().then((response) => {
-      let data = [];
-      data = response.map(
-        ({ Variabel, IntervalAtas, IntervalBawah, Kelas }) => ({
-          value: Variabel,
-          intervalAtas: IntervalAtas,
-          intervalBawah: IntervalBawah,
-          label: Variabel,
-          kelas: kelasMapping(Kelas),
-        })
-      );
-      setDrainaseOptions(data);
-    });
-  });
   const [drainaseOptions, setDrainaseOptions] = useState([]);
+  const [teksturTanahOptions, setTeksturTanahOptions] = useState([]);
+  const [kapasitasTukarKationOptions, setKapasitasTukarKationOptions] =
+    useState([]);
+  const [kedalamanMineralTanahOptions, setKedalamanMineralTanahOptions] =
+    useState([]);
+  const [kejenuhanBasaOptions, setKejenuhanBasaOptions] = useState([]);
+  const [kemasamanTanahOptions, setKemasamanTanahOptions] = useState([]);
 
-  function kelasMapping(kelas) {
-    let result = "";
-    switch (kelas) {
-      case 1:
-        result = "S1";
-      case 2:
-        result = "S2";
-      case 3:
-        result = "S3";
-      default:
-        result = "N";
-    }
-    return result;
-  }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  function drainasePopulate(drainase) {
-    let result = "";
-    switch (drainase) {
-      case "Baik":
-        result = "S1";
-        break;
-      case "Agak Terhambat":
-        result = "S1";
-        break;
-      case "Agak Cepat":
-        result = "S2";
-        break;
-      case "Sedang":
-        result = "S2";
-        break;
-      case "Terhambat":
-        result = "S3";
-        break;
-      case "Sangat Terhambat":
-        result = "N";
-        break;
-      case "Cepat":
-        result = "N";
-        break;
-    }
-    return result;
-  }
+  async function fetchData() {
+    const response = await fetch(
+      "https://garlic-backend.herokuapp.com/syaratTumbuh"
+    );
+    const data = await response.json();
+    const drainase = [];
+    data.drainase.map((d) => {
+      drainase.push({
+        label: d.jenis,
+        value: d.jenis,
+        rekomendasi: d.rekomendasi,
+        kelas: d.kelas,
+      });
+    });
+    setDrainaseOptions(drainase);
+    const teksturTanah = [];
+    data.teksturTanah.map((d) => {
+      teksturTanah.push({
+        label: d.jenis,
+        value: d.jenis,
+        rekomendasi: d.rekomendasi,
+        kelas: d.kelas,
+      });
+    });
+    setTeksturTanahOptions(teksturTanah);
 
-  const teksturTanahOptions = [
-    { value: "Halus", label: "Halus" },
-    { value: "Agak Halus", label: "Agak Halus" },
-    { value: "Sedang", label: "Sedang" },
-    { value: "Agak Kasar", label: "Agak Kasar" },
-    { value: "Kasar", label: "Kasar" },
-  ];
+    const kapasitasTukarKation = [];
+    data.kapasitasTukarKation.map((d) => {
+      kapasitasTukarKation.push({
+        label: d.jenis,
+        value: d.jenis,
+        rekomendasi: d.rekomendasi,
+        kelas: d.kelas,
+      });
+    });
+    setKapasitasTukarKationOptions(kapasitasTukarKation);
 
-  function teksturTanahPopulate(tekstur) {
-    let result = "";
-    switch (tekstur) {
-      case "Halus":
-        result = "S1";
-        break;
-      case "Agak Halus":
-        result = "S1";
-        break;
-      case "Sedang":
-        result = "S1";
-        break;
-      case "Agak Kasar":
-        result = "S2";
-        break;
-      case "Kasar":
-        result = "S3";
-        break;
-    }
-    return result;
-  }
+    const kedalamanMineralTanah = [];
+    data.kedalamanMineralTanah.map((d) => {
+      kedalamanMineralTanah.push({
+        label: d.jenis,
+        value: d.jenis,
+        rekomendasi: d.rekomendasi,
+        kelas: d.kelas,
+      });
+    });
+    setKedalamanMineralTanahOptions(kedalamanMineralTanah);
 
-  const ktkOptions = [
-    { value: "Tinggi", label: "Tinggi" },
-    { value: "Sedang", label: "Sedang" },
-    { value: "Rendah", label: "Rendah" },
-    { value: "Sangat Rendah", label: "Sangat Rendah" },
-  ];
+    const kejenuhanBasa = [];
+    data.kejenuhanBasa.map((d) => {
+      kejenuhanBasa.push({
+        label: d.jenis,
+        value: d.jenis,
+        rekomendasi: d.rekomendasi,
+        kelas: d.kelas,
+      });
+    });
+    setKejenuhanBasaOptions(kejenuhanBasa);
 
-  function ktkPopulate(ktk) {
-    let result = "";
-    switch (ktk) {
-      case "Tinggi":
-        result = "S1";
-        break;
-      case "Sedang":
-        result = "S1";
-        break;
-      case "Rendah":
-        result = "S2";
-        break;
-      case "Sangat Rendah":
-        result = "S3";
-        break;
-    }
-    return result;
-  }
-
-  const kemasamanOptions = [
-    { value: "Agak Masam", label: "Agak Masam" },
-    { value: "Masam", label: "Masam" },
-    { value: "Netral", label: "Netral" },
-    { value: "Sangat Masam", label: "Sangat Masam" },
-  ];
-
-  function kemasamanPopulate(kemasaman) {
-    let result = "";
-    switch (kemasaman) {
-      case "Agak Masam":
-        result = "S1";
-        break;
-      case "Masam":
-        result = "S2";
-        break;
-      case "Sangat Masam":
-        result = "S3";
-        break;
-      case "Netral":
-        result = "S2";
-        break;
-    }
-    return result;
-  }
-
-  const kedalamanOptions = [
-    { value: "Sangat Dalam", label: "Sangat Dalam" },
-    { value: "Dalam", label: "Dalam" },
-    { value: "Sedang", label: "Sedang" },
-    { value: "Dangkal", label: "Dangkal" },
-    { value: "Sangat Dangkal", label: "Sangat Dangkal" },
-    { value: "Batuan", label: "Batuan" },
-  ];
-
-  function kedalamanPopulate(kedalaman) {
-    let result = "";
-    switch (kedalaman) {
-      case "Sangat Dalam":
-        result = "S1";
-        break;
-      case "Dalam":
-        result = "S1";
-        break;
-      case "Sedang":
-        result = "S1";
-        break;
-      case "Dangkal":
-        result = "S2";
-        break;
-      case "Sangat Dangkal":
-        result = "S3";
-        break;
-      case "Batuan":
-        result = "N";
-        break;
-    }
-    return result;
-  }
-
-  const kejenuhanOptions = [
-    { value: "Sangat Tinggi", label: "Sangat Tinggi" },
-    { value: "Tinggi", label: "Tinggi" },
-    { value: "Sedang", label: "Sedang" },
-    { value: "Rendah", label: "Rendah" },
-    { value: "Sangat Rendah", label: "Sangat Rendah" },
-  ];
-
-  function kejenuhanPopulate(kejenuhan) {
-    let result = "";
-    switch (kejenuhan) {
-      case "Sangat Tinggi":
-        result = "S1";
-        break;
-      case "Tinggi":
-        result = "S1";
-        break;
-      case "Sedang":
-        result = "S2";
-        break;
-      case "Rendah":
-        result = "S3";
-        break;
-      case "Sangat Rendah":
-        result = "S3";
-        break;
-    }
-    return result;
-  }
-
-  const curahHujanOptions = [
-    { value: "Tinggi", label: "Tinggi" },
-    { value: "Agak Tinggi", label: "Agak Tinggi" },
-    { value: "Agak Rendah", label: "Agak Rendah" },
-    { value: "Rendah", label: "Rendah" },
-  ];
-
-  function curahHujanPopulate(curahHujan) {
-    let result = "";
-    switch (curahHujan) {
-      case "Tinggi":
-        result = "S1";
-        break;
-      case "Agak Tinggi":
-        result = "S2";
-        break;
-      case "Agak Rendah":
-        result = "S3";
-        break;
-      case "Rendah":
-        result = "N";
-        break;
-    }
-    return result;
-  }
-
-  const lamaSinarOptions = [
-    { value: "Sangat Tinggi", label: "Sangat Tinggi" },
-    { value: "Tinggi", label: "Tinggi" },
-    { value: "Sedang", label: "Sedang" },
-    { value: "Agak Rendah", label: "Agak Rendah" },
-    { value: "Rendah", label: "Rendah" },
-  ];
-
-  function lamaSinarPopulate(lamaSinar) {
-    let result = "";
-    switch (lamaSinar) {
-      case "Sangat Tinggi":
-        result = "S1";
-        break;
-      case "Tinggi":
-        result = "S1";
-        break;
-      case "Sedang":
-        result = "S2";
-        break;
-      case "Agak Rendah":
-        result = "S3";
-        break;
-      case "Rendah":
-        result = "N";
-        break;
-    }
-    return result;
-  }
-
-  const elevasiOptions = [
-    { value: "Sangat Tinggi", label: "Sangat Tinggi" },
-    { value: "Tinggi", label: "Tinggi" },
-    { value: "Agak Tinggi", label: "Agak Tinggi" },
-    { value: "Agak Rendah", label: "Agak Rendah" },
-    { value: "Rendah", label: "Rendah" },
-  ];
-
-  function elevasiPopulate(elevasi) {
-    let result = "";
-    switch (elevasi) {
-      case "Sangat Tinggi":
-        result = "S1";
-        break;
-      case "Tinggi":
-        result = "S1";
-        break;
-      case "Agak Tinggi":
-        result = "S2";
-        break;
-      case "Agak Rendah":
-        result = "S3";
-        break;
-      case "Rendah":
-        result = "N";
-        break;
-    }
-    return result;
-  }
-
-  const reliefOptions = [
-    { value: "Datar", label: "Datar" },
-    { value: "Agak Datar", label: "Agak Datar" },
-    { value: "Agak Landai", label: "Agak Landai" },
-    { value: "Landai", label: "Landai" },
-    { value: "Agak Curam", label: "Agak Curam" },
-    { value: "Curam ", label: "Curam" },
-    { value: "Sangat Curam", label: "Sangat Curam" },
-  ];
-
-  function reliefPopulate(relief) {
-    let result = "";
-    switch (relief) {
-      case "Datar":
-        result = "S1";
-        break;
-      case "Agak Datar":
-        result = "S1";
-        break;
-      case "Agak Landai":
-        result = "S1";
-        break;
-      case "Landai":
-        result = "S1";
-        break;
-      case "Agak Curam":
-        result = "S2";
-        break;
-      case "Curam":
-        result = "S3";
-        break;
-      case "Sangat Curam":
-        result = "N";
-        break;
-    }
-    return result;
+    const kemasamanTanah = [];
+    data.kemasamanTanah.map((d) => {
+      kemasamanTanah.push({
+        label: d.jenis,
+        value: d.jenis,
+        rekomendasi: d.rekomendasi,
+        kelas: d.kelas,
+      });
+    });
+    setKemasamanTanahOptions(kemasamanTanah);
   }
 
   const formik = useFormik({
     initialValues: {
-      faktorYangDikendalikan: "",
       drainase: "",
       mediaPerakaran: "",
       teksturTanah: "",
       retensi: "",
-      ktk: "",
-      kemasaman: "",
-      faktorYangDikoreksi: "",
-      kedalaman: "",
-      kejenuhan: "",
-      faktorTidakDapat: "",
-      cuaca: "",
-      curahHujan: "",
-      lamaSinar: "",
-      faktorRelief: "",
-      evelasi: "",
-      relief: "",
+      kapasitasTukarKation: "",
+      kemasamanTanah: "",
+      kedalamanMineralTanah: "",
+      kejenuhanBasa: "",
+      // faktorTidakDapat: "",
+      // cuaca: "",
+      // curahHujan: "",
+      // lamaSinar: "",
+      // faktorRelief: "",
+      // evelasi: "",
+      // relief: "",
     },
 
     onSubmit: (values) => {
-      let empty = false;
+      let empty = true;
       for (const v in values) {
-        if (values[v] == "") empty = true;
+        if (values[v] != "") empty = false;
       }
-
+      console.log(values);
       let result = {
-        faktorYangDikendalikan: values.faktorYangDikendalikan,
-        drainase: drainasePopulate(values.drainase),
+        drainase: values.drainase,
         mediaPerakaran: values.mediaPerakaran,
-        teksturTanah: teksturTanahPopulate(values.teksturTanah),
+        teksturTanah: values.teksturTanah,
         retensi: values.retensi,
-        ktk: ktkPopulate(values.ktk),
-        kemasaman: kemasamanPopulate(values.kemasaman),
-        faktorYangDikoreksi: values.faktorYangDikoreksi,
-        kedalaman: kedalamanPopulate(values.kedalaman),
-        kejenuhan: kejenuhanPopulate(values.kejenuhan),
-        faktorTidakDapat: values.faktorTidakDapat,
-        cuaca: values.cuaca,
-        curahHujan: curahHujanPopulate(values.curahHujan),
-        lamaSinar: lamaSinarPopulate(values.lamaSinar),
-        faktorRelief: values.faktorRelief,
-        evelasi: elevasiPopulate(values.evelasi),
-        relief: reliefPopulate(values.relief),
+        kapasitasTukarKation: values.kapasitasTukarKation,
+        kemasamanTanah: values.kemasamanTanah,
+        kedalamanMineralTanah: values.kedalamanMineralTanah,
+        kejenuhanBasa: values.kejenuhanBasa,
+        // cuaca: values.cuaca,
+        // curahHujan: curahHujanPopulate(values.curahHujan),
+        // lamaSinar: lamaSinarPopulate(values.lamaSinar),
+        // faktorRelief: values.faktorRelief,
+        // evelasi: elevasiPopulate(values.evelasi),
+        // relief: reliefPopulate(values.relief),
       };
 
       if (!empty) {
@@ -401,93 +142,6 @@ const FormikInput = () => {
     },
   });
 
-  function checkFaktorDikendalikan(drainase, media, retensi) {
-    let result = "";
-    if (drainase != "" && media != "" && retensi != "") {
-      if (drainase == "N" || media == "N" || retensi == "N") result = "N";
-      else if (drainase == "S3" || media == "S3" || retensi == "S3")
-        result = "S3";
-      else if (drainase == "S2" || media == "S2" || retensi == "S2")
-        result = "S2";
-      else result = "S1";
-    }
-    formik.values.faktorYangDikendalikan = result;
-    return result;
-  }
-
-  function checkMedia(tekstur) {
-    let result = "";
-    if (tekstur != "") {
-      if (tekstur == "S3") result = "S3";
-      else if (tekstur == "S2") result = "S2";
-      else if (tekstur == "N") result = "N";
-      else result = "S1";
-    }
-    formik.values.mediaPerakaran = result;
-    return result;
-  }
-
-  function checkRetensi(ktk, kemasaman) {
-    let result = "";
-    if (ktk != "" && kemasaman != "") {
-      if (ktk == "S3" || kemasaman == "S3") result = "S3";
-      else if (ktk == "S2" || kemasaman == "S2") result = "S2";
-      else if (ktk == "N" || kemasaman == "N") result = "N";
-      else result = "S1";
-    }
-    formik.values.retensi = result;
-
-    return result;
-  }
-
-  function checkFaktorDikoreksi(kedalaman, kejenuhan) {
-    var result = "";
-    if (kedalaman != "" && kejenuhan != "") {
-      if (kedalaman == "N" || kejenuhan == "N") result = "N";
-      else if (kedalaman == "S3" || kejenuhan == "S3") result = "S3";
-      else if (kedalaman == "S2" || kejenuhan == "S2") result = "S2";
-      else result = "S1";
-    }
-    formik.values.faktorYangDikoreksi = result;
-    return result;
-  }
-
-  function checkCuaca(curahHujan, lamaSinar) {
-    let result = "";
-    if (curahHujan != "" && lamaSinar != "") {
-      if (curahHujan == "S3" || lamaSinar == "S3") result = "S3";
-      else if (curahHujan == "S2" || lamaSinar == "S2") result = "S2";
-      else if (curahHujan == "N" || lamaSinar == "N") result = "N";
-      else result = "S1";
-    }
-    formik.values.cuaca = result;
-    return result;
-  }
-
-  function checkAllRelief(elevasi, relief) {
-    let result = "";
-    if (elevasi != "" && relief != "") {
-      if (elevasi == "S3" || relief == "S3") result = "S3";
-      else if (elevasi == "S2" || relief == "S2") result = "S2";
-      else if (elevasi == "N" || relief == "N") result = "N";
-      else result = "S1";
-    }
-    formik.values.faktorRelief = result;
-    return result;
-  }
-
-  function checkFaktorTidakDapat(cuaca, relief) {
-    let result = "";
-    if (cuaca != "" && relief != "") {
-      if (cuaca == "N" || relief == "N") result = "N";
-      else if (cuaca == "S3" || relief == "S3") result = "S3";
-      else if (cuaca == "S2" || relief == "S2") result = "S2";
-      else result = "S1";
-    }
-    formik.values.faktorTidakDapat = result;
-    return result;
-  }
-
   return (
     <div className="px-4 py-5  sm:p-6">
       <form onSubmit={formik.handleSubmit}>
@@ -495,13 +149,6 @@ const FormikInput = () => {
         <>
           <div className="col-span-full flex space-x-4 text-lg">
             <b>Faktor yang dapat dikendalikan</b>
-            <b>
-              {checkFaktorDikendalikan(
-                drainasePopulate(formik.values.drainase),
-                formik.values.mediaPerakaran,
-                formik.values.retensi
-              )}
-            </b>
           </div>
           <div className="col-span-6 sm:col-span-3 mb-8">
             <label
@@ -509,13 +156,12 @@ const FormikInput = () => {
               className="block text-base font-medium text-gray-700 space-x-4"
             >
               <b>Drainase</b>
-              <b>{drainasePopulate(formik.values.drainase)}</b>
             </label>
 
             <CustomSelect
-              onChange={(value) =>
-                formik.setFieldValue("drainase", value.value)
-              }
+              onChange={(value) => {
+                formik.setFieldValue("drainase", value.value);
+              }}
               value={formik.values.drainase}
               options={drainaseOptions}
             />
@@ -526,9 +172,6 @@ const FormikInput = () => {
               className="block text-base font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Media Perakaran</b>
-              <b>
-                {checkMedia(teksturTanahPopulate(formik.values.teksturTanah))}
-              </b>
             </label>
           </div>
           <div className="col-span-6 sm:col-span-3 my-2">
@@ -537,7 +180,6 @@ const FormikInput = () => {
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Tekstur Tanah</b>
-              <b>{teksturTanahPopulate(formik.values.teksturTanah)}</b>
             </label>
             <CustomSelect
               onChange={(value) =>
@@ -553,26 +195,21 @@ const FormikInput = () => {
               className="block text-base font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Retensi Hara</b>
-              <b>
-                {checkRetensi(
-                  ktkPopulate(formik.values.ktk),
-                  kemasamanPopulate(formik.values.kemasaman)
-                )}
-              </b>
             </label>
           </div>
           <div className="col-span-6 sm:col-span-3 my-2">
             <label
-              htmlFor="ktk"
+              htmlFor="kapasitasTukarKation"
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Kapasitas Tukar Kation</b>
-              <b>{ktkPopulate(formik.values.ktk)}</b>
             </label>
             <CustomSelect
-              onChange={(value) => formik.setFieldValue("ktk", value.value)}
-              value={formik.values.ktk}
-              options={ktkOptions}
+              onChange={(value) =>
+                formik.setFieldValue("kapasitasTukarKation", value.value)
+              }
+              value={formik.values.kapasitasTukarKation}
+              options={kapasitasTukarKationOptions}
             />
           </div>
           <div className="col-span-6 sm:col-span-3 my-2">
@@ -581,14 +218,13 @@ const FormikInput = () => {
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Kemasaman Tanah</b>
-              <b>{kemasamanPopulate(formik.values.kemasaman)}</b>
             </label>
             <CustomSelect
               onChange={(value) =>
-                formik.setFieldValue("kemasaman", value.value)
+                formik.setFieldValue("kemasamanTanah", value.value)
               }
-              value={formik.values.kemasaman}
-              options={kemasamanOptions}
+              value={formik.values.kemasamanTanah}
+              options={kemasamanTanahOptions}
             />
           </div>
         </>
@@ -596,57 +232,43 @@ const FormikInput = () => {
         <>
           <div className="col-span-full flex space-x-4 text-lg mt-8">
             <b>Faktor yang dapat dikoreksi</b>
-            <b>
-              {checkFaktorDikoreksi(
-                kedalamanPopulate(formik.values.kedalaman),
-                kejenuhanPopulate(formik.values.kejenuhan)
-              )}
-            </b>
           </div>
           <div className="col-span-6 sm:col-span-3 my-2">
             <label
-              htmlFor="kedalaman"
+              htmlFor="kedalamanMineralTanah"
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Kedalaman Mineral Tanah</b>
-              <b>{kedalamanPopulate(formik.values.kedalaman)}</b>
             </label>
             <CustomSelect
               onChange={(value) =>
-                formik.setFieldValue("kedalaman", value.value)
+                formik.setFieldValue("kedalamanMineralTanah", value.value)
               }
-              value={formik.values.kedalaman}
-              options={kedalamanOptions}
+              value={formik.values.kedalamanMineralTanah}
+              options={kedalamanMineralTanahOptions}
             />
           </div>
           <div className="col-span-6 sm:col-span-3 my-2">
             <label
-              htmlFor="kejenuhan"
+              htmlFor="kejenuhanBasa"
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Kejenuhan Basa</b>
-              <b>{kejenuhanPopulate(formik.values.kejenuhan)}</b>
             </label>
             <CustomSelect
               onChange={(value) =>
-                formik.setFieldValue("kejenuhan", value.value)
+                formik.setFieldValue("kejenuhanBasa", value.value)
               }
-              value={formik.values.kejenuhan}
-              options={kejenuhanOptions}
+              value={formik.values.kejenuhanBasa}
+              options={kejenuhanBasaOptions}
             />
           </div>
         </>
         {/* Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <div className="col-span-full flex space-x-4 text-lg mt-8">
             <b>
               Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi
-            </b>
-            <b>
-              {checkFaktorTidakDapat(
-                formik.values.cuaca,
-                formik.values.faktorRelief
-              )}
             </b>
           </div>
           <div className="col-span-6 sm:col-span-3 ">
@@ -655,12 +277,6 @@ const FormikInput = () => {
               className="block text-base font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Cuaca</b>
-              <b>
-                {checkCuaca(
-                  curahHujanPopulate(formik.values.curahHujan),
-                  lamaSinarPopulate(formik.values.lamaSinar)
-                )}
-              </b>
             </label>
           </div>
           <div className="col-span-6 sm:col-span-3 my-2">
@@ -669,7 +285,6 @@ const FormikInput = () => {
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Curah Hujan</b>
-              <b>{curahHujanPopulate(formik.values.curahHujan)}</b>
             </label>
             <CustomSelect
               onChange={(value) =>
@@ -685,7 +300,6 @@ const FormikInput = () => {
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Lama Penyinaran</b>
-              <b>{lamaSinarPopulate(formik.values.lamaSinar)}</b>
             </label>
             <CustomSelect
               onChange={(value) =>
@@ -701,12 +315,6 @@ const FormikInput = () => {
               className="block text-base font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Faktor Relief</b>
-              <b>
-                {checkAllRelief(
-                  elevasiPopulate(formik.values.evelasi),
-                  reliefPopulate(formik.values.relief)
-                )}
-              </b>
             </label>
           </div>
           <div className="col-span-6 sm:col-span-3 my-2">
@@ -715,7 +323,6 @@ const FormikInput = () => {
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Elevasi</b>
-              <b>{elevasiPopulate(formik.values.evelasi)}</b>
             </label>
             <CustomSelect
               onChange={(value) => formik.setFieldValue("evelasi", value.value)}
@@ -729,7 +336,6 @@ const FormikInput = () => {
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
               <b>Relief</b>
-              <b>{reliefPopulate(formik.values.relief)}</b>
             </label>
             <CustomSelect
               onChange={(value) => formik.setFieldValue("relief", value.value)}
@@ -737,7 +343,7 @@ const FormikInput = () => {
               options={reliefOptions}
             />
           </div>
-        </div>
+        </div> */}
         <div className="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
           <button
             type="submit"
