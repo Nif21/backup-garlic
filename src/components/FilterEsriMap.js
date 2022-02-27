@@ -121,6 +121,7 @@ function FilterEsriMap() {
           .getElementById("filter-radio-button")
           .addEventListener("calciteRadioButtonGroupChange", (e) => {
             map.removeAll();
+            view.popup.close();
             getNormalMap(map, spt, e.detail);
           });
 
@@ -775,6 +776,7 @@ const getNormalMap = (map, spt, filter) => {
     let polygon;
     const graphicsNormal = dt.map((v) => {
       v.dataKelas = v.kelas == undefined ? "-" : kelasFaktor(v.kelas, v.kelas);
+      v.filter = filter;
       polygon = {
         type: "polygon",
         rings: v.geom.coordinates[0][0],
@@ -858,6 +860,11 @@ const getNormalMap = (map, spt, filter) => {
           type: "string",
         },
         {
+          name: "filter",
+          alias: "filter",
+          type: "string",
+        },
+        {
           name: "rekomendasi",
           alias: "rekomendasi",
           type: "string",
@@ -882,7 +889,8 @@ const getNormalMap = (map, spt, filter) => {
       popupTemplate: {
         title: "No SPT : {spt} (Proporsi {proporsi} )",
         content:
-          "<h1><b>Kelas:</b> {dataKelas}</h1>" +
+          "<h1><b>Filter:</b> {filter}</h1>" +
+          "<br><b>Kelas:</b> {dataKelas}" +
           "<br><b>Jenis : </b> {jenis}" +
           "<br><b>Rekomendasi: </b> {rekomendasi}",
       },
