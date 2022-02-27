@@ -465,8 +465,8 @@ const getNormalMap = (map, spt) => {
         type: "string",
       },
       {
-        name: "kedalamanmineraltanah",
-        alias: "kedalamanmineraltanah",
+        name: "KelasKedalamanMineralTanah",
+        alias: "KelasKedalamanMineralTanah",
         type: "string",
       },
       {
@@ -475,23 +475,23 @@ const getNormalMap = (map, spt) => {
         type: "string",
       },
       {
-        name: "teksturtanah",
-        alias: "teksturtanah",
+        name: "KelasTeksturTanah",
+        alias: "KelasTeksturTanah",
         type: "string",
       },
       {
-        name: "kemasamantanah",
-        alias: "kemasamantanah",
+        name: "KelasKemasamanTanah",
+        alias: "KelasKemasamanTanah",
         type: "string",
       },
       {
-        name: "kapasitastukarkation",
-        alias: "kapasitastukarkation",
+        name: "KelasKapasitasTukarKation",
+        alias: "KelasKapasitasTukarKation",
         type: "string",
       },
       {
-        name: "kejenuhanbasa",
-        alias: "kejenuhanbasa",
+        name: "KelasKejenuhanBasa",
+        alias: "KelasKejenuhanBasa",
         type: "string",
       },
       {
@@ -542,10 +542,10 @@ const getNormalMap = (map, spt) => {
       content:
         "<br><b>Kedalam Mineral Tanah : </b> {KelasKedalamanMineralTanah}" +
         "<br><b>Drainase: </b> {KelasDrainase}" +
-        "<br><b>Tekstur Tanah:</b> {teksturtanah}" +
-        "<br><b>Kemasaman Tanah: </b> {kemasamantanah}" +
-        "<br><b>Kapasitas Tukar Kation: </b> {kapasitastukarkation}" +
-        "<br><b>Kejenuhan Basa: </b> {kejenuhanbasa}" +
+        "<br><b>Tekstur Tanah:</b> {KelasTeksturTanah}" +
+        "<br><b>Kemasaman Tanah: </b> {KelasKemasamanTanah}" +
+        "<br><b>Kapasitas Tukar Kation: </b> {KelasKapasitasTukarKation}" +
+        "<br><b>Kejenuhan Basa: </b> {KelasKejenuhanBasa}" +
         "<br><b>Land Form: </b> {landform}" +
         "<br><b>Bahan Induk: </b> {bahaninduk}" +
         "<br><b>Relief: </b> {relief}" +
