@@ -16,7 +16,7 @@ function EsriMap() {
   const [isLoading, setIsLoading] = useState(false);
   const [showListMap, setShowListMap] = useState(false);
   const [selectedMap, setSelectedMap] = useState("");
-  
+
   useEffect(() => {
     if (spt.length == 0) requestSpt();
   }, []);
@@ -110,20 +110,20 @@ function EsriMap() {
 
         const dataDaerahPlace = document.getElementById("data-daerah-place");
         if (spt.length > 0) {
-          spt[0].longlat = [110.21382, -7.476283];
-          spt[1].longlat = [116.651761, -8.432406];
           spt.map((s) => {
+            //console.log(s);
             document
-              .getElementById(`data-daerah-${s.name}`)
+              .getElementById(`data-daerah-${s["kabupaten/kota"]}`)
               .addEventListener("click", async () => {
-                setSelectedMap(s.name);
+                setSelectedMap(s["kabupaten/kota"]);
                 document.getElementById(
-                  `data-daerah-${s.name}`
+                  `data-daerah-${s["kabupaten/kota"]}`
                 ).style.backgroundColor = "#3e7c17";
-                document.getElementById(`data-daerah-${s.name}`).style.color =
-                  "#ffffff";
+                document.getElementById(
+                  `data-daerah-${s["kabupaten/kota"]}`
+                ).style.color = "#ffffff";
                 view.goTo({
-                  center: s.longlat,
+                  center: s.lokasi.geometry.coordinates,
                   zoom: 9,
                 });
               });
@@ -144,12 +144,13 @@ function EsriMap() {
     if (!isLoading) {
       if (spt.length > 0) {
         spt.map((s) => {
-          if (!(s.name === selectedMap)) {
+          if (!(s["kabupaten/kota"] === selectedMap)) {
             document.getElementById(
-              `data-daerah-${s.name}`
+              `data-daerah-${s["kabupaten/kota"]}`
             ).style.backgroundColor = "#ffffff";
-            document.getElementById(`data-daerah-${s.name}`).style.color =
-              "#000000";
+            document.getElementById(
+              `data-daerah-${s["kabupaten/kota"]}`
+            ).style.color = "#000000";
           }
         });
       }
@@ -158,7 +159,7 @@ function EsriMap() {
 
   async function requestSpt() {
     setIsLoading(true);
-    const data = await fetch("https://garlic-backend.herokuapp.com/v1");
+    const data = await fetch("https://garlic-backend.herokuapp.com");
     const dataJSON = await data.json();
     setSpt(dataJSON);
     setIsLoading(false);
@@ -191,11 +192,11 @@ function EsriMap() {
                 <div>
                   {spt.map((s) => (
                     <button
-                      id={`data-daerah-${s.name}`}
+                      id={`data-daerah-${s["kabupaten/kota"]}`}
                       className={styles.buttonSubmit}
-                      key={s.name}
+                      key={s["kabupaten/kota"]}
                     >
-                      {s.name}
+                      Daerah {s["kabupaten/kota"]}
                     </button>
                   ))}
                 </div>
@@ -229,14 +230,130 @@ function kelasFaktor(a, b) {
 const getNormalMap = (map, spt) => {
   const dt = [];
   for (let s in spt) {
-    spt[s].data.map((d) => dt.push(d));
+    spt[s].data.map((d) => {
+      //     console.log(d);
+      if (d.karakteristikTanah.length > 0) {
+        d.karakteristikTanah.map((k) => {
+          const karakteristik = d;
+          karakteristik.klasifikasiTanah = k.klasifikasiTanah;
+          karakteristik.jenisTanah = k.jenisTanah;
+          karakteristik.landform = k.landform;
+          karakteristik.bahanInduk = k.bahanInduk;
+          karakteristik.luas = k.luas;
+          karakteristik.persentaseLuas = k.persentaseLuas;
+          karakteristik.proporsi = k.proporsi.id;
+          karakteristik.KelasKedalamanMineralTanah =
+            k.KelasKedalamanMineralTanah == null
+              ? "-"
+              : k.KelasKedalamanMineralTanah.jenis;
+          karakteristik.KelasDrainase =
+            k.KelasDrainase == null ? "-" : k.KelasDrainase.jenis;
+          karakteristik.KelasTeksturTanah =
+            k.KelasTeksturTanah == null ? "-" : k.KelasTeksturTanah.jenis;
+          karakteristik.KelasKemasamanTanah =
+            k.KelasKemasamanTanah == null ? "-" : k.KelasKemasamanTanah.jenis;
+          karakteristik.KelasKapasitasTukarKation =
+            k.KelasKapasitasTukarKation == null
+              ? "-"
+              : k.KelasKapasitasTukarKation.jenis;
+          karakteristik.KelasKejenuhanBasa =
+            k.KelasKejenuhanBasa == null ? "-" : k.KelasKejenuhanBasa.jenis;
+          karakteristik.KelasRelief =
+            k.KelasRelief == null ? "-" : k.KelasRelief.jenis;
+          karakteristik.KelasFaktorCuaca =
+            k.KelasFaktorCuaca == null ? "-" : k.KelasFaktorCuaca.jenis;
+          karakteristik.KelasFaktorRelief =
+            k.KelasFaktorRelief == null ? "-" : k.KelasFaktorRelief.jenis;
+          karakteristik.KelasFaktorYangDapatDikendalikan =
+            k.KelasFaktorYangDapatDikendalikan == null
+              ? "-"
+              : k.KelasFaktorYangDapatDikendalikan.jenis;
+          karakteristik.KelasFaktorYangEfeknyaDapatDikoreksi =
+            k.KelasFaktorYangEfeknyaDapatDikoreksi == null
+              ? "-"
+              : k.KelasFaktorYangEfeknyaDapatDikoreksi.jenis;
+          dt.push(karakteristik);
+        });
+      } else {
+        const karakteristik = d;
+        karakteristik.klasifikasiTanah = d.karakteristikTanah.klasifikasiTanah;
+        karakteristik.jenisTanah = d.karakteristikTanah.jenisTanah;
+        karakteristik.landform = d.karakteristikTanah.landform;
+        karakteristik.bahanInduk = d.karakteristikTanah.bahanInduk;
+        karakteristik.luas = d.karakteristikTanah.luas;
+        karakteristik.persentaseLuas = d.karakteristikTanah.persentaseLuas;
+        karakteristik.proporsi = d.karakteristikTanah.proporsi.id;
+        karakteristik.KelasKedalamanMineralTanah =
+          d.karakteristikTanah.KelasKedalamanMineralTanah == null
+            ? "-"
+            : d.karakteristikTanah.KelasKedalamanMineralTanah.jenis;
+        karakteristik.KelasDrainase =
+          d.karakteristikTanah.KelasDrainase == null
+            ? "-"
+            : d.karakteristikTanah.KelasDrainase.jenis;
+        karakteristik.KelasTeksturTanah =
+          d.karakteristikTanah.KelasTeksturTanah == null
+            ? "-"
+            : d.karakteristikTanah.KelasTeksturTanah.jenis;
+        karakteristik.KelasKemasamanTanah =
+          d.karakteristikTanah.KelasKemasamanTanah == null
+            ? "-"
+            : d.karakteristikTanah.KelasKemasamanTanah.jenis;
+        karakteristik.KelasKapasitasTukarKation =
+          d.karakteristikTanah.KelasKapasitasTukarKation == null
+            ? "-"
+            : d.karakteristikTanah.KelasKapasitasTukarKation.jenis;
+        karakteristik.KelasKejenuhanBasa =
+          d.karakteristikTanah.KelasKejenuhanBasa == null
+            ? "-"
+            : d.karakteristikTanah.KelasKejenuhanBasa.jenis;
+        karakteristik.KelasRelief =
+          d.karakteristikTanah.KelasRelief == null
+            ? "-"
+            : d.karakteristikTanah.KelasRelief.jenis;
+        karakteristik.KelasFaktorCuaca =
+          d.karakteristikTanah.KelasFaktorCuaca == null
+            ? "-"
+            : d.karakteristikTanah.KelasFaktorCuaca.jenis;
+        karakteristik.KelasFaktorRelief =
+          d.karakteristikTanah.KelasFaktorRelief == null
+            ? "-"
+            : d.karakteristikTanah.KelasFaktorRelief.jenis;
+        karakteristik.KelasFaktorYangDapatDikendalikan =
+          d.karakteristikTanah.KelasFaktorYangDapatDikendalikan == null
+            ? "-"
+            : d.karakteristikTanah.KelasFaktorYangDapatDikendalikan.jenis;
+        karakteristik.KelasFaktorYangEfeknyaDapatDikoreksi =
+          d.karakteristikTanah.KelasFaktorYangEfeknyaDapatDikoreksi == null
+            ? "-"
+            : d.karakteristikTanah.KelasFaktorYangEfeknyaDapatDikoreksi.jenis;
+        dt.push(karakteristik);
+      }
+      dt.push(d);
+    });
   }
+
   let polygon;
   const graphicsNormal = dt.map((v) => {
-    let kelas = kelasFaktor(
-      v.KelasFaktorYangDapatDikendalikan.Kelas,
-      v.KelasFaktorYangEfeknyaDapatDikoreksi.Kelas
-    );
+    const spt = v.spt;
+    const kelasList = [];
+    v.karakteristikTanah.map((k) => {
+      kelasList.push(
+        kelasFaktor(
+          k.KelasFaktorYangDapatDikendalikan.kelas,
+          k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas
+        )
+      );
+      k.kelas = kelasFaktor(
+        k.KelasFaktorYangDapatDikendalikan.kelas,
+        k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas
+      );
+      k.spt = spt;
+    });
+
+    let kelas = kelasList.reduce((total, k) => {
+      return kelasFaktor(total, k);
+    });
     v.kelas = kelas;
     polygon = {
       type: "polygon",
@@ -249,10 +366,18 @@ const getNormalMap = (map, spt) => {
   });
 
   const graphicsS3 = dt.map((v) => {
-    if (
-      v.KelasFaktorYangDapatDikendalikan.Kelas == 3 ||
-      v.KelasFaktorYangEfeknyaDapatDikoreksi.Kelas == 3
-    ) {
+    const kelasList = [];
+    v.karakteristikTanah.map((k) => {
+      kelasList.push(
+        k.KelasFaktorYangDapatDikendalikan.kelas == 3 ||
+          k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas == 3
+      );
+    });
+
+    let kelas = kelasList.reduce((total, k) => {
+      return total || k;
+    });
+    if (kelas) {
       polygon = {
         type: "polygon",
         rings: v.geom.coordinates[0][0],
@@ -266,10 +391,19 @@ const getNormalMap = (map, spt) => {
   });
 
   const graphicsS2 = dt.map((v) => {
-    if (
-      v.KelasFaktorYangDapatDikendalikan.Kelas < 3 &&
-      v.KelasFaktorYangEfeknyaDapatDikoreksi.Kelas < 3
-    ) {
+    const kelasList = [];
+    v.karakteristikTanah.map((k) => {
+      kelasList.push(
+        k.KelasFaktorYangDapatDikendalikan.kelas < 3 &&
+          k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas < 3
+      );
+    });
+
+    let kelas = kelasList.reduce((total, k) => {
+      return total || k;
+    });
+
+    if (kelas) {
       polygon = {
         type: "polygon",
         rings: v.geom.coordinates[0][0],
@@ -282,10 +416,19 @@ const getNormalMap = (map, spt) => {
   });
 
   const graphicsS1 = dt.map((v) => {
-    if (
-      v.KelasFaktorYangDapatDikendalikan.Kelas < 2 &&
-      v.KelasFaktorYangEfeknyaDapatDikoreksi.Kelas < 2
-    ) {
+    const kelasList = [];
+    v.karakteristikTanah.map((k) => {
+      kelasList.push(
+        k.KelasFaktorYangDapatDikendalikan.kelas < 2 &&
+          k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas < 2
+      );
+    });
+
+    let kelas = kelasList.reduce((total, k) => {
+      return total || k;
+    });
+    //console.log(kelasList);
+    if (kelas) {
       polygon = {
         type: "polygon",
         rings: v.geom.coordinates[0][0],
@@ -298,6 +441,7 @@ const getNormalMap = (map, spt) => {
     });
   });
 
+  // console.log(graphicsNormal);
   const normalLayer = new FeatureLayer({
     fields: [
       {
@@ -326,8 +470,8 @@ const getNormalMap = (map, spt) => {
         type: "string",
       },
       {
-        name: "drainase",
-        alias: "drainase",
+        name: "KelasDrainase",
+        alias: "KelasDrainase",
         type: "string",
       },
       {
@@ -375,6 +519,7 @@ const getNormalMap = (map, spt) => {
         alias: "persentaseluas",
         type: "string",
       },
+      { name: "klasifikasiTanah", alias: "klasifikasiTanah", type: "string" },
     ],
     objectIdField: "ObjectID",
     geometryType: "polygon",
@@ -395,9 +540,8 @@ const getNormalMap = (map, spt) => {
     popupTemplate: {
       title: "No SPT : {spt} (Proporsi {proporsi} )",
       content:
-        "<h1><b>Kelas Faktor Landscape:</b> {kelas}</h1>" +
-        "<br><b>Kedalam Mineral Tanah : </b> {kedalamanmineraltanah}" +
-        "<br><b>Drainase: </b> {drainase}" +
+        "<br><b>Kedalam Mineral Tanah : </b> {KelasKedalamanMineralTanah}" +
+        "<br><b>Drainase: </b> {KelasDrainase}" +
         "<br><b>Tekstur Tanah:</b> {teksturtanah}" +
         "<br><b>Kemasaman Tanah: </b> {kemasamantanah}" +
         "<br><b>Kapasitas Tukar Kation: </b> {kapasitastukarkation}" +
@@ -488,7 +632,6 @@ const getNormalMap = (map, spt) => {
       label: "S3",
     },
   });
-
   map.add(normalLayer);
   map.add(s3Layer);
   map.add(s2Layer);
