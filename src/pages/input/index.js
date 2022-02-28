@@ -8,6 +8,7 @@ import FormikInput from "../../components/input/FormikInput";
 function Index() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -17,9 +18,13 @@ function Index() {
     setActive(!active);
   };
 
+  const showModalParent = (modal) => {
+    setModal(modal);
+  };
+  console.log(modal);
   return (
     <>
-      <div className=" shadow bg-base-200 drawer">
+      <div className=" shadow bg-base-200 drawer ">
         <Head>
           <title>INA Agro-GARLIC</title>
           <link rel="icon" href="/favicon.ico" />
@@ -28,14 +33,16 @@ function Index() {
         <div className="drawer-side flex-none hidden lg:block">
           <NavigationDrawer handleClick={handleClick} />
         </div>
-        <div className="flex flex-col drawer-content  h-screen w-screen bg-primary-dark">
+        <div
+          className={`flex flex-col drawer-content  h-screen w-screen bg-primary-dark`}
+        >
           <HomeHeader active={active} handleClick={handleClick} />
           <div className="container mx-auto my-16 ">
             <div className="md:mt-0 md:col-span-2 flex-grow bg-white mx-40 p-8 rounded">
               <h2 className=" text-center text-3xl font-extrabold text-gray-900">
                 Masukkan Data Syarat Tumbuh Bawang Putih
               </h2>
-              <FormikInput />
+              <FormikInput showModalParent={showModalParent} />
             </div>
           </div>
           <Footer background="bg-white" textColor="text-black" />

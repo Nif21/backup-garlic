@@ -29,10 +29,11 @@ function MyApp({ Component, pageProps }) {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="https://css.gg/display-grid.css" rel="stylesheet" />
         <link href="https://css.gg/close.css" rel="stylesheet"></link>
+        <link href="https://css.gg/play-list-search.css" rel="stylesheet" />
         <link
-          href="https://css.gg/play-list-search.css"
           rel="stylesheet"
-        />{" "}
+          href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/tailwind.css"
+        />
       </Head>
       <Component {...pageProps} />
     </>
