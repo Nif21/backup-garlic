@@ -953,8 +953,7 @@ const FormikInput = () => {
                     </div>
                   </div>
                   <div className="relative p-6 flex-auto">
-                    {console.log(syaratTumbuh.karakteristikTanah.kelasDrainase)}
-                    {syaratTumbuh.karakteristikTanah.kelasDrainase == null ? (
+                    {syaratTumbuh.karakteristikTanah.KelasDrainase == null ? (
                       ""
                     ) : syaratTumbuh.karakteristikTanah.KelasDrainase
                         .rekomendasi == null ? (
@@ -1040,6 +1039,31 @@ const FormikInput = () => {
                       <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
                         {" Pada variabel Relief membutuhkan rekomendasi " +
                           syaratTumbuh.karakteristikTanah.KelasRelief
+                            .rekomendasi}
+                      </p>
+                    )}
+                    {syaratTumbuh.karakteristikTanah.KelasLamaPenyinaran ==
+                    null ? (
+                      ""
+                    ) : syaratTumbuh.karakteristikTanah.KelasLamaPenyinaran
+                        .rekomendasi == null ? (
+                      ""
+                    ) : (
+                      <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                        {" Pada variabel Lama Penyinaran membutuhkan rekomendasi " +
+                          syaratTumbuh.karakteristikTanah.KelasLamaPenyinaran
+                            .rekomendasi}
+                      </p>
+                    )}
+                    {syaratTumbuh.karakteristikTanah.KelasTemperatur == null ? (
+                      ""
+                    ) : syaratTumbuh.karakteristikTanah.KelasTemperatur
+                        .rekomendasi == null ? (
+                      ""
+                    ) : (
+                      <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                        {" Pada variabel Temperatur membutuhkan rekomendasi " +
+                          syaratTumbuh.karakteristikTanah.KelasTemperatur
                             .rekomendasi}
                       </p>
                     )}
