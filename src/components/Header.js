@@ -18,7 +18,7 @@ export default function Header({ handleClick }) {
           </div>
         </div>
       </div>
-      <div className="flex-grow">
+      {/* <div className="flex-grow">
         <nav className="hidden md:flex pt-5 pr-32">
           <div className="relative  mx-auto space-x-20 ">
             <button
@@ -83,7 +83,7 @@ export default function Header({ handleClick }) {
         <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-8  border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-coco hover:bg-primary-darkcoco">
           Login
         </a>
-      </Link>
+      </Link> */}
     </div>
   );
 }

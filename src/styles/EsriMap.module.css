@@ -46,6 +46,10 @@
   transition: opacity 0.5s ease-in;
 }
 
+.marginTop60 {
+  margin-top: 150px;
+}
+
 .margin10 {
   margin: 10px 0 0 10px;
 }

@@ -8,6 +8,7 @@ import Zoom from "@arcgis/core/widgets/Zoom";
 import styles from "../styles/EsriMap.module.css";
 import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 import Expand from "@arcgis/core/widgets/Expand";
+import Header from "../components/Header";
 
 function FilterEsriMap() {
   const mapDiv = useRef(null);
@@ -178,7 +179,7 @@ function FilterEsriMap() {
 
   async function requestSpt() {
     setIsLoading(true);
-    const data = await fetch("https://garlic-backend.herokuapp.com");
+    const data = await fetch("https://garlic-backend.herokuapp.com/api/v1");
     const dataJSON = await data.json();
     setSpt(dataJSON);
     setIsLoading(false);
@@ -186,7 +187,7 @@ function FilterEsriMap() {
 
   return (
     <div>
-      <div id="data-daerah-place">
+      <div id="data-daerah-place" className={styles.marginTop60}>
         <div id="list-data-daerah" className={styles.listMapBackground}>
           <div className={styles.listMapAlignRight}>
             <button
@@ -348,7 +349,7 @@ const getNormalMap = (map, spt, filter) => {
             karakteristik.bahanInduk = k.bahanInduk;
             karakteristik.luas = k.luas;
             karakteristik.persentaseLuas = k.persentaseLuas;
-            karakteristik.proporsi = k.proporsi.id;
+            karakteristik.proporsi = k.proporsi == null ? "-" : k.proporsi.id;
             karakteristik.KelasKedalamanMineralTanah =
               k.KelasKedalamanMineralTanah == null
                 ? "-"
