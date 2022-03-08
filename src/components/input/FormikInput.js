@@ -38,7 +38,7 @@ const FormikInput = () => {
 
   const fetchProvince = async () => {
     const data = await fetch(
-      "http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
+      "https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
     );
     const json = await data.json();
     setProvince(json);
@@ -46,7 +46,7 @@ const FormikInput = () => {
 
   const fetchKabupaten = async (id) => {
     const data = await fetch(
-      `http://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id}.json`
+      `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id}.json`
     );
     const json = await data.json();
     setKabupaten(json);
