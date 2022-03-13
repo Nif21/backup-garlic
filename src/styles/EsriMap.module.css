@@ -62,6 +62,11 @@
   margin-bottom: 10px 0 0 10px;
 }
 
+.marginBottom10FontSize20 {
+  margin-bottom: 10px 0 0 10px;
+  font-size: 20px;
+}
+
 .listMapAlignRight {
   display: flex;
   justify-content: space-between;

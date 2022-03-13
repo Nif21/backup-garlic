@@ -243,39 +243,60 @@ function FilterEsriMap() {
             </button>
           </div>
           <div className={styles.listMap}>
+            <div className={styles.marginBottom10FontSize24}>
+              Kesesuaian Lahan Bawang Putih
+            </div>
             <label>
-              <div className={styles.marginBottom10}>
-                Pilih variabel untuk di filter.
-              </div>
               <calcite-radio-button-group
                 id="filter-radio-button"
                 name="basic-group"
                 layout="vertical"
               >
                 <calcite-label layout="inline">
+                  <calcite-radio-button value="" checked></calcite-radio-button>
+                  Default
+                </calcite-label>
+                <div className={styles.marginBottom10}>
+                  Kelas Kesesuaian Lahan berdasarkan
+                </div>
+                <div className={styles.marginBottom10}>
+                  <b> Faktor yang dapat dikendalikan:</b>
+                </div>
+                <calcite-label layout="inline">
                   <calcite-radio-button value="KelasDrainase"></calcite-radio-button>
                   Drainase
-                </calcite-label>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasTeksturTanah"></calcite-radio-button>
-                  Tekstur Tanah
-                </calcite-label>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasKedalamanMineralTanah"></calcite-radio-button>
-                  Kedalamanan Mineral Tanah
                 </calcite-label>
                 <calcite-label layout="inline">
                   <calcite-radio-button value="KelasKapasitasTukarKation"></calcite-radio-button>
                   Kapasitas Tukar Kation
                 </calcite-label>
                 <calcite-label layout="inline">
+                  <calcite-radio-button value="KelasTeksturTanah"></calcite-radio-button>
+                  Tekstur Tanah
+                </calcite-label>
+                <calcite-label layout="inline">
                   <calcite-radio-button value="KelasKemasamanTanah"></calcite-radio-button>
                   Kemasaman Tanah
                 </calcite-label>
+                <br />
+                <div className={styles.marginBottom10}>
+                  <b>Faktor yang efeknya dapat dikoreksi:</b>
+                </div>
                 <calcite-label layout="inline">
                   <calcite-radio-button value="KelasKejenuhanBasa"></calcite-radio-button>
                   Kejenuhan Basa
                 </calcite-label>
+                <calcite-label layout="inline">
+                  <calcite-radio-button value="KelasKedalamanMineralTanah"></calcite-radio-button>
+                  Kedalamanan Mineral Tanah
+                </calcite-label>
+                <br />
+                <div className={styles.marginBottom10}>
+                  <b>Faktor yang tidak dapat dikendalikan</b>
+                  <br />
+                  <b>dan dikoreksi yaitu faktor cuaca:</b>
+                </div>
+                <div className={styles.marginBottom10}>1. Faktor cuaca</div>
                 <calcite-label layout="inline">
                   <calcite-radio-button value="KelasTemperatur"></calcite-radio-button>
                   Temperatur
@@ -288,6 +309,8 @@ function FilterEsriMap() {
                   <calcite-radio-button value="KelasLamaPenyinaran"></calcite-radio-button>
                   Lama Penyinaran
                 </calcite-label>
+                <div className={styles.marginBottom10}>2. Faktor relief</div>
+
                 <calcite-label layout="inline">
                   <calcite-radio-button value="KelasElevasi"></calcite-radio-button>
                   Elevasi
@@ -339,7 +362,7 @@ const getNormalMap = (map, spt, filter) => {
     const dt = [];
     for (let s in spt) {
       spt[s].data.map((d) => {
-        //     console.log(d);
+        //console.log(d);
         if (d.karakteristikTanah.length > 0) {
           d.karakteristikTanah.map((k) => {
             const karakteristik = d;
@@ -438,6 +461,7 @@ const getNormalMap = (map, spt, filter) => {
               : d.karakteristikTanah.KelasFaktorYangEfeknyaDapatDikoreksi.jenis;
           dt.push(karakteristik);
         }
+        d.persentaseLuas = d.persentaseLuas.toFixed(2);
         dt.push(d);
       });
     }
@@ -644,7 +668,7 @@ const getNormalMap = (map, spt, filter) => {
             width: 1,
           },
         },
-        label: "N",
+        label: "N: Tidak Sesuai ",
       },
       popupTemplate: {
         title: "No SPT : {spt} (Proporsi {proporsi} )",
@@ -686,7 +710,7 @@ const getNormalMap = (map, spt, filter) => {
             width: 1,
           },
         },
-        label: "S1",
+        label: "S1: Sangat Sesuai",
       },
     });
 
@@ -712,7 +736,7 @@ const getNormalMap = (map, spt, filter) => {
             width: 1,
           },
         },
-        label: "S2",
+        label: "S2: Cukup Sesuai",
       },
     });
 
@@ -738,7 +762,7 @@ const getNormalMap = (map, spt, filter) => {
             width: 1,
           },
         },
-        label: "S3",
+        label: "S3: Sesuai Marginal",
       },
     });
     map.add(normalLayer);

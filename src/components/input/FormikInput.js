@@ -82,8 +82,8 @@ const FormikInput = () => {
     data.kapasitasTukarKation.map((d) => {
       kapasitasTukarKation.push({
         label: `${d.jenis} (${
-          d.intervalBawah == null ? " > " : `${d.intervalBawah}  -`
-        }  ${d.intervalAtas})`,
+          d.intervalBawah == null ? " < " : `${d.intervalBawah}  -`
+        }  ${d.intervalAtas} cmol)`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -96,13 +96,13 @@ const FormikInput = () => {
       kedalamanMineralTanah.push({
         label: `${d.jenis} (${
           d.intervalBawah == null
-            ? " > "
+            ? " < "
             : d.intervalAtas == null
-            ? ` < ${d.intervalBawah}`
+            ? ` > ${d.intervalBawah}`
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        })`,
+        } cm)`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -115,13 +115,13 @@ const FormikInput = () => {
       kejenuhanBasa.push({
         label: `${d.jenis} (${
           d.intervalBawah == null
-            ? " > "
+            ? " < "
             : d.intervalAtas == null
-            ? ` < ${d.intervalBawah}`
+            ? ` > ${d.intervalBawah}`
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        })`,
+        } %)`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -134,13 +134,13 @@ const FormikInput = () => {
       kemasamanTanah.push({
         label: `${d.jenis} (${
           d.intervalBawah == null
-            ? " > "
+            ? " < "
             : d.intervalAtas == null
-            ? ` < ${d.intervalBawah}`
+            ? ` > ${d.intervalBawah}`
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        })`,
+        } pH)`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -153,13 +153,13 @@ const FormikInput = () => {
       relief.push({
         label: `${d.jenis} (${
           d.intervalBawah == null
-            ? " > "
+            ? " < "
             : d.intervalAtas == null
-            ? ` < ${d.intervalBawah}`
+            ? ` > ${d.intervalBawah}`
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        })`,
+        } %)`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -172,13 +172,13 @@ const FormikInput = () => {
       curahHujan.push({
         label: `${d.jenis} (${
           d.intervalBawah == null
-            ? " > "
+            ? " < "
             : d.intervalAtas == null
-            ? ` < ${d.intervalBawah}`
+            ? ` > ${d.intervalBawah}`
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        })`,
+        } mm/bulan)`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -191,13 +191,13 @@ const FormikInput = () => {
       lamaPenyinaran.push({
         label: `${d.jenis} (${
           d.intervalBawah == null
-            ? " > "
+            ? " < "
             : d.intervalAtas == null
-            ? ` < ${d.intervalBawah}`
+            ? ` > ${d.intervalBawah}`
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        })`,
+        } jam/hari)`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -210,13 +210,13 @@ const FormikInput = () => {
       elevasi.push({
         label: `${d.jenis} (${
           d.intervalBawah == null
-            ? " > "
+            ? " < "
             : d.intervalAtas == null
-            ? ` < ${d.intervalBawah}`
+            ? ` > ${d.intervalBawah}`
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        })`,
+        } magl)`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -230,13 +230,13 @@ const FormikInput = () => {
       temperatur.push({
         label: ` (${
           d.intervalBawah == null
-            ? " > "
+            ? " < "
             : d.intervalAtas == null
-            ? ` < ${d.intervalBawah}`
+            ? ` > ${d.intervalBawah}`
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        })`,
+        } c/bulan)`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -272,7 +272,6 @@ const FormikInput = () => {
 
     onSubmit: (values) => {
       let empty = false;
-      console.log(values);
       for (const v in values) {
         if (values[v] == "") empty = true;
       }
@@ -631,7 +630,7 @@ const FormikInput = () => {
                     )} flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t`}
                   >
                     <h3 className="text-3xl font-semibold text-white">
-                      Hasil dari peniliain data syarat tumbuh anda adalah{" "}
+                      Hasil dari peniliain data syarat tumbuh adalah{" "}
                       {getKelas(
                         syaratTumbuh.karakteristikTanah.classify
                           .KelasSyaratTumbuh.kelas
@@ -953,6 +952,8 @@ const FormikInput = () => {
                     </div>
                   </div>
                   <div className="relative p-6 flex-auto">
+                    <p> Rekomendasi : </p>
+                    <br />
                     {syaratTumbuh.karakteristikTanah.KelasDrainase == null ? (
                       ""
                     ) : syaratTumbuh.karakteristikTanah.KelasDrainase
