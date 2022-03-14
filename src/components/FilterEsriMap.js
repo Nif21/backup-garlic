@@ -319,10 +319,6 @@ function FilterEsriMap() {
                   <calcite-radio-button value="KelasRelief"></calcite-radio-button>
                   Relief
                 </calcite-label>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasFaktorCuaca"></calcite-radio-button>
-                  Faktor Cuaca
-                </calcite-label>
               </calcite-radio-button-group>
             </label>
           </div>
