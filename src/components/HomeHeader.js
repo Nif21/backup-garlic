@@ -2,7 +2,7 @@ import Header from "../components/Header";
 
 export default function HomeHeader({ active, handleClick }) {
   return (
-    <div className="sticky top-0 absolute shadow-xl">
+    <div className="sticky top-0 absolute  w-full shadow-xl">
       <div className="md:hidden lg:hidden bg-primary-white">
         <label htmlFor="my-drawer" className="btn btn-square btn-ghost">
           <svg
@@ -19,18 +19,16 @@ export default function HomeHeader({ active, handleClick }) {
               stroke="black"
             ></path>
           </svg>
-        </label>
+        </label>  
       </div>
-      <label htmlFor="my-drawer">
         <div
-          className={`bg-primary-white w-full hover:bg-primary-lesswhite hidden md:block lg:block  `}
-          onClick={handleClick}
+          className={`bg-primary-white w-full hidden md:block lg:block  flex flex-col `}
         >
-          <div className="container p-5">
-            <Header />
+          
+          <div className=" p-5">
+            <Header handleClick={handleClick} />
           </div>
         </div>
-      </label>
     </div>
   );
 }

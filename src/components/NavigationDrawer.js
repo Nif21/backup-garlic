@@ -14,11 +14,10 @@ export default function NavigationDrawer({ handleClick, expand, title }) {
 
   return (
     <>
-      <label htmlFor="my-drawer" className="drawer-overlay" />
-      <div className="flex flex-col overflow-y-auto w-80 bg-primary-normal text-white">
-        <label htmlFor="my-drawer" onClick={handleClick} className="p-4">
+      <div className="flex flex-col  h-screen bg-primary-normal text-white">
+        <div className="p-4">
           {title != null ? <HeaderFilter /> : <Header />}
-        </label>
+        </div>
         <div className="my-3 hover:text-black cursor-pointer px-4">
           <Link href="/">
             <a>Home</a>

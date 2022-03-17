@@ -47,7 +47,7 @@
 }
 
 .marginTop60 {
-  margin-top: 150px;
+  margin-top: 0px;
 }
 
 .margin10 {
@@ -60,9 +60,11 @@
 
 .marginBottom10 {
   margin-bottom: 10px 0 0 10px;
+  color: black
 }
 
 .marginBottom10FontSize20 {
+  color: black;
   margin-bottom: 10px 0 0 10px;
   font-size: 20px;
 }
@@ -75,6 +77,7 @@
 .logo {
   padding: 10px;
   background-color: white;
+  color: black;
 }
 
 .logoFilter {
@@ -121,4 +124,9 @@
 
 .textCenter {
   text-align: center;
+  color: black;
+}
+
+.gg-close {
+  color: black;
 }

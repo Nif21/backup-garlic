@@ -16,6 +16,7 @@
     "@esri/react-arcgis": "^5.1.0",
     "@themesberg/flowbite": "^1.1.1",
     "bootstrap": "^5.0.2",
+    "css.gg": "^2.0.0",
     "daisyui": "^1.10.0",
     "esri-loader": "^3.3.0",
     "formik": "^2.2.9",

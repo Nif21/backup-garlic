@@ -4,7 +4,7 @@ export default function Pengembang({ name, role, image }) {
   return (
     <>
       <div className="container justify-center mx-auto pb-40">
-        <div className="mt-16 py-16 px-8 w-96 bg-primary-coco rounded-xl ">
+        <div className="mt-16 py-16 px-8 h-128 w-96 bg-primary-coco rounded-xl ">
           <div className="w-sm">
             <img
               src={image}

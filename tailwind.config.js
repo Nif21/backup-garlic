@@ -22,6 +22,12 @@ module.exports = {
           krem: "#F7F3E7",
         },
       },
+      maxHeight: {
+        '128': '32rem',
+      },
+      height: {
+        '128': '32rem',
+      }
     },
   },
   variants: {

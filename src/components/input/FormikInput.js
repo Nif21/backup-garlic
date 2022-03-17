@@ -365,31 +365,31 @@ const FormikInput = () => {
         <>
           <div className="grid grid-cols-6 gap-6 my-8 mx-2">
             <div className="mb-col-span-6 sm:col-span-3">
-              <label htmlFor="Provinsi" className="m-2 font-bold">
+              <label htmlFor="Provinsi" className="m-2 font-bold text-black">
                 Provinsi
               </label>
               <select
                 id="country"
                 name="country"
                 onChange={handelChangeProvince}
-                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
+                className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
               >
                 {province.map((p) => (
-                  <option value={p.id} key={p.id}>
+                  <option value={p.id} key={p.id} className="text-black">
                     {p.name}
                   </option>
                 ))}
               </select>
             </div>
             <div className="mb-col-span-6 sm:col-span-3">
-              <label htmlFor="Kabupaten" className="m-2 font-bold">
+              <label htmlFor="Kabupaten" className="m-2 font-bold text-black">
                 Kabupaten
               </label>
               <select
                 id="country"
                 name="country"
                 onChange={handelChangeKabupaten}
-                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
+                className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
               >
                 {kabupaten.map((k) => (
                   <option value={k.id} key={k.id}>
@@ -399,13 +399,13 @@ const FormikInput = () => {
               </select>
             </div>
           </div>
-          <div className="col-span-full flex space-x-4 text-lg">
+          <div className="col-span-full flex space-x-4 text-lg text-black">
             <b>Faktor yang dapat dikendalikan</b>
           </div>
           <div className="col-span-6 sm:col-span-3 mb-8">
             <label
               htmlFor="drainase"
-              className="block text-base font-medium text-gray-700 space-x-4"
+              className="text-black block text-base font-medium text-gray-700 space-x-4"
             >
               <b>Drainase</b>
             </label>
@@ -479,7 +479,7 @@ const FormikInput = () => {
         </>
         {/* Faktor Yang dapat dikoreksi */}
         <>
-          <div className="col-span-full flex space-x-4 text-lg mt-8">
+          <div className="col-span-full flex space-x-4 text-lg mt-8 text-black">
             <b>Faktor yang dapat dikoreksi</b>
           </div>
           <div className="col-span-6 sm:col-span-3 my-2">
@@ -515,7 +515,7 @@ const FormikInput = () => {
         </>
         {/* Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi */}
         <div className="mb-16">
-          <div className="col-span-full flex space-x-4 text-lg mt-8">
+          <div className="col-span-full flex space-x-4 text-lg mt-8 text-black" >
             <b>
               Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi
             </b>

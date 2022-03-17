@@ -191,12 +191,12 @@ function FilterEsriMap() {
         <div id="list-data-daerah" className={styles.listMapBackground}>
           <div className={styles.listMapAlignRight}>
             <button
-              className={styles.margin10}
+              className={styles.logo}
               onClick={() => {
                 setShowListMap((showListMap) => !showListMap);
               }}
             >
-              <i className="gg-close"></i>
+              <i className="gg-close" ></i>
             </button>
           </div>
           <div className={styles.textCenter}>List Peta </div>
@@ -234,7 +234,7 @@ function FilterEsriMap() {
           <div className={styles.listMapAlignRight}>
             <div id="emptyDiv"></div>
             <button
-              className={styles.margin10Right}
+              className={styles.logo}
               onClick={() => {
                 setShowFilter((showFilter) => !showFilter);
               }}
@@ -243,9 +243,7 @@ function FilterEsriMap() {
             </button>
           </div>
           <div className={styles.listMap}>
-            <div className={styles.marginBottom10FontSize24}>
-              Kesesuaian Lahan Bawang Putih
-            </div>
+          
             <label>
               <calcite-radio-button-group
                 id="filter-radio-button"
@@ -254,7 +252,8 @@ function FilterEsriMap() {
               >
                 <calcite-label layout="inline">
                   <calcite-radio-button value="" checked></calcite-radio-button>
-                  Default
+                  Kesesuaian Lahan Bawang Putih
+
                 </calcite-label>
                 <div className={styles.marginBottom10}>
                   Kelas Kesesuaian Lahan berdasarkan
@@ -278,7 +277,6 @@ function FilterEsriMap() {
                   <calcite-radio-button value="KelasKemasamanTanah"></calcite-radio-button>
                   Kemasaman Tanah
                 </calcite-label>
-                <br />
                 <div className={styles.marginBottom10}>
                   <b>Faktor yang efeknya dapat dikoreksi:</b>
                 </div>
@@ -290,7 +288,6 @@ function FilterEsriMap() {
                   <calcite-radio-button value="KelasKedalamanMineralTanah"></calcite-radio-button>
                   Kedalamanan Mineral Tanah
                 </calcite-label>
-                <br />
                 <div className={styles.marginBottom10}>
                   <b>Faktor yang tidak dapat dikendalikan</b>
                   <br />
@@ -325,7 +322,7 @@ function FilterEsriMap() {
         </div>
         <button
           id="logo-filter"
-          className={styles.logoFilter}
+          className={styles.logo}
           onClick={() => {
             setShowFilter((showFilter) => !showFilter);
           }}

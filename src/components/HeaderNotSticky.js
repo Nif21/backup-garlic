@@ -2,7 +2,7 @@ import Header from "../components/Header";
 
 export default function HeaderNotSticky({ active, handleClick }) {
   return (
-    <div className=" top-0  shadow-xl">
+    <div className=" top-0  shadow-xl w-full">
       <div className="md:hidden lg:hidden bg-primary-white">
         <label htmlFor="my-drawer" className="btn btn-square btn-ghost">
           <svg

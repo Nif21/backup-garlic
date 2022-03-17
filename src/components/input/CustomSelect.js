@@ -7,7 +7,7 @@ export default function CustomSelect({ onChange, options, value, className }) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative text-black">
       <Select
         value={defaultValue(options, value)}
         onChange={(value) => {
