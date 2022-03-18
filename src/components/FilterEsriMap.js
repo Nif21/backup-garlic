@@ -351,7 +351,6 @@ function kelasFaktor(a, b) {
 const getNormalMap = (map, spt, filter) => {
   if (filter == "") {
     const dt = [];
-    const dtFix = [];
     for (let s in spt) {
       spt[s].data.map((d) => {
         //console.log(d);
@@ -397,16 +396,9 @@ const getNormalMap = (map, spt, filter) => {
         dt.push(karakteristik);
       });
     }
-    dt.map((d) => {
-      d.geom.coordinates.map((c) => {
-        const peta = d;
-        peta.geom.coordinates = c;
-        dtFix.push(peta);
-      });
-    });
-    console.log(dtFix);
+
     let polygon;
-    const graphicsNormal = dtFix.map((v) => {
+    const graphicsNormal = dt.map((v) => {
       const k = v.karakteristikTanah[0];
       let kelasNumber =
         k.KelasFaktorYangDapatDikendalikan.kelas > 3 ||
@@ -417,10 +409,13 @@ const getNormalMap = (map, spt, filter) => {
         k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas
       );
       v.kelas = kelas;
+
+      const rings = [];
+      v.geom.coordinates.map((b) => rings.push(b[0]));
       if (kelasNumber) {
         polygon = {
           type: "polygon",
-          rings: v.geom.coordinates,
+          rings,
         };
       }
       //console.log(v.geom.coordinates.length + " " + v.spt)
@@ -430,7 +425,7 @@ const getNormalMap = (map, spt, filter) => {
       });
     });
 
-    const graphicsS3 = dtFix.map((v) => {
+    const graphicsS3 = dt.map((v) => {
       const k = v.karakteristikTanah[0];
       let kelasNumber =
         k.KelasFaktorYangDapatDikendalikan.kelas == 3 ||
@@ -440,10 +435,12 @@ const getNormalMap = (map, spt, filter) => {
         k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas
       );
       v.kelas = kelas;
+      const rings = [];
+      v.geom.coordinates.map((b) => rings.push(b[0]));
       if (kelasNumber) {
         polygon = {
           type: "polygon",
-          rings: v.geom.coordinates,
+          rings,
         };
       }
 
@@ -453,7 +450,7 @@ const getNormalMap = (map, spt, filter) => {
       });
     });
 
-    const graphicsS2 = dtFix.map((v) => {
+    const graphicsS2 = dt.map((v) => {
       const k = v.karakteristikTanah[0];
       let kelas = kelasFaktor(
         k.KelasFaktorYangDapatDikendalikan.kelas,
@@ -464,10 +461,12 @@ const getNormalMap = (map, spt, filter) => {
         k.KelasFaktorYangDapatDikendalikan.kelas < 3 &&
         k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas < 3;
 
+      const rings = [];
+      v.geom.coordinates.map((b) => rings.push(b[0]));
       if (kelasNumber) {
         polygon = {
           type: "polygon",
-          rings: v.geom.coordinates,
+          rings,
         };
       }
       return new Graphic({
@@ -476,7 +475,7 @@ const getNormalMap = (map, spt, filter) => {
       });
     });
 
-    const graphicsS1 = dtFix.map((v) => {
+    const graphicsS1 = dt.map((v) => {
       const k = v.karakteristikTanah[0];
       let kelas = kelasFaktor(
         k.KelasFaktorYangDapatDikendalikan.kelas,
@@ -487,10 +486,12 @@ const getNormalMap = (map, spt, filter) => {
         k.KelasFaktorYangDapatDikendalikan.kelas < 2 &&
         k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas < 2;
       //console.log(kelasList);
+      const rings = [];
+      v.geom.coordinates.map((b) => rings.push(b[0]));
       if (kelasNumber) {
         polygon = {
           type: "polygon",
-          rings: v.geom.coordinates,
+          rings,
         };
       }
 
@@ -961,38 +962,29 @@ const getNormalMap = (map, spt, filter) => {
     const dt = [];
     for (let s in spt) {
       spt[s].data.map((d) => {
-        if (d.karakteristikTanah.length > 0) {
-          d.karakteristikTanah.map((k) => {
-            if (k[filter] != null) {
-              const karakteristik = d;
-              karakteristik.kelas = k[filter].kelas;
-              karakteristik.jenis = k[filter].jenis;
-              karakteristik.rekomendasi =
-                k[filter].rekomendasi == null ? "-" : k[filter].rekomendasi;
-              dt.push(karakteristik);
-            }
-          });
-        } else {
+        const k = d.karakteristikTanah[0];
+        if (k[filter] != null) {
           const karakteristik = d;
-          karakteristik.kelas = d.karakteristikTanah[filter].kelas;
-          karakteristik.jenis = d.karakteristikTanah[filter].kelas;
+          karakteristik.kelas = k[filter].kelas;
+          karakteristik.jenis = k[filter].jenis;
           karakteristik.rekomendasi =
-            d.karakteristikTanah[filter].kelas == null
-              ? "-"
-              : d.karakteristikTanah[filter].kelas;
-
+            k[filter].rekomendasi == null ? "-" : k[filter].rekomendasi;
           dt.push(karakteristik);
         }
-        dt.push(d);
       });
     }
     let polygon;
     const graphicsNormal = dt.map((v) => {
       v.dataKelas = v.kelas == undefined ? "-" : kelasFaktor(v.kelas, v.kelas);
       v.filter = filter;
+      const rings = [];
+      v.geom.coordinates.map((b) => rings.push(b[0]));
+      if(v.kelas > 3) {
+
+      }
       polygon = {
         type: "polygon",
-        rings: v.geom.coordinates[0][0],
+        rings
       };
       return new Graphic({
         geometry: polygon,
@@ -1001,43 +993,49 @@ const getNormalMap = (map, spt, filter) => {
     });
 
     const graphicsS3 = dt.map((v) => {
+      const rings = [];
+      v.geom.coordinates.map((b) => rings.push(b[0]));
       if (v.kelas == 3) {
         polygon = {
           type: "polygon",
-          rings: v.geom.coordinates[0][0],
+          rings
         };
       }
 
       return new Graphic({
         geometry: polygon,
-        // attributes: v,
+        attributes: v,
       });
     });
 
     const graphicsS2 = dt.map((v) => {
+      const rings = [];
+      v.geom.coordinates.map((b) => rings.push(b[0]));
       if (v.kelas < 3) {
         polygon = {
           type: "polygon",
-          rings: v.geom.coordinates[0][0],
+          rings
         };
       }
       return new Graphic({
         geometry: polygon,
-        //attributes: v,
+        attributes: v,
       });
     });
 
     const graphicsS1 = dt.map((v) => {
+      const rings = [];
+      v.geom.coordinates.map((b) => rings.push(b[0]));
       if (v.kelas < 2) {
         polygon = {
           type: "polygon",
-          rings: v.geom.coordinates[0][0],
+          rings
         };
       }
 
       return new Graphic({
         geometry: polygon,
-        //attributes: v,
+        attributes: v,
       });
     });
     const normalLayer = new FeatureLayer({
@@ -1117,6 +1115,41 @@ const getNormalMap = (map, spt, filter) => {
           alias: "ObjectID",
           type: "oid",
         },
+        {
+          name: "spt",
+          alias: "spt",
+          type: "string",
+        },
+        {
+          name: "proporsi",
+          alias: "proporsi",
+          type: "string",
+        },
+        {
+          name: "dataKelas",
+          alias: "dataKelas",
+          type: "string",
+        },
+        {
+          name: "kelas",
+          alias: "kelas",
+          type: "string",
+        },
+        {
+          name: "jenis",
+          alias: "jenis",
+          type: "string",
+        },
+        {
+          name: "filter",
+          alias: "filter",
+          type: "string",
+        },
+        {
+          name: "rekomendasi",
+          alias: "rekomendasi",
+          type: "string",
+        },
       ],
       objectIdField: "ObjectID",
       geometryType: "polygon",
@@ -1134,6 +1167,14 @@ const getNormalMap = (map, spt, filter) => {
         },
         label: "S1",
       },
+      popupTemplate: {
+        title: "No SPT : {spt} (Proporsi {proporsi} )",
+        content:
+          "<h1><b>Filter:</b> {filter}</h1>" +
+          "<br><b>Kelas:</b> {dataKelas}" +
+          "<br><b>Jenis : </b> {jenis}" +
+          "<br><b>Rekomendasi: </b> {rekomendasi}",
+      },
     });
 
     const s2Layer = new FeatureLayer({
@@ -1142,6 +1183,41 @@ const getNormalMap = (map, spt, filter) => {
           name: "ObjectID",
           alias: "ObjectID",
           type: "oid",
+        },
+        {
+          name: "spt",
+          alias: "spt",
+          type: "string",
+        },
+        {
+          name: "proporsi",
+          alias: "proporsi",
+          type: "string",
+        },
+        {
+          name: "dataKelas",
+          alias: "dataKelas",
+          type: "string",
+        },
+        {
+          name: "kelas",
+          alias: "kelas",
+          type: "string",
+        },
+        {
+          name: "jenis",
+          alias: "jenis",
+          type: "string",
+        },
+        {
+          name: "filter",
+          alias: "filter",
+          type: "string",
+        },
+        {
+          name: "rekomendasi",
+          alias: "rekomendasi",
+          type: "string",
         },
       ],
       objectIdField: "ObjectID",
@@ -1160,6 +1236,14 @@ const getNormalMap = (map, spt, filter) => {
         },
         label: "S2",
       },
+      popupTemplate: {
+        title: "No SPT : {spt} (Proporsi {proporsi} )",
+        content:
+          "<h1><b>Filter:</b> {filter}</h1>" +
+          "<br><b>Kelas:</b> {dataKelas}" +
+          "<br><b>Jenis : </b> {jenis}" +
+          "<br><b>Rekomendasi: </b> {rekomendasi}",
+      },
     });
 
     const s3Layer = new FeatureLayer({
@@ -1168,6 +1252,41 @@ const getNormalMap = (map, spt, filter) => {
           name: "ObjectID",
           alias: "ObjectID",
           type: "oid",
+        },
+        {
+          name: "spt",
+          alias: "spt",
+          type: "string",
+        },
+        {
+          name: "proporsi",
+          alias: "proporsi",
+          type: "string",
+        },
+        {
+          name: "dataKelas",
+          alias: "dataKelas",
+          type: "string",
+        },
+        {
+          name: "kelas",
+          alias: "kelas",
+          type: "string",
+        },
+        {
+          name: "jenis",
+          alias: "jenis",
+          type: "string",
+        },
+        {
+          name: "filter",
+          alias: "filter",
+          type: "string",
+        },
+        {
+          name: "rekomendasi",
+          alias: "rekomendasi",
+          type: "string",
         },
       ],
       objectIdField: "ObjectID",
@@ -1185,6 +1304,14 @@ const getNormalMap = (map, spt, filter) => {
           },
         },
         label: "S3",
+      },
+      popupTemplate: {
+        title: "No SPT : {spt} (Proporsi {proporsi} )",
+        content:
+          "<h1><b>Filter:</b> {filter}</h1>" +
+          "<br><b>Kelas:</b> {dataKelas}" +
+          "<br><b>Jenis : </b> {jenis}" +
+          "<br><b>Rekomendasi: </b> {rekomendasi}",
       },
     });
     map.add(normalLayer);
