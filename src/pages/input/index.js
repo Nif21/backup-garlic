@@ -21,7 +21,6 @@ function Index() {
   const showModalParent = (modal) => {
     setModal(modal);
   };
-  console.log(modal);
   return (
     <>
       <div className="flex flex-col h-screen bg-white">

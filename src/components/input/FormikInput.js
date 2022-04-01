@@ -307,12 +307,12 @@ const FormikInput = () => {
     },
   });
 
-  const handelChangeProvince = (e) => {
+  const handleChangeProvince = (e) => {
     formik.setFieldValue("provinsi", e.target.value);
     setSelectedProvince(e.target.value);
   };
 
-  const handelChangeKabupaten = (e) => {
+  const handleChangeKabupaten = (e) => {
     formik.setFieldValue("kabupaten/kota", e.target.value);
     setSelectedKabupaten(e.target.value);
   };
@@ -515,7 +515,7 @@ const FormikInput = () => {
         </>
         {/* Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi */}
         <div className="mb-16">
-          <div className="col-span-full flex space-x-4 text-lg mt-8 text-black" >
+          <div className="col-span-full flex space-x-4 text-lg mt-8 text-black">
             <b>
               Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi
             </b>
@@ -1089,7 +1089,7 @@ const FormikInput = () => {
             </div>
             <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
           </>
-        ) }
+        )}
       </form>
     </div>
   );

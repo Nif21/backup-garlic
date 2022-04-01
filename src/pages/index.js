@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ContentRight from "../components/ContentRight";
 import ContentLeft from "../components/ContentLeft";
 import HomeHeader from "../components/HomeHeader";
@@ -7,10 +7,18 @@ import Carousel from "../components/Carousel";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [active, setActive] = useState(false);
-
+  const router = useRouter();
+  useEffect(() => {
+    if (router.asPath === "/login") {
+      window.onpopstate = () => {
+        history.go(1);
+      };
+    }
+  }, [router]);
   const handleClick = () => {
     setActive(!active);
   };
@@ -31,7 +39,7 @@ export default function Home() {
         </aside>
         <div className="flex flex-1 flex-col ">
           <header className="flex items-center text-semibold text-gray-100 bg-primary-white ">
-            <HomeHeader active={active} handleClick={handleClick}/>
+            <HomeHeader active={active} handleClick={handleClick} />
           </header>
           <div className="  overflow-y-auto paragraph">
             <main>
@@ -66,14 +74,12 @@ export default function Home() {
                 ></ContentLeft>
               </div>
               <Footer background="bg-primary-dark" textColor="text-white" />
-              
             </main>
           </div>
         </div>
       </div>
     </div>
     // <div className="flex h-screen">
-      
 
     //   <div className="flex-1">
 

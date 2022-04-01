@@ -1,15 +1,40 @@
 import Link from "next/link";
 import { useState } from "react";
-import Image from "next/image";
-export default function Login() {
+import { useRouter } from "next/router";
+import { Field, Form, Formik, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useSelector, useDispatch } from "react-redux";
+import changeToken from "../../redux/actions/authAction";
+
+const Login = () => {
   const [isLogin, setLogin] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
-  const handleClick = () => {
-    setLogin(!isLogin);
-  };
+  async function login(body) {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    };
+    const response = await fetch(
+      "https://garlic-backend.herokuapp.com/api/v1/login",
+      requestOptions
+    );
+    if (response.ok) {
+      const result = await response.text();
+      dispatch(changeToken(result));
+      router.push("/");
+    } else {
+      const result = await response.text();
+      alert(result);
+    }
+  }
 
-  const ConditionalLink = ({ children, to, condition }) =>
-    !!condition && to ? <Link href={to}>{children}</Link> : <>{children}</>;
+  const loginSchema = Yup.object().shape({
+    email: Yup.string().email().required("Required"),
+    password: Yup.string().required("Required").min(3, "Too Short!"),
+  });
 
   return (
     <>
@@ -25,52 +50,67 @@ export default function Login() {
               Gunakan Akun IPB
             </h2>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
-            <input type="hidden" name="remember" value="true" />
-            <div className="rounded-md shadow-sm -space-y-px">
-              <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
+          <div className=" flex-grow bg-white p-8 rounded">
+            <Formik
+              initialValues={{
+                email: "",
+                password: "",
+              }}
+              validationSchema={loginSchema}
+              onSubmit={(values) => {
+                login(values);
+              }}
+            >
+              <Form>
+                <label className={styles.label} htmlFor="Email">
+                  Email
                 </label>
-                <input
-                  id="email-address"
+                <Field
+                  className={styles.field}
+                  id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-white focus:border-white focus:z-10 sm:text-sm"
-                  placeholder="Email address"
                 />
-              </div>
-              <div>
-                <label htmlFor="password" className="sr-only">
+                <ErrorMessage
+                  component="a"
+                  className={styles.errorMsg}
+                  name="email"
+                />
+                <label className={styles.label} htmlFor="Email">
                   Password
                 </label>
-                <input
+                <Field
+                  className={styles.field}
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="current-password"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
-                  placeholder="Password"
                 />
-              </div>
-            </div>
-
-            <div>
-              <Link href="/">
-                <button
-                  type="submit"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-coco-normal"
-                >
-                  Sign in
-                </button>
-              </Link>
-            </div>
-          </form>
+                <ErrorMessage
+                  component="a"
+                  className={styles.errorMsg}
+                  name="password"
+                />
+                <div className="mt-8">
+                  <button type="submit" className={styles.button}>
+                    Login
+                  </button>
+                </div>
+              </Form>
+            </Formik>
+          </div>
         </div>
-      </div>{" "}
+      </div>
     </>
   );
-}
+};
+
+const styles = {
+  label: "block text-black text-sm font-bold pt-2 pb-1",
+  field:
+    "bg-gray-200 text-black focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none",
+  button:
+    " group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-coco hover:bg-primary-darkcoco",
+  errorMsg: "text-red-500 text-sm",
+};
+
+export default Login;
