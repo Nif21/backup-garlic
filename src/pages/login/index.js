@@ -1,35 +1,63 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useSelector, useDispatch } from "react-redux";
-import changeToken from "../../redux/actions/authAction";
+import { useDispatch } from "react-redux";
+import { setAuth } from "../../redux/actions/authAction";
 
 const Login = () => {
-  const [isLogin, setLogin] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+  const [body, setBody] = useState({});
 
-  async function login(body) {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    };
-    const response = await fetch(
-      "https://garlic-backend.herokuapp.com/api/v1/login",
-      requestOptions
-    );
-    if (response.ok) {
-      const result = await response.text();
-      dispatch(changeToken(result));
-      router.push("/");
-    } else {
-      const result = await response.text();
-      alert(result);
+  useEffect(() => {
+    async function login(b) {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(b),
+      };
+      const response = await fetch(
+        "https://garlic-backend.herokuapp.com/api/v1/login",
+        requestOptions
+      );
+      if (response.ok) {
+        const result = await response.text();
+        const requestOptionsProfile = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + result,
+          },
+        };
+        const responseProfile = await fetch(
+          "https://garlic-backend.herokuapp.com/api/v1/akun",
+          requestOptionsProfile
+        );
+        if (responseProfile.ok) {
+          const resultProfile = await responseProfile.json();
+          const data = {
+            authData: result,
+            userData: {
+              resultProfile,
+            },
+          };
+          dispatch(setAuth(data));
+          router.push("/");
+        } else {
+          const result = await response.text();
+          alert(result);
+        }
+      } else {
+        const result = await response.text();
+        alert(result);
+      }
     }
-  }
+    if (JSON.stringify(body) !== JSON.stringify({})) {
+      login(body);
+    }
+  }, [body, dispatch, router]);
 
   const loginSchema = Yup.object().shape({
     email: Yup.string().email().required("Required"),
@@ -58,7 +86,7 @@ const Login = () => {
               }}
               validationSchema={loginSchema}
               onSubmit={(values) => {
-                login(values);
+                setBody(values);
               }}
             >
               <Form>

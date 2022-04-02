@@ -1,3 +1,8 @@
-export default function changeToken(token) {
-  return { type: "CHANGE_TOKEN", payload: token };
-}
+export const setAuth = (payload) => ({
+  type: "SET_AUTH",
+  payload,
+});
+
+export const clearAuth = () => ({
+  type: "CLEAR_AUTH",
+});
