@@ -371,7 +371,7 @@ const FormikInput = () => {
               <select
                 id="country"
                 name="country"
-                onChange={handelChangeProvince}
+                onChange={handleChangeProvince}
                 className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
               >
                 {province.map((p) => (
@@ -388,7 +388,7 @@ const FormikInput = () => {
               <select
                 id="country"
                 name="country"
-                onChange={handelChangeKabupaten}
+                onChange={handleChangeKabupaten}
                 className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
               >
                 {kabupaten.map((k) => (
