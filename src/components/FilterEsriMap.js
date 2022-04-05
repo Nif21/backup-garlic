@@ -587,7 +587,7 @@ const getNormalMap = (map, spt, filter) => {
       renderer: {
         type: "simple",
         symbol: {
-          color: "#F70400",
+          color: "#ab0300",
           type: "simple-fill",
           style: "solid",
           outline: {
@@ -927,7 +927,7 @@ const getNormalMap = (map, spt, filter) => {
       renderer: {
         type: "simple",
         symbol: {
-          color: "#FF4400",
+          color: "#ff8400",
           type: "simple-fill",
           style: "solid",
           outline: {
@@ -1086,7 +1086,7 @@ const getNormalMap = (map, spt, filter) => {
       renderer: {
         type: "simple",
         symbol: {
-          color: "#F70400",
+          color: "#ab0300",
           type: "simple-fill",
           style: "solid",
           outline: {
@@ -1294,7 +1294,7 @@ const getNormalMap = (map, spt, filter) => {
       renderer: {
         type: "simple",
         symbol: {
-          color: "#FF4400",
+          color: "#ff8400",
           type: "simple-fill",
           style: "solid",
           outline: {

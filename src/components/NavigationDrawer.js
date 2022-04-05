@@ -21,7 +21,12 @@ export default function NavigationDrawer({ title, token, nama }) {
       <>
         <div className="my-3 hover:text-black cursor-pointer px-4 ">
           <Link href="/download-file">
-            <a>Downlaod File</a>
+            <a>Download File</a>
+          </Link>
+        </div>
+        <div className="my-3 hover:text-black cursor-pointer px-4 ">
+          <Link href="/input-file">
+            <a>Input File</a>
           </Link>
         </div>
       </>
@@ -55,13 +60,8 @@ export default function NavigationDrawer({ title, token, nama }) {
           </Link>
         </div>
         {!(token === "" || token === undefined) && <AuthFeature />}
-        {/* <div className="my-3 hover:text-black cursor-pointer px-4 ">
-          <Link href="/input-file">
-            <a>Input File</a>
-          </Link>
-        </div> */}
-        <div className="flex-grow"></div>
 
+        <div className="flex-grow"></div>
         {token === "" || token === undefined ? (
           <button className="w-auto	 py-4  mx-4 mb-4 hover:text-gray-500 hover:bg-primary-darkcoco cursor-pointer bg-primary-coco rounded-xl">
             <Link href="/login">

@@ -19,26 +19,37 @@ function Index() {
   };
   return (
     <>
-      <div className=" shadow bg-base-200 drawer">
+      <div className="flex flex-col h-screen bg-white">
         <Head>
           <title>INA Agro-GARLIC</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-side flex-none hidden lg:block">
-          <NavigationDrawer token={auth.token} nama={auth.user.nama} />
-        </div>
-        <div className="flex flex-col drawer-content  h-screen w-screen bg-primary-dark">
-          <HomeHeader active={active} handleClick={handleClick} />
-          <div className="container mx-auto my-16">
-            <div className=" md:mt-0 md:col-span-2 flex-grow bg-white  mx-40 p-8 rounded">
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 ">
-                Upload File SPT
-              </h2>
-              <FormikUploadFile />
+        <div className="flex flex-1 overflow-hidden">
+          <aside
+            className={`flex-shrink-0 w-64 h-full flex  flex-col border-r transition-all duration-300 ${
+              !active ? "-ml-64" : ""
+            } `}
+          >
+            <NavigationDrawer token={auth.token} nama={auth.user.nama} />
+          </aside>
+          <div className="flex flex-1 flex-col ">
+            <header className="flex items-center text-semibold text-gray-100 bg-primary-white ">
+              <HomeHeader active={active} handleClick={handleClick} />
+            </header>
+            <div className="flex-grow  overflow-y-auto paragraph bg-primary-dark">
+              <main>
+                <div className="container mx-auto my-16">
+                  <div className=" md:mt-0 md:col-span-2 flex-grow bg-white  mx-40 p-8 rounded">
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 ">
+                      Upload File SPT
+                    </h2>
+                    <FormikUploadFile />
+                  </div>
+                </div>
+                <Footer background="bg-white" textColor="text-black" />
+              </main>
             </div>
           </div>
-          <Footer background="bg-white" textColor="text-black" />
         </div>
       </div>
     </>

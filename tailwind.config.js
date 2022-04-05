@@ -20,14 +20,15 @@ module.exports = {
           coco: "#F4A442",
           darkcoco: "#E39A40",
           krem: "#F7F3E7",
+          red: "#FF0000",
         },
       },
       maxHeight: {
-        '128': '32rem',
+        128: "32rem",
       },
       height: {
-        '128': '32rem',
-      }
+        128: "32rem",
+      },
     },
   },
   variants: {
