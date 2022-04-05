@@ -271,10 +271,6 @@ function FilterEsriMap() {
                   <calcite-radio-button value="KelasTeksturTanah"></calcite-radio-button>
                   Tekstur Tanah
                 </calcite-label>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasKemasamanTanah"></calcite-radio-button>
-                  Kemasaman Tanah
-                </calcite-label>
                 <div className={styles.marginBottom10}>
                   <b>Faktor yang efeknya dapat dikoreksi:</b>
                 </div>
@@ -285,6 +281,10 @@ function FilterEsriMap() {
                 <calcite-label layout="inline">
                   <calcite-radio-button value="KelasKedalamanMineralTanah"></calcite-radio-button>
                   Kedalamanan Mineral Tanah
+                </calcite-label>
+                <calcite-label layout="inline">
+                  <calcite-radio-button value="KelasKemasamanTanah"></calcite-radio-button>
+                  Kemasaman Tanah
                 </calcite-label>
                 <div className={styles.marginBottom10}>
                   <b>Faktor yang tidak dapat dikendalikan</b>
@@ -979,12 +979,11 @@ const getNormalMap = (map, spt, filter) => {
       v.filter = filter;
       const rings = [];
       v.geom.coordinates.map((b) => rings.push(b[0]));
-      if(v.kelas > 3) {
-
+      if (v.kelas > 3) {
       }
       polygon = {
         type: "polygon",
-        rings
+        rings,
       };
       return new Graphic({
         geometry: polygon,
@@ -998,7 +997,7 @@ const getNormalMap = (map, spt, filter) => {
       if (v.kelas == 3) {
         polygon = {
           type: "polygon",
-          rings
+          rings,
         };
       }
 
@@ -1014,7 +1013,7 @@ const getNormalMap = (map, spt, filter) => {
       if (v.kelas < 3) {
         polygon = {
           type: "polygon",
-          rings
+          rings,
         };
       }
       return new Graphic({
@@ -1029,7 +1028,7 @@ const getNormalMap = (map, spt, filter) => {
       if (v.kelas < 2) {
         polygon = {
           type: "polygon",
-          rings
+          rings,
         };
       }
 

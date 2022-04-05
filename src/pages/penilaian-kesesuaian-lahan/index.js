@@ -4,12 +4,18 @@ import HomeHeader from "../../components/HeaderNotSticky";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import Footer from "../../components/Footer";
 import FormikInput from "../../components/input/FormikInput";
+import storage from "../../redux/storage";
 
 function Index() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(true);
   const [modal, setModal] = useState(false);
-
+  const auth = storage.get("auth", {
+    token: "",
+    user: {
+      nama: "",
+    },
+  });
   const handleOpen = () => {
     setOpen(!open);
   };
@@ -34,7 +40,7 @@ function Index() {
               !active ? "-ml-64" : ""
             } `}
           >
-            <NavigationDrawer />
+            <NavigationDrawer token={auth.token} nama={auth.user.nama} />
           </aside>
           <div className="flex flex-1 flex-col ">
             <header className="flex items-center text-semibold text-gray-100 bg-primary-white ">

@@ -5,12 +5,15 @@ import { useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { clearAuth } from "../redux/actions/authAction";
+import { useRouter } from "next/router";
 
 export default function NavigationDrawer({ title, token, nama }) {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleClick = () => {
     dispatch(clearAuth());
+    router.replace("/");
   };
 
   const AuthFeature = () => {
@@ -60,20 +63,23 @@ export default function NavigationDrawer({ title, token, nama }) {
         <div className="flex-grow"></div>
 
         {token === "" || token === undefined ? (
-          <div className="w-auto	 py-4  mx-4 mb-4 hover:text-gray-500 hover:bg-primary-darkcoco cursor-pointer bg-primary-coco rounded-xl">
+          <button className="w-auto	 py-4  mx-4 mb-4 hover:text-gray-500 hover:bg-primary-darkcoco cursor-pointer bg-primary-coco rounded-xl">
             <Link href="/login">
               <div className="text-center">Login</div>
             </Link>
-          </div>
+          </button>
         ) : (
-          <div className="w-auto	 py-4  mx-4 mb-4 hover:text-gray-500 hover:bg-primary-darkcoco cursor-pointer bg-primary-coco rounded-xl">
-            <button className="" onClick={handleClick}>
+          <button
+            className="w-auto	 py-4  mx-4 mb-4 hover:text-gray-500 hover:bg-primary-darkcoco cursor-pointer bg-primary-coco rounded-xl"
+            onClick={handleClick}
+          >
+            <div>
               <div className="flex mx-4 my-2">
                 <HiUserCircle className="w-8 h-8" />
                 <div className="text-center mx-4 mt-1">{nama}</div>
               </div>
-            </button>
-          </div>
+            </div>
+          </button>
         )}
       </div>
     </>

@@ -39,9 +39,9 @@ export default function Home() {
           <header className="flex items-center text-semibold text-gray-100 bg-primary-white ">
             <HomeHeader active={active} handleClick={handleClick} />
           </header>
-          <div className="  overflow-y-auto paragraph">
-            <main>
-              <div className="flex-grow bg-white">
+          <div className="flex-1 flex-col   overflow-y-auto paragraph">
+            <main className="flex-grow">
+              <div className=" bg-white">
                 {/* <Carousel /> */}
                 <div className={`bg-primary-dark`}>
                   <div className="container mx-auto pb-40">
@@ -71,8 +71,8 @@ export default function Home() {
                   button="more info"
                 ></ContentLeft>
               </div>
-              <Footer background="bg-primary-dark" textColor="text-white" />
             </main>
+            <Footer background="bg-primary-dark" textColor="text-white" />
           </div>
         </div>
       </div>

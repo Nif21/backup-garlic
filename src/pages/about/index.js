@@ -4,36 +4,41 @@ import HomeHeader from "../../components/HomeHeader";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import Footer from "../../components/Footer";
 import Pengembang from "../../components/ProfiePengembang";
+import storage from "../../redux/storage";
 
 export default function Home() {
   const [active, setActive] = useState(false);
-
+  const auth = storage.get("auth", {
+    token: "",
+    user: {
+      nama: "",
+    },
+  });
   const handleClick = () => {
     setActive(!active);
   };
   return (
     <>
       <div className="flex flex-col h-screen bg-white">
-      <Head>
-        <title>INA Agro-GARLIC</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+        <Head>
+          <title>INA Agro-GARLIC</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <div className="flex flex-1 overflow-hidden">
           <aside
             className={`flex-shrink-0 w-64 h-full flex  flex-col border-r transition-all duration-300 ${
               !active ? "-ml-64" : ""
             } `}
           >
-            <NavigationDrawer />
+            <NavigationDrawer token={auth.token} nama={auth.user.nama} />
           </aside>
           <div className="flex flex-1 flex-col ">
             <div className="shadow-xl">
               <header className="flex items-center text-semibold text-gray-100 bg-primary-white ">
-               
                 <HomeHeader active={active} handleClick={handleClick} />
               </header>
             </div>
-            <div className="  overflow-y-auto paragraph">
+            <div className="flex-grow  overflow-y-auto paragraph">
               <main>
                 <div className="flex-grow bg-white">
                   {/* About Garlic */}
@@ -161,9 +166,8 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-
-                <Footer background={"bg-white"} textColor={"text-black"} />
               </main>
+              <Footer background={"bg-white"} textColor={"text-black"} />
             </div>
           </div>
         </div>

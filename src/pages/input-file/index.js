@@ -4,9 +4,16 @@ import HomeHeader from "../../components/HomeHeader";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import Footer from "../../components/Footer";
 import FormikUploadFile from "../../components/inputFile/FormikUploadFile";
+import storage from "../../redux/storage";
+
 function Index() {
   const [active, setActive] = useState(false);
-
+  const auth = storage.get("auth", {
+    token: "",
+    user: {
+      nama: "",
+    },
+  });
   const handleClick = () => {
     setActive(!active);
   };
@@ -19,7 +26,7 @@ function Index() {
         </Head>
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-side flex-none hidden lg:block">
-          <NavigationDrawer handleClick={handleClick} />
+          <NavigationDrawer token={auth.token} nama={auth.user.nama} />
         </div>
         <div className="flex flex-col drawer-content  h-screen w-screen bg-primary-dark">
           <HomeHeader active={active} handleClick={handleClick} />
