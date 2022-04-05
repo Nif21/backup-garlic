@@ -318,7 +318,6 @@ const FormikInput = () => {
   };
 
   function postData(body) {
-    console.log(body);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -461,21 +460,6 @@ const FormikInput = () => {
               options={kapasitasTukarKationOptions}
             />
           </div>
-          <div className="col-span-6 sm:col-span-3 my-2">
-            <label
-              htmlFor="teksturTanah"
-              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
-            >
-              <b>Kemasaman Tanah</b>
-            </label>
-            <CustomSelect
-              onChange={(value) =>
-                formik.setFieldValue("kemasamanTanah", value.value)
-              }
-              value={formik.values.kemasamanTanah}
-              options={kemasamanTanahOptions}
-            />
-          </div>
         </>
         {/* Faktor Yang dapat dikoreksi */}
         <>
@@ -510,6 +494,21 @@ const FormikInput = () => {
               }
               value={formik.values.kejenuhanBasa}
               options={kejenuhanBasaOptions}
+            />
+          </div>
+          <div className="col-span-6 sm:col-span-3 my-2">
+            <label
+              htmlFor="teksturTanah"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
+            >
+              <b>Kemasaman Tanah</b>
+            </label>
+            <CustomSelect
+              onChange={(value) =>
+                formik.setFieldValue("kemasamanTanah", value.value)
+              }
+              value={formik.values.kemasamanTanah}
+              options={kemasamanTanahOptions}
             />
           </div>
         </>
