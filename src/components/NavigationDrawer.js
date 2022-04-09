@@ -13,7 +13,7 @@ export default function NavigationDrawer({ title, token, nama }) {
 
   const handleClick = () => {
     dispatch(clearAuth());
-    router.replace("/");
+    router.replace("/register");
   };
 
   const AuthFeature = () => {
