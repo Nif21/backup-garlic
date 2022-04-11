@@ -59,6 +59,11 @@ export default function NavigationDrawer({ title, token, nama }) {
             <a>Penilaian Kesesuaian Lahan </a>
           </Link>
         </div>
+        <div className="my-3 hover:text-black cursor-pointer px-4 ">
+          <Link href="/glosarium">
+            <a>Glosarium </a>
+          </Link>
+        </div>
         {!(token === "" || token === undefined) && <AuthFeature />}
 
         <div className="flex-grow"></div>

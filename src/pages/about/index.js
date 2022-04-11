@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import Pengembang from "../../components/ProfiePengembang";
 import storage from "../../redux/storage";
 
-export default function Home() {
+export default function About() {
   const [active, setActive] = useState(false);
   const auth = storage.get("auth", {
     token: "",
@@ -87,7 +87,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="p-4 mb-16">
+                  <div className="p-4 mb-4">
                     <div className="mx-16  mb-8 text-2xl font-bold text-black ">
                       Syarat tumbuh bawang putih
                     </div>
@@ -106,7 +106,7 @@ export default function Home() {
                         a. Kejenuhan Basa (%) <br />
                         b. Kedalaman Mineral Tanah (cm) <br /> <br />
                         3. Faktor yang tidak dapat dikendalikan dan dikoreksi
-                        yaitu faktor cuaca, yang terdiri dari <br />
+                        yang terdiri dari <br />
                         a. Faktor cuaca <br />
                         &emsp;&emsp;i. Temperatur (c), rata-rata (per bulan){" "}
                         <br />
@@ -120,7 +120,10 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-
+                  <div className="p-4 mb-4">
+                    *Informasi diatas bersumber dari Balai Besar Sumberdaya
+                    Lahan Pertanian
+                  </div>
                   {/* Profil Pengembang */}
                   <div className="bg-primary-dark py-4 px-4">
                     <div className="mx-16 mt-16 mb-8 text-2xl font-bold text-white">
