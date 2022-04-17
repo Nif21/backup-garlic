@@ -1,31 +1,29 @@
-import Image from "next/image";
-export default function ContentRight({
-  title,
-  content,
-  button,
-  image,
-  background,
-}) {
-  const setImage = image ? image : "/circle.png";
-  const setBackground = background ? background : "bg-white";
+import Link from "next/link";
 
+export default function ContentRight() {
   return (
     <>
-      <div className={`${setBackground}`}>
-        <div className="container mx-auto pb-40">
-          <div className="flex flex-wrap pt-40">
-            <div className="w-10/12 md:w-8/12 lg:w-8/12 text-justify break-all">
-              <div className="text-5xl m-5 font-semibold text-white">
-                {title}
-              </div>
-              <div className="m-5 text-white">{content}</div>
-              <div className="m-5 cursor-pointer py-5 w-40 bg-primary-coco text-center text-white rounded-xl hover:bg-primary-darkcoco hover:text-white">
-                {button}
-              </div>
-            </div>
-            <img src={`${setImage}`} className="my-10 mx-10 h-72 w-72" alt="" />
+      <div className="flex flex-wrap pt-40 ">
+        <div className="container mx-auto pb-40 w-7/12">
+          <div className="text-7xl m-5 font-display font-semibold text-black">
+            About INA
+          </div>
+          <div className="text-7xl m-5 font-display font-bold text-green-normal">
+            Agro-GARLIC
+          </div>
+          <div className="m-5 font-display text-black text-justify	">
+            {`INA Agro-GARLIC (Agroecological Assessment of Land Suitability for Garlic) adalah Sistem Informasi Geografis Kesesuaian Agroekologi untuk Bawang Putih pada kawasan prioritas pengembangan lahan bawang putih di Indonesia.
+            Struktur klasifikasi kesesuaian lahan mengikuti kerangka FAO (1976)`}
+          </div>
+          <div className="m-5 font-display underline cursor-pointer py-5 w-72 bg-coco-brigth text-center text-white rounded-xl hover:bg-primary-darkcoco hover:text-white">
+            <Link href="/about">{`More Info`}</Link>
           </div>
         </div>
+        <img
+          src={`./new_garlic.png`}
+          className="h-128 w-128 right-0 mx-auto bg-white"
+          alt=""
+        />
       </div>
     </>
   );

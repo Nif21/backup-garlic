@@ -1,24 +1,34 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function ContentLeft({ title, content, button }) {
+export default function ContentLeft() {
   return (
     <>
-      <div className="container mx-auto pb-40">
-        <div className="flex flex-wrap pt-40">
-          <img
-            src="/circle_garlic.png"
-            className="my-10 mx-10  h-72 w-72"
-            alt=""
-          />
-          <div className="w-10/12 md:w-6/12 lg:w-8/12 text-justify ">
-            <div className="text-5xl m-5 font-semibold text-black">{title}</div>
-            <div className="m-5 text-black">{content}</div>
+      <div className="flex flex-wrap py-40 mx-auto">
+        <img src="/new_garlic_2.png" className="mx-auto  h-128 w-128" alt="" />
+        <div className="container mx-auto pb-40 w-7/12 text-justify  font-display">
+          <div className="text-5xl m-5 font-semibold text-black">About</div>
+          <div className="text-5xl m-5 font-bold text-green-normal">
+            Bawang Putih
           </div>
-        </div>
-        <div className="flex">
-          <div className="w-3/12"></div>
-          <div className="m-5 cursor-pointer py-5 w-40 bg-primary-coco text-center text-white rounded-xl hover:bg-primary-darkcoco hover:text-white">
-            {button}
+          <div className="m-5 text-black">
+            Bawang putih (Allium sativum L.) merupakan komoditas hortikultura
+            yang penting bagi masyarakat Indonesia mengingat ragam dan jumlah
+            pemanfaatannya. Selain dapat dimanfaatkan sebagai bahan penyedap
+            makanan hampir di setiap masakan, komoditas ini juga berperan
+            sebagai obat bagi beberapa jenis penyakit. Umbi bawang putih dapat
+            digunakan untuk membantu menurunkan tekanan darah tinggi, mengobati
+            gangguan pernafasan, sakit kepala, wasir, susah buang air besar,
+            memar atau luka sayat, cacingan, insomnia, kolesterol, influenza,
+            gangguan saluran kencing, dan lain-lain. Keadaan ini membawa dampak
+            terhadap tingginya nilai ekonomis bawang putih di mata masyarakat
+            Indonesia. Sumber: Panduan Budidaya Bawang Putih, Kementerian
+            Pertanian Badan Penelitian dan Pengembangan Pertanian Balai
+            Pengkajian Teknologi Pertanian Jawa Timur, Tahun 2018.
+          </div>
+          <div className="flex">
+            <div className="m-5 font-display underline cursor-pointer py-5 w-72 bg-coco-brigth text-center text-white rounded-xl hover:bg-primary-darkcoco hover:text-white">
+              <Link href="/about">{`More Info`}</Link>
+            </div>
           </div>
         </div>
       </div>

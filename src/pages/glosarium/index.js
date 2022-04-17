@@ -244,7 +244,7 @@ export default function Glosarium() {
 
   return (
     <>
-      <div className="flex flex-col h-screen bg-white">
+      <div className="flex font-display flex-col h-screen bg-white">
         <Head>
           <title>INA Agro-GARLIC</title>
           <link rel="icon" href="/favicon.ico" />
@@ -267,7 +267,7 @@ export default function Glosarium() {
               <main>
                 <div className="flex-grow bg-white">
                   {/* About Garlic */}
-                  <div className="px-16 p-4 mt-16 text-2xl font-bold text-black bg-white sticky top-0">
+                  <div className="px-16 p-4 mt-16 text-2xl font-bold text-black bg-white ">
                     Keterangan nilai parameter pada penilaian kesesuian lahan
                   </div>
                   <div className="p-4 ">
@@ -321,9 +321,7 @@ export default function Glosarium() {
                         Kemasaman Tanah
                         <ul className="list-disc	mx-8">
                           {kemasamanTanahOptions.map((d) => (
-                            <li>
-                              {d.value} {d.label}
-                            </li>
+                            <li>{d.label}</li>
                           ))}
                         </ul>
                         <br />
@@ -389,13 +387,13 @@ export default function Glosarium() {
                       </div>
                     </div>
                   </div>
-                  <div className="px-16 p-4 mt-8 text-2xl font-bold text-black bg-white sticky top-0">
+                  <div className="px-16 p-4 mt-8 text-2xl font-bold text-black bg-white ">
                     Keterangan Proporsi Tanah
                   </div>
-                  <div className="p-4 mb-16">
+                  <div className="p-4 mb-32">
                     <div className="flex flex-wrap">
                       <div className="mx-16 w-12/12 sm:7/12 md:7/12 text-lg text-justify text-black">
-                        <ul className="list-disc	mx-8">
+                        <ul className="list-disc mx-8 mb-32">
                           {proporsiOptions.map((d) => (
                             <li>
                               {d.value} {d.label}
@@ -407,7 +405,7 @@ export default function Glosarium() {
                   </div>
                 </div>
               </main>
-              <Footer background={"bg-white"} textColor={"text-black"} />
+              <Footer background="bg-primary-dark" textColor="text-white" />
             </div>
           </div>
         </div>

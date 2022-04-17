@@ -19,16 +19,15 @@ export default function HomeHeader({ active, handleClick }) {
               stroke="black"
             ></path>
           </svg>
-        </label>  
+        </label>
       </div>
-        <div
-          className={`bg-primary-white w-full hidden md:block lg:block  flex flex-col `}
-        >
-          
-          <div className=" p-5">
-            <Header handleClick={handleClick} />
-          </div>
+      <div
+        className={`bg-primary-white w-full hidden md:block lg:block  flex flex-col `}
+      >
+        <div className=" p-5">
+          <Header handleClick={handleClick} />
         </div>
+      </div>
     </div>
   );
 }

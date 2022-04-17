@@ -29,7 +29,7 @@ function Index() {
   };
   return (
     <>
-      <div className="flex flex-col h-screen bg-white">
+      <div className="flex font-display flex-col h-screen bg-white">
         <Head>
           <title>INA Agro-GARLIC</title>
           <link rel="icon" href="/favicon.ico" />

@@ -6,10 +6,12 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["IBM Plex Sans", "ui-sans-serif", "system-ui"],
+        display: ["Poppins"],
       },
       colors: {
         coco: {
           normal: "#948E68",
+          brigth: "#DDA619",
         },
         primary: {
           dark: "#125C13",
@@ -22,11 +24,17 @@ module.exports = {
           krem: "#F7F3E7",
           red: "#FF0000",
         },
+        green: {
+          normal: "#339710",
+        },
       },
       maxHeight: {
         128: "32rem",
       },
       height: {
+        128: "32rem",
+      },
+      width: {
         128: "32rem",
       },
     },
