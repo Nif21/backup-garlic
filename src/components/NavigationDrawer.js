@@ -1,19 +1,14 @@
 import Link from "next/link";
 import Header from "./HeaderDrawer";
 import HeaderFilter from "./HeaderFilter";
-import { useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
-import { useDispatch } from "react-redux";
-import { clearAuth } from "../redux/actions/authAction";
 import { useRouter } from "next/router";
 
 export default function NavigationDrawer({ title, token, nama }) {
-  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleClick = () => {
-    dispatch(clearAuth());
-    router.replace("/register");
+    router.replace("/profile");
   };
 
   const AuthFeature = () => {
@@ -81,7 +76,7 @@ export default function NavigationDrawer({ title, token, nama }) {
             <div>
               <div className="flex mx-4 my-2">
                 <HiUserCircle className="w-8 h-8" />
-                <div className="text-center mx-4 mt-1">{nama}</div>
+                <div className="text-center mx-4 mt-1 truncate ">{nama}</div>
               </div>
             </div>
           </button>

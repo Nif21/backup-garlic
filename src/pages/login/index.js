@@ -61,6 +61,10 @@ const Login = () => {
     login(body);
   };
 
+  const handleRegister = () => {
+    router.push("/register");
+  };
+
   const loginSchema = Yup.object().shape({
     email: Yup.string().email().required("Required"),
     password: Yup.string().required("Required").min(3, "Too Short!"),
@@ -155,6 +159,11 @@ const Login = () => {
                 </div>
               </Form>
             </Formik>
+            <div className="mx-auto  flex items-center justify-center mt-8 ">
+              <button type="submit" onClick={handleRegister}>
+                Register
+              </button>
+            </div>
           </div>
         </div>
       </div>
