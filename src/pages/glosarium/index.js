@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import HomeHeader from "../../components/HomeHeader";
@@ -66,9 +67,9 @@ export default function Glosarium() {
     const kapasitasTukarKation = [];
     data.kapasitasTukarKation.map((d) => {
       kapasitasTukarKation.push({
-        label: `${d.jenis} (${
+        label: `${d.jenis} [${
           d.intervalBawah == null ? " < " : `${d.intervalBawah}  -`
-        }  ${d.intervalAtas} cmol)`,
+        }  ${d.intervalAtas} cmol]`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -79,7 +80,7 @@ export default function Glosarium() {
     const kedalamanMineralTanah = [];
     data.kedalamanMineralTanah.map((d) => {
       kedalamanMineralTanah.push({
-        label: `${d.jenis} (${
+        label: `${d.jenis} [${
           d.intervalBawah == null
             ? " < "
             : d.intervalAtas == null
@@ -87,7 +88,7 @@ export default function Glosarium() {
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        } cm)`,
+        } cm]`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -98,7 +99,7 @@ export default function Glosarium() {
     const kejenuhanBasa = [];
     data.kejenuhanBasa.map((d) => {
       kejenuhanBasa.push({
-        label: `${d.jenis} (${
+        label: `${d.jenis} [(]${
           d.intervalBawah == null
             ? " < "
             : d.intervalAtas == null
@@ -106,7 +107,7 @@ export default function Glosarium() {
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        } %)`,
+        } %]`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -117,7 +118,7 @@ export default function Glosarium() {
     const kemasamanTanah = [];
     data.kemasamanTanah.map((d) => {
       kemasamanTanah.push({
-        label: `${d.jenis} (${
+        label: `${d.jenis} [${
           d.intervalBawah == null
             ? " < "
             : d.intervalAtas == null
@@ -125,7 +126,7 @@ export default function Glosarium() {
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        } pH)`,
+        } pH]`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -136,7 +137,7 @@ export default function Glosarium() {
     const relief = [];
     data.relief.map((d) => {
       relief.push({
-        label: `${d.jenis} (${
+        label: `${d.jenis} [${
           d.intervalBawah == null
             ? " < "
             : d.intervalAtas == null
@@ -144,7 +145,7 @@ export default function Glosarium() {
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        } %)`,
+        } %]`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -155,7 +156,7 @@ export default function Glosarium() {
     const curahHujan = [];
     data.curahHujan.map((d) => {
       curahHujan.push({
-        label: `${d.jenis} (${
+        label: `${d.jenis} [${
           d.intervalBawah == null
             ? " < "
             : d.intervalAtas == null
@@ -163,7 +164,7 @@ export default function Glosarium() {
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        } mm/bulan)`,
+        } mm/bulan]`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -171,29 +172,29 @@ export default function Glosarium() {
     });
     setCurahHujanOptions(curahHujan);
 
-    const lamaPenyinaran = [];
-    data.lamaPenyinaran.map((d) => {
-      lamaPenyinaran.push({
-        label: `${d.jenis} (${
-          d.intervalBawah == null
-            ? " < "
-            : d.intervalAtas == null
-            ? ` > ${d.intervalBawah}`
-            : d.intervalBawah
-        }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
-          d.intervalAtas == null ? "" : d.intervalAtas
-        } jam/hari)`,
-        value: d.jenis,
-        rekomendasi: d.rekomendasi,
-        kelas: d.kelas,
-      });
-    });
-    setLamaPenyinaranOptions(lamaPenyinaran);
+    // const lamaPenyinaran = [];
+    // data.lamaPenyinaran.map((d) => {
+    //   lamaPenyinaran.push({
+    //     label: `${d.jenis} (${
+    //       d.intervalBawah == null
+    //         ? " < "
+    //         : d.intervalAtas == null
+    //         ? ` > ${d.intervalBawah}`
+    //         : d.intervalBawah
+    //     }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
+    //       d.intervalAtas == null ? "" : d.intervalAtas
+    //     } jam/hari)`,
+    //     value: d.jenis,
+    //     rekomendasi: d.rekomendasi,
+    //     kelas: d.kelas,
+    //   });
+    // });
+    // setLamaPenyinaranOptions(lamaPenyinaran);
 
     const elevasi = [];
     data.elevasi.map((d) => {
       elevasi.push({
-        label: `${d.jenis} (${
+        label: `${d.jenis} [${
           d.intervalBawah == null
             ? " < "
             : d.intervalAtas == null
@@ -201,7 +202,7 @@ export default function Glosarium() {
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        } magl)`,
+        } magl]`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -213,7 +214,7 @@ export default function Glosarium() {
     const temperatur = [];
     data.temperatur.map((d) => {
       temperatur.push({
-        label: ` (${
+        label: ` [${
           d.intervalBawah == null
             ? " < "
             : d.intervalAtas == null
@@ -221,7 +222,7 @@ export default function Glosarium() {
             : d.intervalBawah
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
-        } c/bulan)`,
+        } c/bulan]`,
         value: d.jenis,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
@@ -273,117 +274,117 @@ export default function Glosarium() {
                   <div className="p-4 ">
                     <div className="flex flex-wrap">
                       <div className="mx-16 w-12/12 sm:7/12 md:7/12 text-lg text-justify text-black">
-                        <b>Faktor yang dapat dikendalikan</b>
-                        <br />
-                        Drainase
-                        <ul className="list-disc	mx-8">
-                          {drainaseOptions.map((d) => (
-                            <li>{d.value}</li>
-                          ))}
-                        </ul>
-                        <br />
-                        Kapasitas Tukar Kation
-                        <ul className="list-disc	mx-8">
-                          {kapasitasTukarKationOptions.map((d) => (
-                            <li>
-                              {d.value} {d.label}
-                            </li>
-                          ))}
-                        </ul>
-                        <br />
-                        Tekstur Tanah
-                        <ul className="list-disc	mx-8">
-                          {teksturTanahOptions.map((d) => (
-                            <li>{d.value}</li>
-                          ))}
-                        </ul>
-                        <br />
-                        <b>Faktor yang efeknya dapat dikoreksi</b>
-                        <br />
-                        Kejenuhan Basa
-                        <ul className="list-disc	mx-8">
-                          {kejenuhanBasaOptions.map((d) => (
-                            <li>
-                              {d.value} {d.label}
-                            </li>
-                          ))}
-                        </ul>
-                        <br />
-                        Kedalaman Mineral Tanah
-                        <ul className="list-disc	mx-8">
-                          {kedalamanMineralTanahOptions.map((d) => (
-                            <li>
-                              {d.value} {d.label}
-                            </li>
-                          ))}
-                        </ul>
-                        <br />
-                        Kemasaman Tanah
-                        <ul className="list-disc	mx-8">
-                          {kemasamanTanahOptions.map((d) => (
-                            <li>{d.label}</li>
-                          ))}
-                        </ul>
-                        <br />
-                        <b>
-                          Faktor yang tidak dapat dikendalikan dan dikoreksi
-                        </b>
-                        <br />
-                        Faktor cuaca
-                        <ul className="list-decimal mx-8">
-                          <li>Temperatur</li>
-                          <ul className="list-disc	mx-8">
-                            {temperaturOptions.map((d) => (
+                        <div className="grid grid-cols-4   gap-4">
+                          <div className="flex flex-col">
+                            <b>Faktor yang dapat dikendalikan</b>
+                            <div className="my-4">
+                              Drainase
+                              <ul className="list-disc	mx-8">
+                                {drainaseOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="my-4">
+                              Kapasitas Tukar Kation
+                              <ul className="list-disc	mx-8">
+                                {kapasitasTukarKationOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="my-4">
+                              Tekstur Tanah
+                              <ul className="list-disc	mx-8">
+                                {teksturTanahOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="flex flex-col">
+                            <b>Faktor yang efeknya dapat dikoreksi</b>
+                            <div className="my-4">
+                              Kejenuhan Basa
+                              <ul className="list-disc	mx-8">
+                                {kejenuhanBasaOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="my-4">
+                              Kedalaman Mineral Tanah
+                              <ul className="list-disc	mx-8">
+                                {kedalamanMineralTanahOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="my-4">
+                              Kemasaman Tanah
+                              <ul className="list-disc	mx-8">
+                                {kemasamanTanahOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="flex flex-col col-span-2 ">
+                            <b>
+                              Faktor yang tidak dapat dikendalikan dan dikoreksi
+                            </b>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div className="my-4">
+                                Faktor cuaca
+                                <ul className="list-decimal mx-8">
+                                  <li>Temperatur</li>
+                                  <ul className="list-disc	mx-8">
+                                    {temperaturOptions.map((d) => (
+                                      <li className="text-left">{d.label}</li>
+                                    ))}
+                                  </ul>
+                                  <li>Curah Hujan</li>
+                                  <ul className="list-disc	mx-8">
+                                    {curahHujanOptions.map((d) => (
+                                      <li className="text-left">{d.label}</li>
+                                    ))}
+                                  </ul>
+                                  <li>Lama Penyinaran</li>
+                                  <ul className="list-disc	mx-8">
+                                    {/* {lamaPenyinaranOptions.map((d) => (
                               <li>
                                 {d.value} {d.label}
                               </li>
-                            ))}
-                          </ul>
-                          <li>Curah Hujan</li>
-                          <ul className="list-disc	mx-8">
-                            {curahHujanOptions.map((d) => (
-                              <li>
-                                {d.value} {d.label}
-                              </li>
-                            ))}
-                          </ul>
-                          <li>Lama Penyinaran</li>
-                          <ul className="list-disc	mx-8">
-                            {lamaPenyinaranOptions.map((d) => (
-                              <li>
-                                {d.value} {d.label}
-                              </li>
-                            ))}
-                          </ul>
-                          <li>Radiasi Penyinaran</li>
-                          <ul className="list-disc	mx-8">
-                            {temperaturOptions.map((d) => (
-                              <li>
-                                {d.value} {d.label}
-                              </li>
-                            ))}
-                          </ul>
-                        </ul>
-                        <br />
-                        Faktor Relief
-                        <ul className="list-decimal mx-8">
-                          <li>Elevasi</li>
-                          <ul className="list-disc	mx-8">
-                            {elevasiOptions.map((d) => (
-                              <li>
-                                {d.value} {d.label}
-                              </li>
-                            ))}
-                          </ul>
-                          <li>Relief</li>
-                          <ul className="list-disc	mx-8">
-                            {reliefOptions.map((d) => (
-                              <li>
-                                {d.value} {d.label}
-                              </li>
-                            ))}
-                          </ul>
-                        </ul>
+                            ))} */}
+                                  </ul>
+                                  <li>Radiasi Penyinaran</li>
+                                  <ul className="list-disc	mx-8">
+                                    {temperaturOptions.map((d) => (
+                                      <li className="text-left">{d.label}</li>
+                                    ))}
+                                  </ul>
+                                </ul>
+                              </div>
+                              <div className="my-4">
+                                Faktor Relief
+                                <ul className="list-decimal mx-8">
+                                  <li>Elevasi</li>
+                                  <ul className="list-disc	mx-8">
+                                    {elevasiOptions.map((d) => (
+                                      <li className="text-left">{d.label}</li>
+                                    ))}
+                                  </ul>
+                                  <li>Relief</li>
+                                  <ul className="list-disc	mx-8">
+                                    {reliefOptions.map((d) => (
+                                      <li className="text-left">{d.label}</li>
+                                    ))}
+                                  </ul>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -395,6 +396,7 @@ export default function Glosarium() {
                       <div className="mx-16 w-12/12 sm:7/12 md:7/12 text-lg text-justify text-black">
                         <ul className="list-disc mx-8 mb-32">
                           {proporsiOptions.map((d) => (
+                            // eslint-disable-next-line react/jsx-key
                             <li>
                               {d.value} {d.label}
                             </li>

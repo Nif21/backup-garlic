@@ -45,8 +45,6 @@ const Register = () => {
     email: Yup.string().email().required("Required"),
     phoneNumber: Yup.string().required("Required"),
     address: Yup.string().required("Required"),
-    kebutuhan: Yup.string().required("Required"),
-    tipe: Yup.string().required("Required"),
     password: Yup.string().required("Required").min(3, "Too Short!"),
   });
 
@@ -83,11 +81,11 @@ const Register = () => {
               >
                 <Form>
                   <dl>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-6 sm:gap-4 sm:px-6">
+                    <div className="bg-gray-50 px-4 py-5 grid grid-cols-6 gap-4 ">
                       <dt className="text-sm font-medium text-gray-500">
                         Nama Lengkap
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-5">
+                      <dd className=" text-sm text-gray-900 mt-0 col-span-5">
                         <Field
                           className={styles.field}
                           id="nama"
@@ -162,15 +160,15 @@ const Register = () => {
                       <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-5">
                         <Field
                           className={styles.field}
-                          id="kebutuhan"
+                          as="select"
                           name="kebutuhan"
-                          type="text"
-                        />
-                        <ErrorMessage
-                          component="a"
-                          className={styles.errorMsg}
-                          name="kebutuhan"
-                        />
+                        >
+                          <option value="penelitian">Penelitian</option>
+                          <option value="pendidikan">Pendidikan</option>
+                          <option value="pengabdianMasyarakat">
+                            Pengabdian Masyarakat
+                          </option>
+                        </Field>
                       </dd>
                     </div>
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-6 sm:gap-4 sm:px-6">
