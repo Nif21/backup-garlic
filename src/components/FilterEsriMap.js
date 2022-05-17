@@ -69,9 +69,6 @@ function FilterEsriMap() {
   useEffect(() => {
     if (!isLoading) {
       if (mapDiv.current) {
-        /**
-         * Initialize application
-         */
         const map = new ArcGISMap({
           basemap: "gray-vector",
         });
@@ -83,7 +80,6 @@ function FilterEsriMap() {
             components: ["attribution"],
           },
           extent: {
-            // autocasts as new Extent()
             xmin: 11467704.3,
             ymin: -1008101.35,
             xmax: 14285478.91,
@@ -102,8 +98,6 @@ function FilterEsriMap() {
           view: view,
           container: document.createElement("div"),
         });
-
-        // Add widget to the top right corner of the view
 
         var bgExpandLegend = new Expand({
           view: view,
@@ -128,7 +122,6 @@ function FilterEsriMap() {
 
         if (spt.length > 0) {
           spt.map((s) => {
-            //console.log(s);
             document
               .getElementById(`data-daerah-${s["kabupaten/kota"]}`)
               .addEventListener("click", async () => {
@@ -298,7 +291,10 @@ function FilterEsriMap() {
                 </calcite-label>
                 <calcite-label layout="inline">
                   <calcite-radio-button value="KelasCurahHujan"></calcite-radio-button>
-                  Curah Hujan
+                  <span>
+                    Curah Hujan ( Saat ini ditetapkan s1 <br /> karena data
+                    belum tersedia )
+                  </span>
                 </calcite-label>
                 <calcite-label layout="inline">
                   <calcite-radio-button value="KelasLamaPenyinaran"></calcite-radio-button>
@@ -360,8 +356,8 @@ const getNormalMap = (map, spt, filter) => {
         karakteristik.jenisTanah = k.jenisTanah;
         karakteristik.landform = k.landform;
         karakteristik.bahanInduk = k.bahanInduk;
-        karakteristik.luas = k.luas;
-        karakteristik.persentaseLuas = k.persentaseLuas;
+        karakteristik.luas = k.luas.toFixed(2);
+        karakteristik.persentaseLuas = k.persentaseLuas.toFixed(2);
         karakteristik.proporsi = k.proporsi == null ? "-" : k.proporsi.id;
         karakteristik.KelasKedalamanMineralTanah =
           k.KelasKedalamanMineralTanah == null

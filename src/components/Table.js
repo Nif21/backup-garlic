@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React from "react";
 import {
   useTable,
@@ -17,15 +18,9 @@ import { Button, PageButton } from "./shared/Button";
 import { classNames } from "./shared/Utils";
 import { SortIcon, SortUpIcon, SortDownIcon } from "./shared/Icons";
 
-// Define a default UI for filtering
-
-// This is a custom filter UI for selecting
-// a unique option from a list
 export function SelectColumnFilter({
-  column: { filterValue, setFilter, preFilteredRows, id, render },
+  column: { filterValue, setFilter, preFilteredRows, id, render, isRight },
 }) {
-  // Calculate the options for filtering
-  // using the preFilteredRows
   const options = React.useMemo(() => {
     const options = new Set();
     preFilteredRows.forEach((row) => {
@@ -34,7 +29,6 @@ export function SelectColumnFilter({
     return [...options.values()];
   }, [id, preFilteredRows]);
 
-  // Render a multi-select box
   return (
     <label className="flex gap-x-2 items-baseline">
       <span className="text-gray-700">{render("Header")}: </span>
@@ -96,16 +90,12 @@ export function AvatarCell({ value, column, row }) {
 }
 
 function Table({ columns, data }) {
-  // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    page, // Instead of using 'rows', we'll use page,
-    // which has only the rows for the active page
-
-    // The rest of these things are super handy, too ;)
+    page,
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -128,7 +118,6 @@ function Table({ columns, data }) {
     useSortBy,
     usePagination // new
   );
-
   // Render the UI for your table
   return (
     <>
@@ -145,29 +134,34 @@ function Table({ columns, data }) {
                   {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                       {headerGroup.headers.map((column) => (
-                        // Add the sorting props to control sorting. For this example
-                        // we can add them into the header props
                         <th
                           scope="col"
-                          className="group px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          className="group px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                           {...column.getHeaderProps(
                             column.getSortByToggleProps()
                           )}
                         >
-                          <div className="flex items-center justify-between">
-                            {column.render("Header")}
-                            {/* Add a sort direction indicator */}
-                            <span>
-                              {column.isSorted ? (
-                                column.isSortedDesc ? (
-                                  <SortDownIcon className="w-4 h-4 text-gray-400" />
+                          <div className="flex  items-center justify-between text-right">
+                            <div
+                              className={`${
+                                column.isRight ? "text-right" : "text-left"
+                              }    w-full`}
+                            >
+                              {column.render("Header")}
+                            </div>
+                            {!column.isRight && (
+                              <span>
+                                {column.isSorted ? (
+                                  column.isSortedDesc ? (
+                                    <SortDownIcon className="w-4 h-4 text-gray-400" />
+                                  ) : (
+                                    <SortUpIcon className="w-4 h-4 text-gray-400" />
+                                  )
                                 ) : (
-                                  <SortUpIcon className="w-4 h-4 text-gray-400" />
-                                )
-                              ) : (
-                                <SortIcon className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100" />
-                              )}
-                            </span>
+                                  <SortIcon className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100" />
+                                )}
+                              </span>
+                            )}
                           </div>
                         </th>
                       ))}
@@ -179,7 +173,6 @@ function Table({ columns, data }) {
                   className="bg-white divide-y divide-gray-200"
                 >
                   {page.map((row, i) => {
-                    // new
                     prepareRow(row);
                     return (
                       <tr {...row.getRowProps()}>
@@ -209,7 +202,6 @@ function Table({ columns, data }) {
           </div>
         </div>
       </div>
-      {/* Pagination */}
       <div className="py-3 flex items-center justify-between">
         <div className="flex-1 flex justify-between sm:hidden">
           <Button onClick={() => previousPage()} disabled={!canPreviousPage}>

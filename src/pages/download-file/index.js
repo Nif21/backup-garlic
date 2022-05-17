@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import HomeHeader from "../../components/HeaderNotSticky";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import Footer from "../../components/Footer";
-import { useTable } from "react-table";
-import { HiOutlineDownload } from "react-icons/hi";
 import storage from "../../redux/storage";
 import Table from "../../components/Table";
 
@@ -32,7 +30,6 @@ function Index() {
     for (const d in data) {
       data[d].link = data[d]["kabupaten/kota"];
     }
-    console.log(data);
     if (data) {
       setLoading(false);
       setDaerah(data);
@@ -50,6 +47,23 @@ function Index() {
       });
   };
 
+  const handleDownloadShapeFile = (value) => {
+    fetch(
+      "https://garlic-backend.herokuapp.com/api/v1/download/shapefile?kabupaten/kota=" +
+        value,
+      {
+        headers: new Headers({
+          Authorization: "Bearer " + auth.token,
+          "Content-Type": "application/x-www-form-urlencoded",
+        }),
+      }
+    )
+      .then((response) => response.text())
+      .then((data) => {
+        window.location.href = data;
+      });
+  };
+
   const handleClick = () => {
     setActive(!active);
   };
@@ -58,15 +72,26 @@ function Index() {
     () => [
       {
         Header: "Nama Daerah",
+        isRight: false,
         accessor: "kabupaten/kota",
       },
       {
+        Header: () => {
+          return <div className="text-right ">Download</div>;
+        },
+        isRight: true,
         accessor: "link",
         Cell: ({ value }) => {
           return (
             <div className="text-right ">
-              <button onClick={() => handleDownload(value)}>
-                <HiOutlineDownload />
+              <button onClick={() => handleDownload(value)} className="btn m-1">
+                CSV
+              </button>
+              <button
+                onClick={() => handleDownloadShapeFile(value)}
+                className="btn m-1"
+              >
+                SHP
               </button>
             </div>
           );

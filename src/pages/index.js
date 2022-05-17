@@ -8,9 +8,11 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import storage from "../redux/storage";
+import LoginModal from "../components/LoginModal";
 
 export default function Home() {
   const [active, setActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const auth = storage.get("auth", {
     token: "",
     user: {
@@ -21,7 +23,6 @@ export default function Home() {
   const handleClick = () => {
     setActive(!active);
   };
-
   return (
     <div className="flex flex-col h-screen font-display bg-white">
       <Head>
@@ -34,7 +35,12 @@ export default function Home() {
             !active ? "-ml-64" : ""
           } `}
         >
-          <NavigationDrawer token={auth.token} nama={auth.user.nama} />
+          <NavigationDrawer
+            token={auth.token}
+            nama={auth.user.nama}
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
+          />
         </aside>
         <div className="flex flex-1 flex-col ">
           <header className="flex items-center text-semibold text-gray-100 bg-primary-white ">
@@ -47,6 +53,15 @@ export default function Home() {
             </main>
             <Footer background="bg-primary-dark" textColor="text-white" />
           </div>
+          {isOpen && (
+            <div className="w-full h-full bg-gray-900 bg-opacity-80 top-0 fixed sticky-0">
+              <div className="2xl:container  2xl:mx-auto py-48 px-4 md:px-28 flex justify-center items-center">
+                <div className="max-w-md w-full space-y-8 ">
+                  <LoginModal />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

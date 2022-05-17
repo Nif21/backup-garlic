@@ -4,7 +4,13 @@ import HeaderFilter from "./HeaderFilter";
 import { HiUserCircle } from "react-icons/hi";
 import { useRouter } from "next/router";
 
-export default function NavigationDrawer({ title, token, nama }) {
+export default function NavigationDrawer({
+  title,
+  token,
+  nama,
+  setIsOpen,
+  isOpen,
+}) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -63,7 +69,12 @@ export default function NavigationDrawer({ title, token, nama }) {
 
         <div className="flex-grow"></div>
         {token === "" || token === undefined ? (
-          <button className="w-auto	 py-4  mx-4 mb-4 hover:text-gray-500 hover:bg-primary-darkcoco cursor-pointer bg-primary-coco rounded-xl">
+          <button
+            className="w-auto	 py-4  mx-4 mb-4 hover:text-gray-500 hover:bg-primary-darkcoco cursor-pointer bg-primary-coco rounded-xl"
+            // onClick={() => {
+            //   setIsOpen(!isOpen);
+            // }}
+          >
             <Link href="/login">
               <div className="text-center">Login</div>
             </Link>
