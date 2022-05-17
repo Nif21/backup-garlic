@@ -80,7 +80,7 @@ function Index() {
 
   return (
     <>
-      <div className="flex flex-col font-display h-screen bg-white">
+      <div className="flex flex-col font-display h-screen bg-white text-black">
         <Head>
           <title>INA Agro-GARLIC</title>
           <link rel="icon" href="/favicon.ico" />

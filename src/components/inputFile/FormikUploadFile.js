@@ -73,7 +73,7 @@ function UploadFile({ values, setFieldValue }) {
   };
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 text-black">
       <Form>
         <div className="grid grid-cols-6 gap-6 my-8 mx-2">
           <div className="mb-col-span-6 sm:col-span-3">

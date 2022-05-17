@@ -186,9 +186,9 @@ const FormikInput = () => {
     });
     setCurahHujanOptions(curahHujan);
 
-    const lamaPenyinaran = [];
-    data.lamaPenyinaran.map((d) => {
-      lamaPenyinaran.push({
+    const radiasiPenyinaran = [];
+    data.radiasiPenyinaran.map((d) => {
+      radiasiPenyinaran.push({
         label: `${d.jenis} (${
           d.intervalBawah == null
             ? " < "
@@ -203,7 +203,7 @@ const FormikInput = () => {
         kelas: d.kelas,
       });
     });
-    setLamaPenyinaranOptions(lamaPenyinaran);
+    setLamaPenyinaranOptions(radiasiPenyinaran);
 
     const elevasi = [];
     data.elevasi.map((d) => {
@@ -226,6 +226,7 @@ const FormikInput = () => {
     setElevasiOptions(elevasi);
 
     const temperatur = [];
+    console.log(data.temperatur);
     data.temperatur.map((d) => {
       temperatur.push({
         label: ` (${
@@ -264,7 +265,7 @@ const FormikInput = () => {
       // cuaca: "",
       temperatur: "",
       curahHujan: "",
-      lamaPenyinaran: "",
+      radiasiPenyinaran: "",
       // faktorRelief: "",
       elevasi: "",
       relief: "",
@@ -273,6 +274,7 @@ const FormikInput = () => {
     onSubmit: (values) => {
       let empty = false;
       for (const v in values) {
+        console.log(values[v]);
         if (values[v] == "") empty = true;
       }
       let result = {
@@ -291,7 +293,7 @@ const FormikInput = () => {
         // cuaca: values.cuaca,
         temperatur: 1,
         curahHujan: values.curahHujan,
-        lamaPenyinaran: values.lamaPenyinaran,
+        radiasiPenyinaran: values.radiasiPenyinaran,
         // faktorRelief: values.faktorRelief,
         elevasi: values.elevasi,
         relief: values.relief,
@@ -559,16 +561,16 @@ const FormikInput = () => {
           </div>
           <div className="col-span-6 sm:col-span-3 my-2">
             <label
-              htmlFor="lamaPenyinaran"
+              htmlFor="radiasiPenyinaran"
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
-              <b>Lama Penyinaran</b>
+              <b>Radiasi Penyinaran</b>
             </label>
             <CustomSelect
               onChange={(value) =>
-                formik.setFieldValue("lamaPenyinaran", value.value)
+                formik.setFieldValue("radiasiPenyinaran", value.value)
               }
-              value={formik.values.lamaPenyinaran}
+              value={formik.values.radiasiPenyinaran}
               options={lamaPenyinaranOptions}
             />
           </div>
@@ -898,18 +900,18 @@ const FormikInput = () => {
                     <div className="group relative">
                       <div
                         className={`py-4 px-2 w-full min-h-80 ${getColor(
-                          syaratTumbuh.karakteristikTanah.KelasLamaPenyinaran
+                          syaratTumbuh.karakteristikTanah.KelasRadiasiPenyinaran
                             .kelas
                         )} aspect-w-1 aspect-h-1 rounded-md overflow-hidden flex flex-col lg:h-32 lg:aspect-none`}
                       >
                         <p className="sm:text-xs lg:text-base text-center	text-white">
-                          Kelas Lama Penyinaran
+                          Kelas Radiasi Penyinaran
                         </p>
                         <p className="flex-grow "></p>
                         <p className="text-center	sm:text-lg font-bold	 lg:text-2xl text-white">
                           {getKelas(
-                            syaratTumbuh.karakteristikTanah.KelasLamaPenyinaran
-                              .kelas
+                            syaratTumbuh.karakteristikTanah
+                              .KelasRadiasiPenyinaran.kelas
                           )}
                         </p>
                       </div>
@@ -1042,16 +1044,16 @@ const FormikInput = () => {
                             .rekomendasi}
                       </p>
                     )}
-                    {syaratTumbuh.karakteristikTanah.KelasLamaPenyinaran ==
+                    {syaratTumbuh.karakteristikTanah.KelasRadiasiPenyinaran ==
                     null ? (
                       ""
-                    ) : syaratTumbuh.karakteristikTanah.KelasLamaPenyinaran
+                    ) : syaratTumbuh.karakteristikTanah.KelasRadiasiPenyinaran
                         .rekomendasi == null ? (
                       ""
                     ) : (
                       <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
-                        {" Pada variabel Lama Penyinaran membutuhkan rekomendasi " +
-                          syaratTumbuh.karakteristikTanah.KelasLamaPenyinaran
+                        {" Pada variabel Radiasi Penyinaran membutuhkan rekomendasi " +
+                          syaratTumbuh.karakteristikTanah.KelasRadiasiPenyinaran
                             .rekomendasi}
                       </p>
                     )}

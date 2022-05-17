@@ -83,7 +83,6 @@ function FilterEsriMap() {
             components: ["attribution"],
           },
           extent: {
-            // autocasts as new Extent()
             xmin: 11467704.3,
             ymin: -1008101.35,
             xmax: 14285478.91,
@@ -353,7 +352,7 @@ const getNormalMap = (map, spt, filter) => {
     const dt = [];
     for (let s in spt) {
       spt[s].data.map((d) => {
-        //console.log(d);
+        console.log(d);
         const k = d.karakteristikTanah[0];
         const karakteristik = d;
         karakteristik.klasifikasiTanah = k.klasifikasiTanah;
@@ -411,14 +410,14 @@ const getNormalMap = (map, spt, filter) => {
       v.kelas = kelas;
 
       const rings = [];
-      v.geom.coordinates.map((b) => rings.push(b[0]));
+
+      v.geom.coordinates.map((g) => rings.push(g[0]));
       if (kelasNumber) {
         polygon = {
           type: "polygon",
           rings,
         };
       }
-      //console.log(v.geom.coordinates.length + " " + v.spt)
       return new Graphic({
         geometry: polygon,
         attributes: v,
@@ -485,7 +484,6 @@ const getNormalMap = (map, spt, filter) => {
       let kelasNumber =
         k.KelasFaktorYangDapatDikendalikan.kelas < 2 &&
         k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas < 2;
-      //console.log(kelasList);
       const rings = [];
       v.geom.coordinates.map((b) => rings.push(b[0]));
       if (kelasNumber) {
@@ -497,11 +495,9 @@ const getNormalMap = (map, spt, filter) => {
 
       return new Graphic({
         geometry: polygon,
-        //attributes: v,
       });
     });
 
-    // console.log(graphicsNormal);
     const normalLayer = new FeatureLayer({
       fields: [
         {
@@ -962,6 +958,7 @@ const getNormalMap = (map, spt, filter) => {
     const dt = [];
     for (let s in spt) {
       spt[s].data.map((d) => {
+        console.log(d);
         const k = d.karakteristikTanah[0];
         if (k[filter] != null) {
           const karakteristik = d;
