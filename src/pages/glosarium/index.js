@@ -273,7 +273,7 @@ export default function Glosarium() {
                   </div>
                   <div className="p-4 ">
                     <div className="flex flex-wrap">
-                      <div className="mx-16 w-12/12 sm:7/12 md:7/12 text-lg text-justify text-black">
+                      <div className="mx-16 w-12/12 sm:7/12 md:7/12 text-lg  text-black">
                         <div className="grid grid-cols-4   gap-4">
                           <div className="flex flex-col">
                             <b>Faktor yang dapat dikendalikan</b>
@@ -329,36 +329,36 @@ export default function Glosarium() {
                               </ul>
                             </div>
                           </div>
-                          <div className="flex flex-col col-span-2 ">
+                          <div className="flex flex-col col-span-2">
                             <b>
                               Faktor yang tidak dapat dikendalikan dan dikoreksi
                             </b>
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-2 ">
                               <div className="my-4">
                                 Faktor cuaca
-                                <ul className="list-decimal mx-8">
+                                <ul className="list-decimal mx-2">
                                   <li>Temperatur</li>
-                                  <ul className="list-disc	mx-8">
+                                  <ul className="list-disc	mx-4">
                                     {temperaturOptions.map((d) => (
                                       <li className="text-left">{d.label}</li>
                                     ))}
                                   </ul>
                                   <li>Curah Hujan</li>
-                                  <ul className="list-disc	mx-8">
+                                  <ul className="list-disc	mx-4">
                                     {curahHujanOptions.map((d) => (
                                       <li className="text-left">{d.label}</li>
                                     ))}
                                   </ul>
                                   <li>Lama Penyinaran</li>
-                                  <ul className="list-disc	mx-8">
-                                    {/* {lamaPenyinaranOptions.map((d) => (
-                              <li>
-                                {d.value} {d.label}
-                              </li>
-                            ))} */}
+                                  <ul className="list-disc	mx-4">
+                                    {lamaPenyinaranOptions.map((d) => (
+                                      <li>
+                                        {d.value} {d.label}
+                                      </li>
+                                    ))}
                                   </ul>
                                   <li>Radiasi Penyinaran</li>
-                                  <ul className="list-disc	mx-8">
+                                  <ul className="list-disc	mx-4">
                                     {temperaturOptions.map((d) => (
                                       <li className="text-left">{d.label}</li>
                                     ))}
@@ -367,15 +367,15 @@ export default function Glosarium() {
                               </div>
                               <div className="my-4">
                                 Faktor Relief
-                                <ul className="list-decimal mx-8">
+                                <ul className="list-decimal mx-2">
                                   <li>Elevasi</li>
-                                  <ul className="list-disc	mx-8">
+                                  <ul className="list-disc	mx-4">
                                     {elevasiOptions.map((d) => (
                                       <li className="text-left">{d.label}</li>
                                     ))}
                                   </ul>
                                   <li>Relief</li>
-                                  <ul className="list-disc	mx-8">
+                                  <ul className="list-disc	mx-4">
                                     {reliefOptions.map((d) => (
                                       <li className="text-left">{d.label}</li>
                                     ))}
@@ -403,6 +403,10 @@ export default function Glosarium() {
                           ))}
                         </ul>
                       </div>
+                    </div>
+                    <div className="p-4 mb-4 text-black">
+                      *Informasi diatas bersumber dari Balai Besar Sumberdaya
+                      Lahan Pertanian
                     </div>
                   </div>
                 </div>

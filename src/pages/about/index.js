@@ -128,7 +128,7 @@ export default function About() {
                       </div>
                     </div>
                   </div>
-                  <div className="p-4 mb-4">
+                  <div className="p-4 mb-4 text-black">
                     *Informasi diatas bersumber dari Balai Besar Sumberdaya
                     Lahan Pertanian
                   </div>

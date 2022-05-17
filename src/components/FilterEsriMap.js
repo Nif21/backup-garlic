@@ -338,18 +338,18 @@ function FilterEsriMap() {
   );
 }
 
-function kelasFaktor(a, b) {
-  if (a < 2 && b < 2) return "Kelas S1, Sangat Sesuai";
-  else if (a < 3 && b < 3) return "Kelas S2, Cukup Sesuai";
-  else if (a == 3 || b == 3) return "Kelas S3, Sesuai Marginal";
-  return "Kelas N, Tidak Sesuai";
+function kelasFaktor(a) {
+  if (a === 1) return "N (Tidak Sesuai)";
+  else if (a === 2) return "S3 (Sesuai Marjinal)";
+  else if (a === 3) return "S2 (Cukup Sesuai)";
+  return "S1 (Sangat Sesuai)";
 }
 const getNormalMap = (map, spt, filter) => {
   if (filter == "") {
     const dt = [];
     for (let s in spt) {
+      console.log(spt);
       spt[s].data.map((d) => {
-        console.log(d);
         const k = d.karakteristikTanah[0];
         const karakteristik = d;
         karakteristik.klasifikasiTanah = k.klasifikasiTanah;
@@ -396,20 +396,14 @@ const getNormalMap = (map, spt, filter) => {
     let polygon;
     const graphicsNormal = dt.map((v) => {
       const k = v.karakteristikTanah[0];
-      let kelasNumber =
-        k.KelasFaktorYangDapatDikendalikan.kelas > 3 ||
-        k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas > 3;
-
-      let kelas = kelasFaktor(
-        k.KelasFaktorYangDapatDikendalikan.kelas,
-        k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas
-      );
-      v.kelas = kelas;
+      let kelasNumber = k.KelasSyaratTumbuh.kelas === 1;
 
       const rings = [];
 
       v.geom.coordinates.map((g) => rings.push(g[0]));
       if (kelasNumber) {
+        let kelas = k.KelasSyaratTumbuh.keterangan;
+        v.kelas = kelas;
         polygon = {
           type: "polygon",
           rings,
@@ -423,17 +417,13 @@ const getNormalMap = (map, spt, filter) => {
 
     const graphicsS3 = dt.map((v) => {
       const k = v.karakteristikTanah[0];
-      let kelasNumber =
-        k.KelasFaktorYangDapatDikendalikan.kelas == 3 ||
-        k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas == 3;
-      let kelas = kelasFaktor(
-        k.KelasFaktorYangDapatDikendalikan.kelas,
-        k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas
-      );
-      v.kelas = kelas;
+      let kelasNumber = k.KelasSyaratTumbuh.kelas === 2;
       const rings = [];
       v.geom.coordinates.map((b) => rings.push(b[0]));
       if (kelasNumber) {
+        let kelas = k.KelasSyaratTumbuh.keterangan;
+
+        v.kelas = kelas;
         polygon = {
           type: "polygon",
           rings,
@@ -448,18 +438,13 @@ const getNormalMap = (map, spt, filter) => {
 
     const graphicsS2 = dt.map((v) => {
       const k = v.karakteristikTanah[0];
-      let kelas = kelasFaktor(
-        k.KelasFaktorYangDapatDikendalikan.kelas,
-        k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas
-      );
-      v.kelas = kelas;
-      let kelasNumber =
-        k.KelasFaktorYangDapatDikendalikan.kelas < 3 &&
-        k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas < 3;
+      let kelasNumber = k.KelasSyaratTumbuh.kelas === 3;
 
       const rings = [];
       v.geom.coordinates.map((b) => rings.push(b[0]));
       if (kelasNumber) {
+        let kelas = k.KelasSyaratTumbuh.keterangan;
+        v.kelas = kelas;
         polygon = {
           type: "polygon",
           rings,
@@ -473,17 +458,13 @@ const getNormalMap = (map, spt, filter) => {
 
     const graphicsS1 = dt.map((v) => {
       const k = v.karakteristikTanah[0];
-      let kelas = kelasFaktor(
-        k.KelasFaktorYangDapatDikendalikan.kelas,
-        k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas
-      );
-      v.kelas = kelas;
-      let kelasNumber =
-        k.KelasFaktorYangDapatDikendalikan.kelas < 2 &&
-        k.KelasFaktorYangEfeknyaDapatDikoreksi.kelas < 2;
+      let kelasNumber = k.KelasSyaratTumbuh.kelas === 4;
+
       const rings = [];
       v.geom.coordinates.map((b) => rings.push(b[0]));
       if (kelasNumber) {
+        let kelas = k.KelasSyaratTumbuh.keterangan;
+        v.kelas = kelas;
         polygon = {
           type: "polygon",
           rings,
@@ -969,11 +950,11 @@ const getNormalMap = (map, spt, filter) => {
     }
     let polygon;
     const graphicsNormal = dt.map((v) => {
-      v.dataKelas = v.kelas == undefined ? "-" : kelasFaktor(v.kelas, v.kelas);
+      v.dataKelas = v.kelas == undefined ? "-" : kelasFaktor(v.kelas);
       v.filter = filter;
       const rings = [];
       v.geom.coordinates.map((b) => rings.push(b[0]));
-      if (v.kelas > 3) {
+      if (v.kelas === 1) {
       }
       polygon = {
         type: "polygon",
@@ -988,7 +969,7 @@ const getNormalMap = (map, spt, filter) => {
     const graphicsS3 = dt.map((v) => {
       const rings = [];
       v.geom.coordinates.map((b) => rings.push(b[0]));
-      if (v.kelas == 3) {
+      if (v.kelas === 2) {
         polygon = {
           type: "polygon",
           rings,
@@ -1004,7 +985,7 @@ const getNormalMap = (map, spt, filter) => {
     const graphicsS2 = dt.map((v) => {
       const rings = [];
       v.geom.coordinates.map((b) => rings.push(b[0]));
-      if (v.kelas < 3) {
+      if (v.kelas === 3) {
         polygon = {
           type: "polygon",
           rings,
@@ -1019,7 +1000,7 @@ const getNormalMap = (map, spt, filter) => {
     const graphicsS1 = dt.map((v) => {
       const rings = [];
       v.geom.coordinates.map((b) => rings.push(b[0]));
-      if (v.kelas < 2) {
+      if (v.kelas === 4) {
         polygon = {
           type: "polygon",
           rings,
@@ -1093,7 +1074,7 @@ const getNormalMap = (map, spt, filter) => {
       popupTemplate: {
         title: "No SPT : {spt} (Proporsi {proporsi} )",
         content:
-          "<h1><b>Filter:</b> {filter}</h1>" +
+          "<h1> {filter}</h1>" +
           "<br><b>Kelas:</b> {dataKelas}" +
           "<br><b>Jenis : </b> {jenis}" +
           "<br><b>Rekomendasi: </b> {rekomendasi}",
@@ -1163,7 +1144,7 @@ const getNormalMap = (map, spt, filter) => {
       popupTemplate: {
         title: "No SPT : {spt} (Proporsi {proporsi} )",
         content:
-          "<h1><b>Filter:</b> {filter}</h1>" +
+          "<h1>{filter}</h1>" +
           "<br><b>Kelas:</b> {dataKelas}" +
           "<br><b>Jenis : </b> {jenis}" +
           "<br><b>Rekomendasi: </b> {rekomendasi}",
@@ -1232,7 +1213,7 @@ const getNormalMap = (map, spt, filter) => {
       popupTemplate: {
         title: "No SPT : {spt} (Proporsi {proporsi} )",
         content:
-          "<h1><b>Filter:</b> {filter}</h1>" +
+          "<h1> {filter}</h1>" +
           "<br><b>Kelas:</b> {dataKelas}" +
           "<br><b>Jenis : </b> {jenis}" +
           "<br><b>Rekomendasi: </b> {rekomendasi}",
@@ -1301,7 +1282,7 @@ const getNormalMap = (map, spt, filter) => {
       popupTemplate: {
         title: "No SPT : {spt} (Proporsi {proporsi} )",
         content:
-          "<h1><b>Filter:</b> {filter}</h1>" +
+          "<h1> {filter}</h1>" +
           "<br><b>Kelas:</b> {dataKelas}" +
           "<br><b>Jenis : </b> {jenis}" +
           "<br><b>Rekomendasi: </b> {rekomendasi}",

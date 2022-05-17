@@ -12,7 +12,7 @@ export default function NavigationDrawer({
   isOpen,
 }) {
   const router = useRouter();
-
+  console.log(token);
   const handleClick = () => {
     router.replace("/profile");
   };

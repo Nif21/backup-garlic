@@ -23,6 +23,31 @@ export default function Home() {
   const handleClick = () => {
     setActive(!active);
   };
+
+  useEffect(() => {
+    if (auth.token !== "") {
+      recheckToken();
+    }
+  }, []);
+
+  const recheckToken = async () => {
+    const requestOptionsProfile = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + auth.token,
+      },
+    };
+    const responseProfile = await fetch(
+      "https://garlic-backend.herokuapp.com/api/v1/akun",
+      requestOptionsProfile
+    );
+    console.log(responseProfile);
+    if (!responseProfile.ok) {
+      setIsOpen(true);
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen font-display bg-white">
       <Head>

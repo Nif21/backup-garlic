@@ -226,7 +226,6 @@ const FormikInput = () => {
     setElevasiOptions(elevasi);
 
     const temperatur = [];
-    console.log(data.temperatur);
     data.temperatur.map((d) => {
       temperatur.push({
         label: ` (${
@@ -272,10 +271,12 @@ const FormikInput = () => {
     },
 
     onSubmit: (values) => {
-      let empty = false;
+      let empty = "";
+
       for (const v in values) {
-        console.log(values[v]);
-        if (values[v] == "") empty = true;
+        if (values[v] == "") {
+          empty += ` ${v},`;
+        }
       }
       let result = {
         provinsi: values.provinsi,
@@ -299,11 +300,11 @@ const FormikInput = () => {
         relief: values.relief,
       };
 
-      if (!empty) {
+      if (empty === "") {
         postData(result);
       } else {
         setTimeout(() => {
-          alert("Kelas Tidak Boleh Kosong");
+          alert(`Kelas ${empty} Tidak Boleh Kosong`);
         }, 1000);
       }
     },
@@ -338,22 +339,22 @@ const FormikInput = () => {
   }
 
   const getColor = (color) => {
-    if (color == 999999 || color == 99) {
+    if (color === 1) {
       return "bg-red-600";
-    } else if (color == 3) {
+    } else if (color === 2) {
       return "bg-yellow-600";
-    } else if (color == 2) {
+    } else if (color === 3) {
       return "bg-yellow-300";
     }
     return "bg-green-500";
   };
 
   const getKelas = (color) => {
-    if (color == 999999 || color == 99) {
+    if (color === 1) {
       return "N";
-    } else if (color == 3) {
+    } else if (color === 2) {
       return "S3";
-    } else if (color == 2) {
+    } else if (color === 3) {
       return "S2";
     }
     return "S1";

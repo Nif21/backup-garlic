@@ -23,6 +23,7 @@ module.exports = {
           darkcoco: "#E39A40",
           krem: "#F7F3E7",
           red: "#FF0000",
+          redlight: "#FF4C4C",
         },
         green: {
           normal: "#339710",
