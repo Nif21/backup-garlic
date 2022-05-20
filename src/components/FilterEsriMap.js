@@ -8,6 +8,7 @@ import Zoom from "@arcgis/core/widgets/Zoom";
 import styles from "../styles/EsriMap.module.css";
 import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 import Expand from "@arcgis/core/widgets/Expand";
+import Print from "@arcgis/core/widgets/Print";
 import Header from "../components/Header";
 
 function FilterEsriMap() {
@@ -99,6 +100,12 @@ function FilterEsriMap() {
           container: document.createElement("div"),
         });
 
+        const print = new Print({
+          view: view,
+          printServiceUrl:
+            "https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+        });
+
         var bgExpandLegend = new Expand({
           view: view,
           content: legend.container,
@@ -108,6 +115,11 @@ function FilterEsriMap() {
           view: view,
           content: basemapGallery.container,
           expandIconClass: "esri-icon-basemap",
+        });
+        var bgExpandPrint = new Expand({
+          view: view,
+          content: print,
+          expandIconClass: "esri-icon-printer",
         });
         const filterElement = document.getElementById("filter-variabel-place");
         const dataDaerahPlace = document.getElementById("data-daerah-place");
@@ -145,6 +157,7 @@ function FilterEsriMap() {
         view.ui.add(filterElement, "top-right");
         view.ui.add(bgExpandLegend, "top-right");
         view.ui.add(bgExpandBasemap, "top-right");
+        view.ui.add(bgExpandPrint, "top-right");
         view.ui.add(zoom, "top-right");
         if (!isLoading) {
           getNormalMap(map, spt, "");
