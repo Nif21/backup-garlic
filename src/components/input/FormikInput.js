@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useFormik, Formik } from "formik";
+import { useFormik, Formik, Field } from "formik";
 import CustomSelect from "./CustomSelect";
 import * as Yup from "yup";
 
@@ -237,7 +237,7 @@ const FormikInput = () => {
         }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
           d.intervalAtas == null ? "" : d.intervalAtas
         } c/bulan)`,
-        value: d.jenis,
+        value: d.id,
         rekomendasi: d.rekomendasi,
         kelas: d.kelas,
       });
@@ -264,7 +264,7 @@ const FormikInput = () => {
       // cuaca: "",
       temperatur: "",
       curahHujan: "",
-      radiasiPenyinaran: "",
+      //radiasiPenyinaran: "",
       // faktorRelief: "",
       elevasi: "",
       relief: "",
@@ -272,7 +272,6 @@ const FormikInput = () => {
 
     onSubmit: (values) => {
       let empty = "";
-
       for (const v in values) {
         if (values[v] == "") {
           empty += ` ${v},`;
@@ -292,9 +291,9 @@ const FormikInput = () => {
         kedalamanMineralTanah: values.kedalamanMineralTanah,
         kejenuhanBasa: values.kejenuhanBasa,
         // cuaca: values.cuaca,
-        temperatur: 1,
+        temperatur: values.temperatur,
         curahHujan: values.curahHujan,
-        radiasiPenyinaran: values.radiasiPenyinaran,
+        //radiasiPenyinaran: values.radiasiPenyinaran,
         // faktorRelief: values.faktorRelief,
         elevasi: values.elevasi,
         relief: values.relief,
@@ -331,33 +330,50 @@ const FormikInput = () => {
       "https://garlic-backend.herokuapp.com/api/v1/inputPengguna",
       requestOptions
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          return response.text().then((text) => {
+            throw new Error(text);
+          });
+        } else {
+          return response.json();
+        }
+      })
       .then((data) => {
         setSyaratTumbuh(data);
         setShowModal(true);
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          alert(error);
+        }, 1000);
       });
   }
 
-  const getColor = (color) => {
-    if (color === 1) {
+  const getColor = (nilai) => {
+    if (1 <= nilai && nilai <= 1.5) {
       return "bg-red-600";
-    } else if (color === 2) {
+    } else if (1.5 < nilai && nilai <= 2.5) {
       return "bg-yellow-600";
-    } else if (color === 3) {
+    } else if (2.5 < nilai && nilai <= 3.5) {
       return "bg-yellow-300";
+    } else if (3.5 < nilai && nilai <= 4) {
+      return "bg-green-500";
     }
-    return "bg-green-500";
+    return "bg-red-600";
   };
 
-  const getKelas = (color) => {
-    if (color === 1) {
+  const getKelas = (nilai) => {
+    if (1 <= nilai && nilai <= 1.5) {
       return "N";
-    } else if (color === 2) {
+    } else if (1.5 < nilai && nilai <= 2.5) {
       return "S3";
-    } else if (color === 3) {
+    } else if (2.5 < nilai && nilai <= 3.5) {
       return "S2";
+    } else if (3.5 < nilai && nilai <= 4) {
+      return "S1";
     }
-    return "S1";
+    return "N";
   };
 
   return (
@@ -560,7 +576,7 @@ const FormikInput = () => {
               options={curahHujanOptions}
             />
           </div>
-          <div className="col-span-6 sm:col-span-3 my-2">
+          {/* <div className="col-span-6 sm:col-span-3 my-2">
             <label
               htmlFor="radiasiPenyinaran"
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
@@ -574,7 +590,7 @@ const FormikInput = () => {
               value={formik.values.radiasiPenyinaran}
               options={lamaPenyinaranOptions}
             />
-          </div>
+          </div> */}
           <div className="col-span-6 sm:col-span-3 mt-8">
             <label
               htmlFor="faktorRelief"
@@ -628,14 +644,14 @@ const FormikInput = () => {
                   <div
                     className={`${getColor(
                       syaratTumbuh.karakteristikTanah.classify.KelasSyaratTumbuh
-                        .kelas
+                        .nilai
                     )} flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t`}
                   >
                     <h3 className="text-3xl font-semibold text-white">
                       Hasil dari peniliain data syarat tumbuh adalah{" "}
                       {getKelas(
                         syaratTumbuh.karakteristikTanah.classify
-                          .KelasSyaratTumbuh.kelas
+                          .KelasSyaratTumbuh.nilai
                       )}
                     </h3>
                     <button
@@ -653,7 +669,7 @@ const FormikInput = () => {
                       <div
                         className={`py-4 px-2 w-full min-h-80 ${getColor(
                           syaratTumbuh.karakteristikTanah.classify
-                            .KelasFaktorYangDapatDikendalikan.kelas
+                            .KelasFaktorYangDapatDikendalikan.nilai
                         )} aspect-w-1 aspect-h-1 rounded-md overflow-hidden flex flex-col lg:h-48 lg:aspect-none`}
                       >
                         <p className="sm:text-sm lg:text-lg text-center	text-white">
@@ -663,7 +679,7 @@ const FormikInput = () => {
                         <p className="text-center	sm:text-2xl font-bold	 lg:text-5xl text-white">
                           {getKelas(
                             syaratTumbuh.karakteristikTanah.classify
-                              .KelasFaktorYangDapatDikendalikan.kelas
+                              .KelasFaktorYangDapatDikendalikan.nilai
                           )}
                         </p>
                       </div>
@@ -672,7 +688,7 @@ const FormikInput = () => {
                       <div
                         className={`py-4 px-2 w-full min-h-80 ${getColor(
                           syaratTumbuh.karakteristikTanah.classify
-                            .KelasFaktorYangEfeknyaDapatDikoreksi.kelas
+                            .KelasFaktorYangEfeknyaDapatDikoreksi.nilai
                         )} aspect-w-1 aspect-h-1 rounded-md overflow-hidden  flex flex-col   lg:h-48 lg:aspect-none`}
                       >
                         <p className="sm:text-sm lg:text-lg text-center	text-white">
@@ -682,7 +698,7 @@ const FormikInput = () => {
                         <p className="text-center	sm:text-2xl font-bold	 lg:text-5xl text-white">
                           {getKelas(
                             syaratTumbuh.karakteristikTanah.classify
-                              .KelasFaktorYangEfeknyaDapatDikoreksi.kelas
+                              .KelasFaktorYangEfeknyaDapatDikoreksi.nilai
                           )}
                         </p>
                       </div>
@@ -692,7 +708,7 @@ const FormikInput = () => {
                         className={`py-4 px-2  w-full min-h-80 ${getColor(
                           syaratTumbuh.karakteristikTanah.classify
                             .KelasFaktorYangTidakDapatDikendalikanDanDikoreksi
-                            .kelas
+                            .nilai
                         )} aspect-w-1 aspect-h-1 rounded-md overflow-hidden  flex flex-col  lg:h-48 lg:aspect-none`}
                       >
                         <p className="sm:text-sm lg:text-lg text-center	text-white">
@@ -704,7 +720,7 @@ const FormikInput = () => {
                           {getKelas(
                             syaratTumbuh.karakteristikTanah.classify
                               .KelasFaktorYangTidakDapatDikendalikanDanDikoreksi
-                              .kelas
+                              .nilai
                           )}
                         </p>
                       </div>
@@ -713,7 +729,7 @@ const FormikInput = () => {
                       <div
                         className={`py-4 px-2 w-full min-h-80 ${getColor(
                           syaratTumbuh.karakteristikTanah.classify
-                            .KelasFaktorRelief.kelas
+                            .KelasFaktorRelief.nilai
                         )} aspect-w-1 aspect-h-1 rounded-md overflow-hidden  flex flex-col   lg:h-48 lg:aspect-none`}
                       >
                         <p className="sm:text-sm lg:text-lg text-center	text-white">
@@ -723,7 +739,7 @@ const FormikInput = () => {
                         <p className="text-center	sm:text-2xl font-bold	 lg:text-5xl text-white">
                           {getKelas(
                             syaratTumbuh.karakteristikTanah.classify
-                              .KelasFaktorRelief.kelas
+                              .KelasFaktorRelief.nilai
                           )}
                         </p>
                       </div>
@@ -732,17 +748,17 @@ const FormikInput = () => {
                       <div
                         className={`py-4 px-2 w-full min-h-80 ${getColor(
                           syaratTumbuh.karakteristikTanah.classify
-                            .KelasFaktorCuaca.kelas
+                            .KelasFaktorCuaca.nilai
                         )} aspect-w-1 aspect-h-1 rounded-md overflow-hidden  flex flex-col   lg:h-48 lg:aspect-none`}
                       >
                         <p className="sm:text-sm lg:text-lg text-center	text-white">
-                          Kelas Faktor Cuaca{" "}
+                          Kelas Faktor Cuaca
                         </p>
                         <p className="flex-grow "></p>
                         <p className="text-center	sm:text-2xl font-bold	 lg:text-5xl text-white">
                           {getKelas(
                             syaratTumbuh.karakteristikTanah.classify
-                              .KelasFaktorCuaca.kelas
+                              .KelasFaktorCuaca.nilai
                           )}
                         </p>
                       </div>

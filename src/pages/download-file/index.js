@@ -49,18 +49,11 @@ function Index() {
 
   const handleDownloadShapeFile = (value) => {
     fetch(
-      "https://garlic-backend.herokuapp.com/api/v1/download/shapefile?kabupaten/kota=" +
-        value,
-      {
-        headers: new Headers({
-          Authorization: "Bearer " + auth.token,
-          "Content-Type": "application/x-www-form-urlencoded",
-        }),
-      }
+      `https://garlic-backend.herokuapp.com/api/v1/download/shapefile/Bearer ${auth.token}?kabupaten/kota=${value}`
     )
       .then((response) => response.text())
       .then((data) => {
-        window.location.href = data;
+        window.location.href = `https://garlic-backend.herokuapp.com/api/v1/download/shapefile/Bearer ${auth.token}?kabupaten/kota=${value}`;
       });
   };
 

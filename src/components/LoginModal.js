@@ -14,7 +14,7 @@ const LoginModal = () => {
           <button
             onClick={() => {
               storage.remove("auth");
-              router.push("/");
+              window.location.reload();
             }}
           >
             Be Guest
