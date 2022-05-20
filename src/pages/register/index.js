@@ -42,7 +42,13 @@ const Register = () => {
 
   const loginSchema = Yup.object().shape({
     nama: Yup.string().required("Required"),
-    email: Yup.string().email().required("Required"),
+    email: Yup.string()
+      .email()
+      .required("Required")
+      .matches(
+        /[a-zA-Z0-9]+([\w\.\'\!\#\$\%\&\*\+\-\/\=\?\^\`\{\|\}\~])+@apps.ipb.ac.id/,
+        "Email harus menggunakan email ipb"
+      ),
     phoneNumber: Yup.string().required("Required"),
     address: Yup.string().required("Required"),
     password: Yup.string().required("Required").min(3, "Too Short!"),
