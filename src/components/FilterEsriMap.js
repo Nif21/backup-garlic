@@ -415,6 +415,19 @@ const getNormalMap = (map, spt, filter) => {
       });
     });
 
+    const uncoverageGraphics = dt.map((v) => {
+      const rings = [];
+      rings.push(v.geom.coordinates[0]);
+      polygon = {
+        type: "polygon",
+        rings,
+      };
+      return new Graphic({
+        geometry: polygon,
+        attributes: v,
+      });
+    });
+
     const graphicsS3 = dt.map((v) => {
       const k = v.karakteristikTanah[0];
       let kelasNumber = k.KelasSyaratTumbuh.kelas === 2;
@@ -928,6 +941,32 @@ const getNormalMap = (map, spt, filter) => {
           "<br><b>Persentase Luas: </b> {persentaseluas}",
       },
     });
+    const uncoverage = new FeatureLayer({
+      fields: [
+        {
+          name: "ObjectID",
+          alias: "ObjectID",
+          type: "oid",
+        },
+      ],
+      objectIdField: "ObjectID",
+      geometryType: "polygon",
+      source: uncoverageGraphics,
+      renderer: {
+        type: "simple",
+        symbol: {
+          color: "#EEEEEE",
+          type: "simple-fill",
+          style: "solid",
+          outline: {
+            color: [255, 255, 255],
+            width: 1,
+          },
+        },
+        label: "Tidak Tercakup",
+      },
+    });
+    map.add(uncoverage);
     map.add(normalLayer);
     map.add(s3Layer);
     map.add(s2Layer);
@@ -949,6 +988,19 @@ const getNormalMap = (map, spt, filter) => {
       });
     }
     let polygon;
+
+    const uncoverageGraphics = dt.map((v) => {
+      const rings = [];
+      rings.push(v.geom.coordinates[0]);
+      polygon = {
+        type: "polygon",
+        rings,
+      };
+      return new Graphic({
+        geometry: polygon,
+        attributes: v,
+      });
+    });
     const graphicsNormal = dt.map((v) => {
       v.dataKelas = v.kelas == undefined ? "-" : kelasFaktor(v.kelas);
       v.filter = filter;
@@ -1012,6 +1064,32 @@ const getNormalMap = (map, spt, filter) => {
         attributes: v,
       });
     });
+    const uncoverage = new FeatureLayer({
+      fields: [
+        {
+          name: "ObjectID",
+          alias: "ObjectID",
+          type: "oid",
+        },
+      ],
+      objectIdField: "ObjectID",
+      geometryType: "polygon",
+      source: uncoverageGraphics,
+      renderer: {
+        type: "simple",
+        symbol: {
+          color: "#EEEEEE",
+          type: "simple-fill",
+          style: "solid",
+          outline: {
+            color: [255, 255, 255],
+            width: 1,
+          },
+        },
+        label: "Tidak Tercakup",
+      },
+    });
+
     const normalLayer = new FeatureLayer({
       fields: [
         {
@@ -1288,6 +1366,7 @@ const getNormalMap = (map, spt, filter) => {
           "<br><b>Rekomendasi: </b> {rekomendasi}",
       },
     });
+    map.add(uncoverage);
     map.add(normalLayer);
     map.add(s3Layer);
     map.add(s2Layer);
