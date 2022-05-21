@@ -1020,11 +1020,12 @@ const getNormalMap = (map, spt, filter) => {
       const rings = [];
       v.geom.coordinates.map((b) => rings.push(b[0]));
       if (v.kelas === 1) {
+        polygon = {
+          type: "polygon",
+          rings,
+        };
       }
-      polygon = {
-        type: "polygon",
-        rings,
-      };
+    
       return new Graphic({
         geometry: polygon,
         attributes: v,
