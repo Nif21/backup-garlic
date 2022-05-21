@@ -914,7 +914,7 @@ const FormikInput = () => {
                         </p>
                       </div>
                     </div>
-                    <div className="group relative">
+                    {/* <div className="group relative">
                       <div
                         className={`py-4 px-2 w-full min-h-80 ${getColor(
                           syaratTumbuh.karakteristikTanah.KelasRadiasiPenyinaran
@@ -932,7 +932,7 @@ const FormikInput = () => {
                           )}
                         </p>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="group relative">
                       <div
                         className={`py-4 px-2 w-full min-h-80 ${getColor(
