@@ -304,15 +304,9 @@ function FilterEsriMap() {
                 </calcite-label>
                 <calcite-label layout="inline">
                   <calcite-radio-button value="KelasCurahHujan"></calcite-radio-button>
-                  <span>
-                    Curah Hujan ( Saat ini ditetapkan s1 <br /> karena data
-                    belum tersedia )
-                  </span>
+                  <span>Curah Hujan</span>
                 </calcite-label>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasLamaPenyinaran"></calcite-radio-button>
-                  Lama Penyinaran
-                </calcite-label>
+
                 <div className={styles.marginBottom10}>2. Faktor relief</div>
 
                 <calcite-label layout="inline">
@@ -565,8 +559,8 @@ const getNormalMap = (map, spt, filter) => {
           type: "string",
         },
         {
-          name: "relief",
-          alias: "relief",
+          name: "KelasFaktorRelief",
+          alias: "KelasFaktorRelief",
           type: "string",
         },
         {
@@ -609,7 +603,7 @@ const getNormalMap = (map, spt, filter) => {
           "<br><b>Kejenuhan Basa: </b> {KelasKejenuhanBasa}" +
           "<br><b>Land Form: </b> {landform}" +
           "<br><b>Bahan Induk: </b> {bahaninduk}" +
-          "<br><b>Relief: </b> {relief}" +
+          "<br><b>Relief: </b> {KelasFaktorRelief}" +
           "<br><b>Luas: </b> {luas}" +
           "<br><b>Persentase Luas: </b> {persentaseluas}",
       },
@@ -679,8 +673,8 @@ const getNormalMap = (map, spt, filter) => {
           type: "string",
         },
         {
-          name: "relief",
-          alias: "relief",
+          name: "KelasFaktorRelief",
+          alias: "KelasFaktorRelief",
           type: "string",
         },
         {
@@ -723,7 +717,7 @@ const getNormalMap = (map, spt, filter) => {
           "<br><b>Kejenuhan Basa: </b> {KelasKejenuhanBasa}" +
           "<br><b>Land Form: </b> {landform}" +
           "<br><b>Bahan Induk: </b> {bahaninduk}" +
-          "<br><b>Relief: </b> {relief}" +
+          "<br><b>Relief: </b> {KelasFaktorRelief}" +
           "<br><b>Luas: </b> {luas}" +
           "<br><b>Persentase Luas: </b> {persentaseluas}",
       },
@@ -792,8 +786,8 @@ const getNormalMap = (map, spt, filter) => {
           type: "string",
         },
         {
-          name: "relief",
-          alias: "relief",
+          name: "KelasFaktorRelief",
+          alias: "KelasFaktorRelief",
           type: "string",
         },
         {
@@ -836,7 +830,7 @@ const getNormalMap = (map, spt, filter) => {
           "<br><b>Kejenuhan Basa: </b> {KelasKejenuhanBasa}" +
           "<br><b>Land Form: </b> {landform}" +
           "<br><b>Bahan Induk: </b> {bahaninduk}" +
-          "<br><b>Relief: </b> {relief}" +
+          "<br><b>Relief: </b> {KelasFaktorRelief}" +
           "<br><b>Luas: </b> {luas}" +
           "<br><b>Persentase Luas: </b> {persentaseluas}",
       },
@@ -905,8 +899,8 @@ const getNormalMap = (map, spt, filter) => {
           type: "string",
         },
         {
-          name: "relief",
-          alias: "relief",
+          name: "KelasFaktorRelief",
+          alias: "KelasFaktorRelief",
           type: "string",
         },
         {
@@ -949,37 +943,12 @@ const getNormalMap = (map, spt, filter) => {
           "<br><b>Kejenuhan Basa: </b> {KelasKejenuhanBasa}" +
           "<br><b>Land Form: </b> {landform}" +
           "<br><b>Bahan Induk: </b> {bahaninduk}" +
-          "<br><b>Relief: </b> {relief}" +
+          "<br><b>Relief: </b> {KelasFaktorRelief}" +
           "<br><b>Luas: </b> {luas}" +
           "<br><b>Persentase Luas: </b> {persentaseluas}",
       },
     });
-    const uncoverage = new FeatureLayer({
-      fields: [
-        {
-          name: "ObjectID",
-          alias: "ObjectID",
-          type: "oid",
-        },
-      ],
-      objectIdField: "ObjectID",
-      geometryType: "polygon",
-      source: uncoverageGraphics,
-      renderer: {
-        type: "simple",
-        symbol: {
-          color: "#EEEEEE",
-          type: "simple-fill",
-          style: "solid",
-          outline: {
-            color: [255, 255, 255],
-            width: 1,
-          },
-        },
-        label: "Tidak Tercakup",
-      },
-    });
-    map.add(uncoverage);
+
     map.add(normalLayer);
     map.add(s3Layer);
     map.add(s2Layer);
@@ -1002,18 +971,6 @@ const getNormalMap = (map, spt, filter) => {
     }
     let polygon;
 
-    const uncoverageGraphics = dt.map((v) => {
-      const rings = [];
-      rings.push(v.geom.coordinates[0]);
-      polygon = {
-        type: "polygon",
-        rings,
-      };
-      return new Graphic({
-        geometry: polygon,
-        attributes: v,
-      });
-    });
     const graphicsNormal = dt.map((v) => {
       v.dataKelas = v.kelas == undefined ? "-" : kelasFaktor(v.kelas);
       v.filter = filter;
@@ -1025,7 +982,7 @@ const getNormalMap = (map, spt, filter) => {
           rings,
         };
       }
-    
+
       return new Graphic({
         geometry: polygon,
         attributes: v,
@@ -1077,31 +1034,6 @@ const getNormalMap = (map, spt, filter) => {
         geometry: polygon,
         attributes: v,
       });
-    });
-    const uncoverage = new FeatureLayer({
-      fields: [
-        {
-          name: "ObjectID",
-          alias: "ObjectID",
-          type: "oid",
-        },
-      ],
-      objectIdField: "ObjectID",
-      geometryType: "polygon",
-      source: uncoverageGraphics,
-      renderer: {
-        type: "simple",
-        symbol: {
-          color: "#EEEEEE",
-          type: "simple-fill",
-          style: "solid",
-          outline: {
-            color: [255, 255, 255],
-            width: 1,
-          },
-        },
-        label: "Tidak Tercakup",
-      },
     });
 
     const normalLayer = new FeatureLayer({
@@ -1380,7 +1312,6 @@ const getNormalMap = (map, spt, filter) => {
           "<br><b>Rekomendasi: </b> {rekomendasi}",
       },
     });
-    map.add(uncoverage);
     map.add(normalLayer);
     map.add(s3Layer);
     map.add(s2Layer);

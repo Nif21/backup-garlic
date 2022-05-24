@@ -186,24 +186,24 @@ const FormikInput = () => {
     });
     setCurahHujanOptions(curahHujan);
 
-    const radiasiPenyinaran = [];
-    data.radiasiPenyinaran.map((d) => {
-      radiasiPenyinaran.push({
-        label: `${d.jenis} (${
-          d.intervalBawah == null
-            ? " < "
-            : d.intervalAtas == null
-            ? ` > ${d.intervalBawah}`
-            : d.intervalBawah
-        }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
-          d.intervalAtas == null ? "" : d.intervalAtas
-        } jam/hari)`,
-        value: d.jenis,
-        rekomendasi: d.rekomendasi,
-        kelas: d.kelas,
-      });
-    });
-    setLamaPenyinaranOptions(radiasiPenyinaran);
+    // const radiasiPenyinaran = [];
+    // data.radiasiPenyinaran.map((d) => {
+    //   radiasiPenyinaran.push({
+    //     label: `${d.jenis} (${
+    //       d.intervalBawah == null
+    //         ? " < "
+    //         : d.intervalAtas == null
+    //         ? ` > ${d.intervalBawah}`
+    //         : d.intervalBawah
+    //     }  ${d.intervalBawah != null && d.intervalAtas != null ? " - " : ""}  ${
+    //       d.intervalAtas == null ? "" : d.intervalAtas
+    //     } jam/hari)`,
+    //     value: d.jenis,
+    //     rekomendasi: d.rekomendasi,
+    //     kelas: d.kelas,
+    //   });
+    // });
+    // setLamaPenyinaranOptions(radiasiPenyinaran);
 
     const elevasi = [];
     data.elevasi.map((d) => {
