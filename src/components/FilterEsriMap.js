@@ -75,7 +75,7 @@ function FilterEsriMap() {
     if (!isLoading) {
       if (mapDiv.current) {
         const map = new ArcGISMap({
-          basemap: "arcgis-nova",
+          basemap: "arcgis-imagery",
         });
 
         const view = new MapView({
