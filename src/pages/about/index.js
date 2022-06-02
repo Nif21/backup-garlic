@@ -53,12 +53,16 @@ export default function About() {
                         Suitability for Garlic) adalah Sistem Informasi
                         Geografis Kesesuaian Agroekologi untuk Bawang Putih pada
                         kawasan prioritas pengembangan lahan bawang putih di
-                        Indonesia. Struktur klasifikasi kesesuaian lahan
-                        mengikuti kerangka FAO (1976) yaitu
+                        Indonesia.
                         <br />
                         <br />
                       </div>
                       <div className="mx-16 w-12/12 sm:7/12 md:7/12 text-lg text-justify text-black">
+                        <b>
+                          Struktur klasifikasi kesesuaian lahan mengikuti
+                          kerangka FAO (1976) yaitu{" "}
+                        </b>
+                        <br />
                         <b>Kelas S1, Sangat Sesuai</b>: Lahan tidak mempunyai
                         faktor pembatas yang berarti atau nyata terhadap
                         penggunaan secara berkelanjutan, atau faktor pembatas
@@ -99,32 +103,33 @@ export default function About() {
                         Syarat tumbuh bawang putih yang dianalisis dikelompokan
                         ke dalam tiga kategori yaitu: <br />
                         <div className="font-semibold">
-                          1. Faktor yang dapat dikendalikan, yang terdiri dari
+                          1. Faktor yang tidak dapat dikendalikan dan dikoreksi
+                          yang terdiri dari
                         </div>
-                        a. Drainase <br />
-                        b. Kapasitas Tukar Kation (cmol) <br />
-                        c. Tekstur Tanah <br />
-                        d. Kemasaman Tanah (pH) <br /> <br />
-                        <div className="font-semibold">
-                          2. Faktor yang efeknya dapat dikoreksi, yang terdiri
-                        </div>
-                        dari <br />
-                        a. Kejenuhan Basa (%) <br />
-                        b. Kedalaman Mineral Tanah (cm) <br /> <br />
-                        <div className="font-semibold">
-                          3. Faktor yang tidak dapat dikendalikan dan dikoreksi
-                        </div>
-                        yang terdiri dari <br />
                         a. Faktor cuaca <br />
                         &emsp;&emsp;i. Temperatur (c), rata-rata (per bulan){" "}
                         <br />
                         &emsp;&emsp;ii. Curah Hujan (mm), (total per bulan){" "}
                         <br />
-                        &emsp;&emsp;iii. Lama Penyinaran (jam per hari),
-                        (rata-rata bulanan) <br />
+                        &emsp;&emsp;iii. Lama Penyinaran <br />
+                        &emsp;&emsp;iv. Radiasi Penyinaran <br />
                         b. Faktor relief <br />
                         &emsp;&emsp; i. Elevasi (magl) <br />
                         &emsp;&emsp;ii. Relief(%) <br></br>
+                        <div className="font-semibold">
+                          2. Faktor yang efeknya dapat dikoreksi, yang terdiri
+                        </div>
+                        dari <br />
+                        a. Kejenuhan Basa (%) <br />
+                        b. Kedalaman Mineral Tanah (cm) <br />
+                        c. Kemasaman Tanah (pH) <br /> <br />
+                        <div className="font-semibold">
+                          3. Faktor yang dapat dikendalikan, yang terdiri dari
+                        </div>
+                        a. Drainase <br />
+                        b. Kapasitas Tukar Kation (cmol) <br />
+                        c. Tekstur Tanah <br />
+                        <br />
                       </div>
                     </div>
                   </div>

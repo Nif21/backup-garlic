@@ -12,7 +12,6 @@ import Print from "@arcgis/core/widgets/Print";
 import Header from "../components/Header";
 import config from "@arcgis/core/config";
 
-
 function FilterEsriMap() {
   const mapDiv = useRef(null);
   const [spt, setSpt] = useState([]);
@@ -21,7 +20,8 @@ function FilterEsriMap() {
   const [showListMap, setShowListMap] = useState(false);
   const [selectedMap, setSelectedMap] = useState("");
 
-  config.apiKey = "AAPKcfa8335875844ec3a947accb000d9aabChoKNebcrtEXxVF42aBHPA8zbkzPA4D3ipEhEn-JCOQkdyFN0kUL6Kcpxa9Z8toe"
+  config.apiKey =
+    "AAPKcfa8335875844ec3a947accb000d9aabChoKNebcrtEXxVF42aBHPA8zbkzPA4D3ipEhEn-JCOQkdyFN0kUL6Kcpxa9Z8toe";
 
   useEffect(() => {
     if (spt.length == 0) requestSpt();
@@ -267,36 +267,6 @@ function FilterEsriMap() {
                   Kelas Kesesuaian Lahan berdasarkan
                 </div>
                 <div className={styles.marginBottom10}>
-                  <b> Faktor yang dapat dikendalikan:</b>
-                </div>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasDrainase"></calcite-radio-button>
-                  Drainase
-                </calcite-label>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasKapasitasTukarKation"></calcite-radio-button>
-                  Kapasitas Tukar Kation
-                </calcite-label>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasTeksturTanah"></calcite-radio-button>
-                  Tekstur Tanah
-                </calcite-label>
-                <div className={styles.marginBottom10}>
-                  <b>Faktor yang efeknya dapat dikoreksi:</b>
-                </div>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasKejenuhanBasa"></calcite-radio-button>
-                  Kejenuhan Basa
-                </calcite-label>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasKedalamanMineralTanah"></calcite-radio-button>
-                  Kedalamanan Mineral Tanah
-                </calcite-label>
-                <calcite-label layout="inline">
-                  <calcite-radio-button value="KelasKemasamanTanah"></calcite-radio-button>
-                  Kemasaman Tanah
-                </calcite-label>
-                <div className={styles.marginBottom10}>
                   <b>Faktor yang tidak dapat dikendalikan</b>
                   <br />
                   <b>dan dikoreksi yaitu faktor cuaca:</b>
@@ -320,6 +290,36 @@ function FilterEsriMap() {
                 <calcite-label layout="inline">
                   <calcite-radio-button value="KelasRelief"></calcite-radio-button>
                   Relief
+                </calcite-label>
+                <div className={styles.marginBottom10}>
+                  <b>Faktor yang efeknya dapat dikoreksi:</b>
+                </div>
+                <calcite-label layout="inline">
+                  <calcite-radio-button value="KelasKejenuhanBasa"></calcite-radio-button>
+                  Kejenuhan Basa
+                </calcite-label>
+                <calcite-label layout="inline">
+                  <calcite-radio-button value="KelasKedalamanMineralTanah"></calcite-radio-button>
+                  Kedalamanan Mineral Tanah
+                </calcite-label>
+                <calcite-label layout="inline">
+                  <calcite-radio-button value="KelasKemasamanTanah"></calcite-radio-button>
+                  Kemasaman Tanah
+                </calcite-label>
+                <div className={styles.marginBottom10}>
+                  <b> Faktor yang dapat dikendalikan:</b>
+                </div>
+                <calcite-label layout="inline">
+                  <calcite-radio-button value="KelasDrainase"></calcite-radio-button>
+                  Drainase
+                </calcite-label>
+                <calcite-label layout="inline">
+                  <calcite-radio-button value="KelasKapasitasTukarKation"></calcite-radio-button>
+                  Kapasitas Tukar Kation
+                </calcite-label>
+                <calcite-label layout="inline">
+                  <calcite-radio-button value="KelasTeksturTanah"></calcite-radio-button>
+                  Tekstur Tanah
                 </calcite-label>
               </calcite-radio-button-group>
             </label>

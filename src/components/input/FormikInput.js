@@ -380,158 +380,42 @@ const FormikInput = () => {
     <div className="px-4 py-5  sm:p-6">
       <form onSubmit={formik.handleSubmit}>
         {/* Faktor Yang dapat dikendalikan */}
-        <>
-          <div className="grid grid-cols-6 gap-6 my-8 mx-2">
-            <div className="mb-col-span-6 sm:col-span-3">
-              <label htmlFor="Provinsi" className="m-2 font-bold text-black">
-                Provinsi
-              </label>
-              <select
-                id="country"
-                name="country"
-                onChange={handleChangeProvince}
-                className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
-              >
-                {province.map((p) => (
-                  <option value={p.id} key={p.id} className="text-black">
-                    {p.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-col-span-6 sm:col-span-3">
-              <label htmlFor="Kabupaten" className="m-2 font-bold text-black">
-                Kabupaten
-              </label>
-              <select
-                id="country"
-                name="country"
-                onChange={handleChangeKabupaten}
-                className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
-              >
-                {kabupaten.map((k) => (
-                  <option value={k.id} key={k.id}>
-                    {k.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="col-span-full flex space-x-4 text-lg text-black">
-            <b>Faktor yang dapat dikendalikan</b>
-          </div>
-          <div className="col-span-6 sm:col-span-3 mb-8">
-            <label
-              htmlFor="drainase"
-              className="text-black block text-base font-medium text-gray-700 space-x-4"
+        <div className="grid grid-cols-6 gap-6 my-8 mx-2">
+          <div className="mb-col-span-6 sm:col-span-3">
+            <label htmlFor="Provinsi" className="m-2 font-bold text-black">
+              Provinsi
+            </label>
+            <select
+              id="country"
+              name="country"
+              onChange={handleChangeProvince}
+              className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
             >
-              <b>Drainase</b>
-            </label>
-
-            <CustomSelect
-              onChange={(value) => {
-                formik.setFieldValue("drainase", value.value);
-              }}
-              value={formik.values.drainase}
-              options={drainaseOptions}
-            />
+              {province.map((p) => (
+                <option value={p.id} key={p.id} className="text-black">
+                  {p.name}
+                </option>
+              ))}
+            </select>
           </div>
-          <div className="col-span-6 sm:col-span-3 my-2">
-            <label
-              htmlFor="drainase"
-              className="block text-base font-medium text-gray-700 space-x-4 my-2"
+          <div className="mb-col-span-6 sm:col-span-3">
+            <label htmlFor="Kabupaten" className="m-2 font-bold text-black">
+              Kabupaten
+            </label>
+            <select
+              id="country"
+              name="country"
+              onChange={handleChangeKabupaten}
+              className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
             >
-              <b>Media Perakaran</b>
-            </label>
+              {kabupaten.map((k) => (
+                <option value={k.id} key={k.id}>
+                  {k.name}
+                </option>
+              ))}
+            </select>
           </div>
-          <div className="col-span-6 sm:col-span-3 my-2">
-            <label
-              htmlFor="teksturTanah"
-              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
-            >
-              <b>Tekstur Tanah</b>
-            </label>
-            <CustomSelect
-              onChange={(value) =>
-                formik.setFieldValue("teksturTanah", value.value)
-              }
-              value={formik.values.teksturTanah}
-              options={teksturTanahOptions}
-            />
-          </div>
-          <div className="col-span-6 sm:col-span-3 mt-8">
-            <label className="block text-base font-medium text-gray-700 space-x-4 my-2">
-              <b>Retensi Hara</b>
-            </label>
-          </div>
-          <div className="col-span-6 sm:col-span-3 my-2">
-            <label
-              htmlFor="kapasitasTukarKation"
-              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
-            >
-              <b>Kapasitas Tukar Kation</b>
-            </label>
-            <CustomSelect
-              onChange={(value) =>
-                formik.setFieldValue("kapasitasTukarKation", value.value)
-              }
-              value={formik.values.kapasitasTukarKation}
-              options={kapasitasTukarKationOptions}
-            />
-          </div>
-        </>
-        {/* Faktor Yang dapat dikoreksi */}
-        <>
-          <div className="col-span-full flex space-x-4 text-lg mt-8 text-black">
-            <b>Faktor yang dapat dikoreksi</b>
-          </div>
-          <div className="col-span-6 sm:col-span-3 my-2">
-            <label
-              htmlFor="kedalamanMineralTanah"
-              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
-            >
-              <b>Kedalaman Mineral Tanah</b>
-            </label>
-            <CustomSelect
-              onChange={(value) =>
-                formik.setFieldValue("kedalamanMineralTanah", value.value)
-              }
-              value={formik.values.kedalamanMineralTanah}
-              options={kedalamanMineralTanahOptions}
-            />
-          </div>
-          <div className="col-span-6 sm:col-span-3 my-2">
-            <label
-              htmlFor="kejenuhanBasa"
-              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
-            >
-              <b>Kejenuhan Basa</b>
-            </label>
-            <CustomSelect
-              onChange={(value) =>
-                formik.setFieldValue("kejenuhanBasa", value.value)
-              }
-              value={formik.values.kejenuhanBasa}
-              options={kejenuhanBasaOptions}
-            />
-          </div>
-          <div className="col-span-6 sm:col-span-3 my-2">
-            <label
-              htmlFor="teksturTanah"
-              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
-            >
-              <b>Kemasaman Tanah</b>
-            </label>
-            <CustomSelect
-              onChange={(value) =>
-                formik.setFieldValue("kemasamanTanah", value.value)
-              }
-              value={formik.values.kemasamanTanah}
-              options={kemasamanTanahOptions}
-            />
-          </div>
-        </>
-        {/* Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi */}
+        </div>
         <div className="mb-16">
           <div className="col-span-full flex space-x-4 text-lg mt-8 text-black">
             <b>
@@ -626,6 +510,123 @@ const FormikInput = () => {
             />
           </div>
         </div>
+        {/* Faktor Yang dapat dikoreksi */}
+        <div className="mb-16">
+          <div className="col-span-full flex space-x-4 text-lg mt-8 text-black">
+            <b>Faktor yang dapat dikoreksi</b>
+          </div>
+          <div className="col-span-6 sm:col-span-3 my-2">
+            <label
+              htmlFor="kedalamanMineralTanah"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
+            >
+              <b>Kedalaman Mineral Tanah</b>
+            </label>
+            <CustomSelect
+              onChange={(value) =>
+                formik.setFieldValue("kedalamanMineralTanah", value.value)
+              }
+              value={formik.values.kedalamanMineralTanah}
+              options={kedalamanMineralTanahOptions}
+            />
+          </div>
+          <div className="col-span-6 sm:col-span-3 my-2">
+            <label
+              htmlFor="kejenuhanBasa"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
+            >
+              <b>Kejenuhan Basa</b>
+            </label>
+            <CustomSelect
+              onChange={(value) =>
+                formik.setFieldValue("kejenuhanBasa", value.value)
+              }
+              value={formik.values.kejenuhanBasa}
+              options={kejenuhanBasaOptions}
+            />
+          </div>
+          <div className="col-span-6 sm:col-span-3 my-2">
+            <label
+              htmlFor="teksturTanah"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
+            >
+              <b>Kemasaman Tanah</b>
+            </label>
+            <CustomSelect
+              onChange={(value) =>
+                formik.setFieldValue("kemasamanTanah", value.value)
+              }
+              value={formik.values.kemasamanTanah}
+              options={kemasamanTanahOptions}
+            />
+          </div>
+        </div>
+        {/* Faktor yang tidak dapat dikendalikan dan tidak dapat dikoreksi */}
+        <>
+          <div className="col-span-full flex space-x-4 text-lg text-black">
+            <b>Faktor yang dapat dikendalikan</b>
+          </div>
+          <div className="col-span-6 sm:col-span-3 mb-8">
+            <label
+              htmlFor="drainase"
+              className="text-black block text-base font-medium text-gray-700 space-x-4"
+            >
+              <b>Drainase</b>
+            </label>
+
+            <CustomSelect
+              onChange={(value) => {
+                formik.setFieldValue("drainase", value.value);
+              }}
+              value={formik.values.drainase}
+              options={drainaseOptions}
+            />
+          </div>
+          <div className="col-span-6 sm:col-span-3 my-2">
+            <label
+              htmlFor="drainase"
+              className="block text-base font-medium text-gray-700 space-x-4 my-2"
+            >
+              <b>Media Perakaran</b>
+            </label>
+          </div>
+          <div className="col-span-6 sm:col-span-3 my-2">
+            <label
+              htmlFor="teksturTanah"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
+            >
+              <b>Tekstur Tanah</b>
+            </label>
+            <CustomSelect
+              onChange={(value) =>
+                formik.setFieldValue("teksturTanah", value.value)
+              }
+              value={formik.values.teksturTanah}
+              options={teksturTanahOptions}
+            />
+          </div>
+          <div className="col-span-6 sm:col-span-3 mt-8">
+            <label className="block text-base font-medium text-gray-700 space-x-4 my-2">
+              <b>Retensi Hara</b>
+            </label>
+          </div>
+          <div className="col-span-6 sm:col-span-3 my-2">
+            <label
+              htmlFor="kapasitasTukarKation"
+              className="block text-sm font-medium text-gray-700 space-x-4 my-2"
+            >
+              <b>Kapasitas Tukar Kation</b>
+            </label>
+            <CustomSelect
+              onChange={(value) =>
+                formik.setFieldValue("kapasitasTukarKation", value.value)
+              }
+              value={formik.values.kapasitasTukarKation}
+              options={kapasitasTukarKationOptions}
+            />
+          </div>
+        </>
+
         <div className="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
           <button
             type="submit"

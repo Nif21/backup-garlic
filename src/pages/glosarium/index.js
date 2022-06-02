@@ -275,60 +275,6 @@ export default function Glosarium() {
                     <div className="flex flex-wrap">
                       <div className="mx-16 w-12/12 sm:7/12 md:7/12 text-lg  text-black">
                         <div className="grid grid-cols-4   gap-4">
-                          <div className="flex flex-col">
-                            <b>Faktor yang dapat dikendalikan</b>
-                            <div className="my-4">
-                              Drainase
-                              <ul className="list-disc	mx-8">
-                                {drainaseOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div className="my-4">
-                              Kapasitas Tukar Kation
-                              <ul className="list-disc	mx-8">
-                                {kapasitasTukarKationOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div className="my-4">
-                              Tekstur Tanah
-                              <ul className="list-disc	mx-8">
-                                {teksturTanahOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                          <div className="flex flex-col">
-                            <b>Faktor yang efeknya dapat dikoreksi</b>
-                            <div className="my-4">
-                              Kejenuhan Basa
-                              <ul className="list-disc	mx-8">
-                                {kejenuhanBasaOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div className="my-4">
-                              Kedalaman Mineral Tanah
-                              <ul className="list-disc	mx-8">
-                                {kedalamanMineralTanahOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div className="my-4">
-                              Kemasaman Tanah
-                              <ul className="list-disc	mx-8">
-                                {kemasamanTanahOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
                           <div className="flex flex-col col-span-2">
                             <b>
                               Faktor yang tidak dapat dikendalikan dan dikoreksi
@@ -382,6 +328,60 @@ export default function Glosarium() {
                                   </ul>
                                 </ul>
                               </div>
+                            </div>
+                          </div>
+                          <div className="flex flex-col">
+                            <b>Faktor yang efeknya dapat dikoreksi</b>
+                            <div className="my-4">
+                              Kejenuhan Basa
+                              <ul className="list-disc	mx-8">
+                                {kejenuhanBasaOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="my-4">
+                              Kedalaman Mineral Tanah
+                              <ul className="list-disc	mx-8">
+                                {kedalamanMineralTanahOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="my-4">
+                              Kemasaman Tanah
+                              <ul className="list-disc	mx-8">
+                                {kemasamanTanahOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="flex flex-col">
+                            <b>Faktor yang dapat dikendalikan</b>
+                            <div className="my-4">
+                              Drainase
+                              <ul className="list-disc	mx-8">
+                                {drainaseOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="my-4">
+                              Kapasitas Tukar Kation
+                              <ul className="list-disc	mx-8">
+                                {kapasitasTukarKationOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="my-4">
+                              Tekstur Tanah
+                              <ul className="list-disc	mx-8">
+                                {teksturTanahOptions.map((d) => (
+                                  <li className="text-left">{d.label}</li>
+                                ))}
+                              </ul>
                             </div>
                           </div>
                         </div>
