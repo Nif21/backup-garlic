@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, useFormik } from "formik";
+import axios from "axios";
 
 const initialValues = {
   province: "",
@@ -47,11 +48,12 @@ function UploadFile({ values, setFieldValue }) {
   }, [selectedProvince]);
 
   const fetchProvince = async () => {
-    const data = await fetch(
-      "http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
-    );
-    const json = await data.json();
-    setProvince(json);
+    axios
+      .get("http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json")
+      .then((data) => {
+        setProvince(data.json());
+        console.log(data.json());
+      });
   };
 
   const fetchKabupaten = async (id) => {
