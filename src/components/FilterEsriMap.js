@@ -10,6 +10,8 @@ import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
 import Expand from "@arcgis/core/widgets/Expand";
 import Print from "@arcgis/core/widgets/Print";
 import Header from "../components/Header";
+import config from "@arcgis/core/config";
+
 
 function FilterEsriMap() {
   const mapDiv = useRef(null);
@@ -18,6 +20,8 @@ function FilterEsriMap() {
   const [showFilter, setShowFilter] = useState(false);
   const [showListMap, setShowListMap] = useState(false);
   const [selectedMap, setSelectedMap] = useState("");
+
+  config.apiKey = "AAPKcfa8335875844ec3a947accb000d9aabChoKNebcrtEXxVF42aBHPA8zbkzPA4D3ipEhEn-JCOQkdyFN0kUL6Kcpxa9Z8toe"
 
   useEffect(() => {
     if (spt.length == 0) requestSpt();
@@ -71,7 +75,7 @@ function FilterEsriMap() {
     if (!isLoading) {
       if (mapDiv.current) {
         const map = new ArcGISMap({
-          basemap: "gray-vector",
+          basemap: "arcgis-nova",
         });
 
         const view = new MapView({
