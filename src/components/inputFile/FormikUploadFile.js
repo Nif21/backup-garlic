@@ -3,16 +3,53 @@ import { Formik, Form, useFormik } from "formik";
 
 const initialValues = {
   province: "",
-  kabupaten: "",
+  location: "",
   shp: "",
   shx: "",
   dbf: "",
   xlsx: "",
+  prj: "",
 };
+
+function postData(body) {
+  const requestOptions = {
+    method: "POST",
+    body: body,
+  };
+
+  fetch("https://4bb7-125-161-173-216.ap.ngrok.io/api/v1", requestOptions)
+    .then((response) => {
+      if (!response.ok) {
+        return response.text().then((text) => {
+          throw new Error(text);
+        });
+      } else {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      setSyaratTumbuh(data);
+      setShowModal(true);
+    })
+    .catch((error) => {
+      setTimeout(() => {
+        alert(error);
+      }, 1000);
+    });
+}
 
 const FormikUploadFile = () => {
   const onSubmitFile = (values) => {
-    console.log(values);
+    const body = new FormData();
+
+    body.append("shp", values.shp);
+    body.append("shx", values.shx);
+    body.append("dbf", values.dbf);
+    body.append("xlsx", values.xlsx);
+    body.append("prj", values.prj);
+    body.append("location", values.location);
+
+    postData(body);
   };
 
   return (
@@ -37,6 +74,7 @@ function UploadFile({ values, setFieldValue }) {
   const fileInput2 = React.createRef();
   const fileInput3 = React.createRef();
   const fileInput4 = React.createRef();
+  const fileInput5 = React.createRef();
 
   useEffect(() => {
     fetchProvince();
@@ -68,7 +106,7 @@ function UploadFile({ values, setFieldValue }) {
   };
 
   const handelChangeKabupaten = (e) => {
-    setFieldValue("kabupaten", e.target.value);
+    setFieldValue("location", e.target.value);
     setSelectedKabupaten(e.target.value);
   };
 
@@ -104,7 +142,7 @@ function UploadFile({ values, setFieldValue }) {
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
             >
               {kabupaten.map((k) => (
-                <option value={k.id} key={k.id}>
+                <option value={k.name} key={k.name}>
                   {k.name}
                 </option>
               ))}
@@ -161,13 +199,13 @@ function UploadFile({ values, setFieldValue }) {
           <div className="flex-grow"></div>
         </div>
 
-        <div className="m-2 font-bold">File Dpf</div>
+        <div className="m-2 font-bold">File Dbf</div>
         <div className="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
           <input
             type="file"
             style={{ display: "none" }}
             onChange={(event) => {
-              setFieldValue("dpf", event.currentTarget.files[0]);
+              setFieldValue("dbf", event.currentTarget.files[0]);
             }}
             ref={fileInput3}
           />
@@ -181,7 +219,7 @@ function UploadFile({ values, setFieldValue }) {
           </button>
 
           <small className="text-base my-auto">
-            {values.dpf ? values.dpf.name || "Error" : "No file chosen"}
+            {values.dbf ? values.dbf.name || "Error" : "No file chosen"}
           </small>
           <div className="flex-grow"></div>
         </div>
@@ -207,6 +245,31 @@ function UploadFile({ values, setFieldValue }) {
 
           <small className="text-base my-auto">
             {values.xlsx ? values.xlsx.name || "Error" : "No file chosen"}
+          </small>
+          <div className="flex-grow"></div>
+        </div>
+
+        <div className="m-2 font-bold">File Prj</div>
+        <div className="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
+          <input
+            type="file"
+            style={{ display: "none" }}
+            onChange={(event) => {
+              setFieldValue("prj", event.currentTarget.files[0]);
+            }}
+            ref={fileInput5}
+          />
+
+          <button
+            className="mr-4 bg-primary-coco p-2 rounded-l-lg"
+            type="button"
+            onClick={() => fileInput5.current.click()}
+          >
+            Choose file
+          </button>
+
+          <small className="text-base my-auto">
+            {values.prj ? values.prj.name || "Error" : "No file chosen"}
           </small>
           <div className="flex-grow"></div>
         </div>
