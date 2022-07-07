@@ -249,7 +249,7 @@ function UploadFile({ values, setFieldValue }) {
           <div className="flex-grow"></div>
         </div>
 
-        <div className="m-2 font-bold">File Prj</div>
+        {/* <div className="m-2 font-bold">File Prj</div>
         <div className="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
           <input
             type="file"
@@ -272,7 +272,7 @@ function UploadFile({ values, setFieldValue }) {
             {values.prj ? values.prj.name || "Error" : "No file chosen"}
           </small>
           <div className="flex-grow"></div>
-        </div>
+        </div> */}
 
         <div className="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
           <button
