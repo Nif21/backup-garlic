@@ -19,10 +19,22 @@ const FormikInput = () => {
   const [temperaturOptions, setTemperaturOptions] = useState([]);
   const [syaratTumbuh, setSyaratTumbuh] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [province, setProvince] = useState([]);
+  const [province, setProvince] = useState([
+    {
+      name: "empty",
+    },
+  ]);
   const [selectedProvince, setSelectedProvince] = useState(null);
-  const [kabupaten, setKabupaten] = useState([]);
+  const [kabupaten, setKabupaten] = useState([{ name: "empty" }]);
+  const [kecamatan, setKecamatan] = useState([{ name: "empty" }]);
+  const [kelurahan, setKelurahan] = useState([
+    {
+      name: "empty",
+    },
+  ]);
   const [selectedKabupaten, setSelectedKabupaten] = useState(null);
+  const [selectedKecamatan, setSelectedKecamatan] = useState(null);
+  const [selectedKelurahan, setSelectedKelurahan] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -36,20 +48,44 @@ const FormikInput = () => {
     fetchKabupaten(selectedProvince);
   }, [selectedProvince]);
 
+  useEffect(() => {
+    fetchKecamatan(selectedKabupaten);
+  }, [selectedKabupaten]);
+
+  useEffect(() => {
+    fetchKelurahan(selectedKecamatan);
+  }, [selectedKecamatan]);
+
   const fetchProvince = async () => {
     const data = await fetch(
-      "https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
+      "https://dev.farizdotid.com/api/daerahindonesia/provinsi"
     );
     const json = await data.json();
-    setProvince(json);
+    setProvince(json.provinsi);
   };
 
   const fetchKabupaten = async (id) => {
     const data = await fetch(
-      `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id}.json`
+      `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${id}`
     );
     const json = await data.json();
-    setKabupaten(json);
+    setKabupaten(json.kota_kabupaten);
+  };
+
+  const fetchKecamatan = async (id) => {
+    const data = await fetch(
+      `https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=${id}`
+    );
+    const json = await data.json();
+    setKecamatan(json.kecamatan);
+  };
+
+  const fetchKelurahan = async (id) => {
+    const data = await fetch(
+      `https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=${id}`
+    );
+    const json = await data.json();
+    setKelurahan(json.kelurahan);
   };
 
   async function fetchData() {
@@ -250,8 +286,8 @@ const FormikInput = () => {
     initialValues: {
       provinsi: "",
       "kabupaten/kota": "",
-      kecamatan: "tes",
-      "kelurahan/desa": "tes",
+      kecamatan: "",
+      "kelurahan/desa": "",
       drainase: "",
       //mediaPerakaran: "",
       teksturTanah: "",
@@ -277,11 +313,16 @@ const FormikInput = () => {
           empty += ` ${v},`;
         }
       }
+
       let result = {
-        provinsi: values.provinsi,
-        "kabupaten/kota": values["kabupaten/kota"],
-        kecamatan: "tes",
-        "kelurahan/desa": "tes",
+        provinsi: province.find((d) => d.id == values.provinsi).nama,
+        "kabupaten/kota": kabupaten.find(
+          (d) => d.id == values["kabupaten/kota"]
+        ).nama,
+        kecamatan: kecamatan.find((d) => d.id == values.kecamatan).nama,
+        "kelurahan/desa": kelurahan.find(
+          (d) => d.id == values["kelurahan/desa"]
+        ).nama,
         drainase: values.drainase,
         //mediaPerakaran: values.mediaPerakaran,
         teksturTanah: values.teksturTanah,
@@ -317,6 +358,16 @@ const FormikInput = () => {
   const handleChangeKabupaten = (e) => {
     formik.setFieldValue("kabupaten/kota", e.target.value);
     setSelectedKabupaten(e.target.value);
+  };
+
+  const handleChangeKecamatan = (e) => {
+    formik.setFieldValue("kecamatan", e.target.value);
+    setSelectedKecamatan(e.target.value);
+  };
+
+  const handleChangeKelurahan = (e) => {
+    formik.setFieldValue("kelurahan/desa", e.target.value);
+    setSelectedKelurahan(e.target.value);
   };
 
   function postData(body) {
@@ -393,7 +444,7 @@ const FormikInput = () => {
             >
               {province.map((p) => (
                 <option value={p.id} key={p.id} className="text-black">
-                  {p.name}
+                  {p.nama}
                 </option>
               ))}
             </select>
@@ -410,7 +461,43 @@ const FormikInput = () => {
             >
               {kabupaten.map((k) => (
                 <option value={k.id} key={k.id}>
-                  {k.name}
+                  {k.nama}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="grid grid-cols-6 gap-6 my-8 mx-2">
+          <div className="mb-col-span-6 sm:col-span-3">
+            <label htmlFor="kecamatan" className="m-2 font-bold text-black">
+              Kecamatan
+            </label>
+            <select
+              id="kecamatan"
+              name="kecamatan"
+              onChange={handleChangeKecamatan}
+              className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
+            >
+              {kecamatan.map((p) => (
+                <option value={p.id} key={p.id} className="text-black">
+                  {p.nama}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-col-span-6 sm:col-span-3">
+            <label htmlFor="kelurahan" className="m-2 font-bold text-black">
+              Kelurahan/Desa
+            </label>
+            <select
+              id="kelurahan"
+              name="kelurahan"
+              onChange={handleChangeKelurahan}
+              className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
+            >
+              {kelurahan.map((k) => (
+                <option value={k.id} key={k.id}>
+                  {k.nama}
                 </option>
               ))}
             </select>
@@ -665,7 +752,26 @@ const FormikInput = () => {
                     </button>
                   </div>
                   {/*body*/}
-                  <div className="p-4 mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-4 lg:grid-cols-5 xl:gap-x-8">
+                  <div className="p-4 mt-2 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-4 lg:grid-cols-4 xl:gap-x-8">
+                    <div className=" text-blueGray-500 text-lg leading-relaxed text-center">
+                      Provinsi :<br />
+                      {province.find((d) => d.id == selectedProvince).nama}
+                    </div>
+                    <div className=" text-blueGray-500 text-lg leading-relaxed text-center">
+                      Kabupaten/Kota :<br />
+                      {kabupaten.find((d) => d.id == selectedKabupaten).nama}
+                    </div>
+                    <div className=" text-blueGray-500 text-lg leading-relaxed text-center">
+                      Kecamatan :<br />
+                      {kecamatan.find((d) => d.id == selectedKecamatan).nama}
+                    </div>
+                    <div className=" text-blueGray-500 text-lg leading-relaxed text-center">
+                      Kelurahan/Desa :<br />
+                      {kelurahan.find((d) => d.id == selectedKelurahan).nama}
+                    </div>
+                  </div>
+
+                  <div className="p-4 mt-2 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-4 lg:grid-cols-5 xl:gap-x-8">
                     <div className="group relative">
                       <div
                         className={`py-4 px-2 w-full min-h-80 ${getColor(
