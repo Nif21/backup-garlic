@@ -702,7 +702,7 @@ const FormikInput = () => {
               htmlFor="kapasitasTukarKation"
               className="block text-sm font-medium text-gray-700 space-x-4 my-2"
             >
-              <b>Kapasitas Tukar Kation</b>
+              <b>Kapasitas Tukar Kation </b>
             </label>
             <CustomSelect
               onChange={(value) =>
