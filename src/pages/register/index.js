@@ -5,7 +5,7 @@ import { Field, Form, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../../redux/actions/authAction";
-import { HiEye, HiEyeOff } from "react-icons/hi";
+import { HiEye, HiEyeOff, HiArrowSmLeft } from "react-icons/hi";
 
 const Register = () => {
   const router = useRouter();
@@ -59,7 +59,14 @@ const Register = () => {
       <div className="min-h-screen font-display flex items-center justify-center bg-primary-dark py-12 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto my-16 ">
           <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-            <div className="flex">
+            <div className="flex px-4 ">
+              <button
+                onClick={() => {
+                  window.history.back();
+                }}
+              >
+                <HiArrowSmLeft className="w-6 h-6" />
+              </button>
               <div className="flex-grow px-4 py-5 sm:px-6">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
                   Registrasi Pengguna

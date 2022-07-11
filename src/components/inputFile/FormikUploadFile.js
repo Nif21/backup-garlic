@@ -47,7 +47,7 @@ const FormikUploadFile = () => {
     body.append("dbf", values.dbf);
     body.append("xlsx", values.xlsx);
     body.append("prj", values.prj);
-    body.append("location", values.location);
+    body.append("location", values.kecamatan);
 
     postData(body);
   };
@@ -66,10 +66,22 @@ const FormikUploadFile = () => {
 };
 
 function UploadFile({ values, setFieldValue }) {
-  const [province, setProvince] = useState([]);
+  const [province, setProvince] = useState([
+    {
+      name: "empty",
+    },
+  ]);
   const [selectedProvince, setSelectedProvince] = useState(null);
-  const [kabupaten, setKabupaten] = useState([]);
+  const [kabupaten, setKabupaten] = useState([{ name: "empty" }]);
+  const [kecamatan, setKecamatan] = useState([{ name: "empty" }]);
+  const [kelurahan, setKelurahan] = useState([
+    {
+      name: "empty",
+    },
+  ]);
   const [selectedKabupaten, setSelectedKabupaten] = useState(null);
+  const [selectedKecamatan, setSelectedKecamatan] = useState(null);
+  const [selectedKelurahan, setSelectedKelurahan] = useState(null);
   const fileInput1 = React.createRef();
   const fileInput2 = React.createRef();
   const fileInput3 = React.createRef();
@@ -84,30 +96,64 @@ function UploadFile({ values, setFieldValue }) {
     fetchKabupaten(selectedProvince);
   }, [selectedProvince]);
 
+  useEffect(() => {
+    fetchKecamatan(selectedKabupaten);
+  }, [selectedKabupaten]);
+
+  useEffect(() => {
+    fetchKelurahan(selectedKecamatan);
+  }, [selectedKecamatan]);
+
   const fetchProvince = async () => {
     const data = await fetch(
-      "http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
+      "https://dev.farizdotid.com/api/daerahindonesia/provinsi"
     );
     const json = await data.json();
-    setProvince(json);
+    setProvince(json.provinsi);
   };
 
   const fetchKabupaten = async (id) => {
     const data = await fetch(
-      `http://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id}.json`
+      `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${id}`
     );
     const json = await data.json();
-    setKabupaten(json);
+    setKabupaten(json.kota_kabupaten);
   };
 
-  const handelChangeProvince = (e) => {
-    setFieldValue("province", e.target.value);
+  const fetchKecamatan = async (id) => {
+    const data = await fetch(
+      `https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=${id}`
+    );
+    const json = await data.json();
+    setKecamatan(json.kecamatan);
+  };
+
+  const fetchKelurahan = async (id) => {
+    const data = await fetch(
+      `https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=${id}`
+    );
+    const json = await data.json();
+    setKelurahan(json.kelurahan);
+  };
+
+  const handleChangeProvince = (e) => {
+    setFieldValue("provinsi", e.target.value);
     setSelectedProvince(e.target.value);
   };
 
-  const handelChangeKabupaten = (e) => {
-    setFieldValue("location", e.target.value);
+  const handleChangeKabupaten = (e) => {
+    setFieldValue("kabupaten/kota", e.target.value);
     setSelectedKabupaten(e.target.value);
+  };
+
+  const handleChangeKecamatan = (e) => {
+    setFieldValue("kecamatan", e.target.value);
+    setSelectedKecamatan(e.target.value);
+  };
+
+  const handleChangeKelurahan = (e) => {
+    setFieldValue("kelurahan/desa", e.target.value);
+    setSelectedKelurahan(e.target.value);
   };
 
   return (
@@ -115,35 +161,71 @@ function UploadFile({ values, setFieldValue }) {
       <Form>
         <div className="grid grid-cols-6 gap-6 my-8 mx-2">
           <div className="mb-col-span-6 sm:col-span-3">
-            <label htmlFor="Provinsi" className="m-2 font-bold">
+            <label htmlFor="Provinsi" className="m-2 font-bold text-black">
               Provinsi
             </label>
             <select
               id="country"
               name="country"
-              onChange={handelChangeProvince}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
+              onChange={handleChangeProvince}
+              className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
             >
               {province.map((p) => (
-                <option value={p.id} key={p.id}>
-                  {p.name}
+                <option value={p.id} key={p.id} className="text-black">
+                  {p.nama}
                 </option>
               ))}
             </select>
           </div>
           <div className="mb-col-span-6 sm:col-span-3">
-            <label htmlFor="Kabupaten" className="m-2 font-bold">
+            <label htmlFor="Kabupaten" className="m-2 font-bold text-black">
               Kabupaten
             </label>
             <select
               id="country"
               name="country"
-              onChange={handelChangeKabupaten}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
+              onChange={handleChangeKabupaten}
+              className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
             >
               {kabupaten.map((k) => (
-                <option value={k.name} key={k.name}>
-                  {k.name}
+                <option value={k.id} key={k.id}>
+                  {k.nama}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="grid grid-cols-6 gap-6 my-8 mx-2">
+          <div className="mb-col-span-6 sm:col-span-3">
+            <label htmlFor="kecamatan" className="m-2 font-bold text-black">
+              Kecamatan
+            </label>
+            <select
+              id="kecamatan"
+              name="kecamatan"
+              onChange={handleChangeKecamatan}
+              className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
+            >
+              {kecamatan.map((p) => (
+                <option value={p.id} key={p.id} className="text-black">
+                  {p.nama}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-col-span-6 sm:col-span-3">
+            <label htmlFor="kelurahan" className="m-2 font-bold text-black">
+              Kelurahan/Desa
+            </label>
+            <select
+              id="kelurahan"
+              name="kelurahan"
+              onChange={handleChangeKelurahan}
+              className="text-black mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-darkcoco focus:border-primary-darkcoco sm:text-sm"
+            >
+              {kelurahan.map((k) => (
+                <option value={k.id} key={k.id}>
+                  {k.nama}
                 </option>
               ))}
             </select>
@@ -249,7 +331,7 @@ function UploadFile({ values, setFieldValue }) {
           <div className="flex-grow"></div>
         </div>
 
-        {/* <div className="m-2 font-bold">File Prj</div>
+        <div className="m-2 font-bold">File Prj</div>
         <div className="m-2 bg-primary-white rounded-lg border-black border flex mb-8">
           <input
             type="file"
@@ -272,7 +354,7 @@ function UploadFile({ values, setFieldValue }) {
             {values.prj ? values.prj.name || "Error" : "No file chosen"}
           </small>
           <div className="flex-grow"></div>
-        </div> */}
+        </div>
 
         <div className="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
           <button
