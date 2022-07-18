@@ -268,121 +268,185 @@ export default function Glosarium() {
               <main>
                 <div className="flex-grow bg-white">
                   {/* About Garlic */}
-                  <div className="px-16 p-4 mt-16 text-2xl font-bold text-black bg-white ">
+                  <div className="px-16 p-4 mt-16 text-2xl font-bold text-black bg-white  ">
                     Keterangan nilai parameter pada penilaian kesesuian lahan
                   </div>
                   <div className="p-4 ">
-                    <div className="flex flex-wrap">
-                      <div className="mx-16 w-12/12 sm:7/12 md:7/12 text-lg  text-black">
-                        <div className="grid grid-cols-4   gap-4">
-                          <div className="flex flex-col col-span-2">
+                    <div className="flex ">
+                      <div className="mx-16 w-full text-lg  text-black ">
+                        <div className="grid grid-cols-6 gap-16">
+                          <div className="flex flex-col col-span-2 b">
                             <b>
                               Faktor yang tidak dapat dikendalikan dan dikoreksi
                             </b>
-                            <div className="grid grid-cols-2 ">
-                              <div className="my-4">
-                                Faktor cuaca
-                                <ul className="list-decimal mx-2">
-                                  <li>Temperatur</li>
-                                  <ul className="list-disc	mx-4">
-                                    {temperaturOptions.map((d) => (
-                                      <li className="text-left">{d.label}</li>
-                                    ))}
-                                  </ul>
-                                  <li>Curah Hujan</li>
-                                  <ul className="list-disc	mx-4">
-                                    {curahHujanOptions.map((d) => (
-                                      <li className="text-left">{d.label}</li>
-                                    ))}
-                                  </ul>
-                                  <li>Lama Penyinaran</li>
-                                  <ul className="list-disc	mx-4">
-                                    {lamaPenyinaranOptions.map((d) => (
-                                      <li>
-                                        {d.value} {d.label}
-                                      </li>
-                                    ))}
-                                  </ul>
-                                  <li>Radiasi Penyinaran</li>
-                                  <ul className="list-disc	mx-4">
-                                    {temperaturOptions.map((d) => (
-                                      <li className="text-left">{d.label}</li>
-                                    ))}
-                                  </ul>
-                                </ul>
-                              </div>
-                              <div className="my-4">
-                                Faktor Relief
-                                <ul className="list-decimal mx-2">
-                                  <li>Elevasi</li>
-                                  <ul className="list-disc	mx-4">
-                                    {elevasiOptions.map((d) => (
-                                      <li className="text-left">{d.label}</li>
-                                    ))}
-                                  </ul>
-                                  <li>Relief</li>
-                                  <ul className="list-disc	mx-4">
-                                    {reliefOptions.map((d) => (
-                                      <li className="text-left">{d.label}</li>
-                                    ))}
-                                  </ul>
-                                </ul>
-                              </div>
-                            </div>
+                            <b>Faktor cuaca</b>
+                            <p>Temperatur</p>
+                            <table className="table-fixed">
+                              <thead>
+                                <tr className="m-16">
+                                  <th>Nilai Parameter</th>
+                                  <th>Kelas</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {temperaturOptions.map((d) => (
+                                  <tr>
+                                    <td className="text-center">{d.label}</td>
+                                    <td className="text-center">{d.kelas}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                              <p className="mt-8">Curah Hujan</p>
+                              <thead>
+                                <tr>
+                                  <th>Nilai Parameter</th>
+                                  <th>Kelas</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {curahHujanOptions.map((d) => (
+                                  <tr>
+                                    <td className="text-center">{d.label}</td>
+                                    <td className="text-center">{d.kelas}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                              <p className="mt-8 font-bold"> Faktor Relief</p>
+                              <p>Elevasi</p>
+                              <thead>
+                                <tr>
+                                  <th>Nilai Parameter</th>
+                                  <th>Kelas</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {elevasiOptions.map((d) => (
+                                  <tr>
+                                    <td className="text-center">{d.label}</td>
+                                    <td className="text-center">{d.kelas}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                              <p className="mt-8">Relief</p>
+                              <thead>
+                                <tr>
+                                  <th>Nilai Parameter</th>
+                                  <th>Kelas</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {reliefOptions.map((d) => (
+                                  <tr>
+                                    <td className="text-center">{d.label}</td>
+                                    <td className="text-center">{d.kelas}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
                           </div>
-                          <div className="flex flex-col">
+                          <div className="flex flex-col col-span-2">
                             <b>Faktor yang efeknya dapat dikoreksi</b>
-                            <div className="my-4">
-                              Kejenuhan Basa
-                              <ul className="list-disc	mx-8">
+                            <b>Kejenuhan Basa</b>
+                            <table className="table-fixed">
+                              <thead>
+                                <tr className="m-16">
+                                  <th>Nilai Parameter</th>
+                                  <th>Kelas</th>
+                                </tr>
+                              </thead>
+                              <tbody>
                                 {kejenuhanBasaOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
+                                  <tr>
+                                    <td className="text-center">{d.label}</td>
+                                    <td className="text-center">{d.kelas}</td>
+                                  </tr>
                                 ))}
-                              </ul>
-                            </div>
-                            <div className="my-4">
-                              Kedalaman Mineral Tanah
-                              <ul className="list-disc	mx-8">
+                              </tbody>
+                              <p className="mt-8 font-bold">
+                                Kedalaman Mineral Tanah
+                              </p>
+                              <thead>
+                                <tr>
+                                  <th>Nilai Parameter</th>
+                                  <th>Kelas</th>
+                                </tr>
+                              </thead>
+                              <tbody>
                                 {kedalamanMineralTanahOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
+                                  <tr>
+                                    <td className="text-center">{d.label}</td>
+                                    <td className="text-center">{d.kelas}</td>
+                                  </tr>
                                 ))}
-                              </ul>
-                            </div>
-                            <div className="my-4">
-                              Kemasaman Tanah
-                              <ul className="list-disc	mx-8">
+                              </tbody>
+                              <p className="mt-8 font-bold">Kemasaman Tanah</p>
+                              <thead>
+                                <tr>
+                                  <th>Nilai Parameter</th>
+                                  <th>Kelas</th>
+                                </tr>
+                              </thead>
+                              <tbody>
                                 {kemasamanTanahOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
+                                  <tr>
+                                    <td className="text-center">{d.label}</td>
+                                    <td className="text-center">{d.kelas}</td>
+                                  </tr>
                                 ))}
-                              </ul>
-                            </div>
+                              </tbody>
+                            </table>
                           </div>
-                          <div className="flex flex-col">
+                          <div className="flex flex-col col-span-2">
                             <b>Faktor yang dapat dikendalikan</b>
-                            <div className="my-4">
-                              Drainase
-                              <ul className="list-disc	mx-8">
+                            <b>Drainase</b>
+                            <table className="table-fixed">
+                              <thead>
+                                <tr className="m-16">
+                                  <th>Nilai Parameter</th>
+                                  <th>Kelas</th>
+                                </tr>
+                              </thead>
+                              <tbody>
                                 {drainaseOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
+                                  <tr>
+                                    <td className="text-center">{d.label}</td>
+                                    <td className="text-center">{d.kelas}</td>
+                                  </tr>
                                 ))}
-                              </ul>
-                            </div>
-                            <div className="my-4">
-                              Kapasitas Tukar Kation
-                              <ul className="list-disc	mx-8">
+                              </tbody>
+                              <p className="mt-8 font-bold">
+                                Kapasitas Tukar Kation
+                              </p>
+                              <thead>
+                                <tr>
+                                  <th>Nilai Parameter</th>
+                                  <th>Kelas</th>
+                                </tr>
+                              </thead>
+                              <tbody>
                                 {kapasitasTukarKationOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
+                                  <tr>
+                                    <td className="text-center">{d.label}</td>
+                                    <td className="text-center">{d.kelas}</td>
+                                  </tr>
                                 ))}
-                              </ul>
-                            </div>
-                            <div className="my-4">
-                              Tekstur Tanah
-                              <ul className="list-disc	mx-8">
+                              </tbody>
+                              <p className="mt-8 font-bold"> Tekstur Tanah</p>
+                              <thead>
+                                <tr>
+                                  <th>Nilai Parameter</th>
+                                  <th>Kelas</th>
+                                </tr>
+                              </thead>
+                              <tbody>
                                 {teksturTanahOptions.map((d) => (
-                                  <li className="text-left">{d.label}</li>
+                                  <tr>
+                                    <td className="text-center">{d.label}</td>
+                                    <td className="text-center">{d.kelas}</td>
+                                  </tr>
                                 ))}
-                              </ul>
-                            </div>
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
