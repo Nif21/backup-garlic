@@ -10,6 +10,12 @@ npm run dev
 yarn dev
 ```
 
+## Node and NPM Version
+```
+node v16.13.0
+npm v8.1.0
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
