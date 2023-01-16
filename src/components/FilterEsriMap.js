@@ -189,9 +189,9 @@ function FilterEsriMap() {
 
   async function requestSpt() {
     setIsLoading(true);
-    const data = await fetch("https://garlic-backend.herokuapp.com/api/v1");
-    const dataJSON = await data.json();
-    setSpt(dataJSON);
+    // const data = await fetch("https://garlic-backend.herokuapp.com/api/v1");
+    // const dataJSON = await data.json();
+    // setSpt(dataJSON);
     setIsLoading(false);
   }
 

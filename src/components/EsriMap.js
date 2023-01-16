@@ -159,9 +159,9 @@ function EsriMap() {
 
   async function requestSpt() {
     setIsLoading(true);
-    const data = await fetch("https://garlic-backend.herokuapp.com");
-    const dataJSON = await data.json();
-    setSpt(dataJSON);
+    // const data = await fetch("https://garlic-backend.herokuapp.com");
+    // const dataJSON = await data.json();
+    // setSpt(dataJSON);
     setIsLoading(false);
   }
 
